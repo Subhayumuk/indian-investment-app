@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Danish Resident NRI Investment and Tax Planner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #d1d5db;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --danger: #dc2626;
+      --success: #059669;
+      --code-bg: #111827;
+      --code-text: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .header {
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      margin: 0 0 8px 0;
+      font-size: 28px;
+    }
+
+    .header p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    }
+
+    .section-title {
+      margin: 22px 0 12px 0;
+      font-size: 17px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .section-title:first-child {
+      margin-top: 0;
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px 11px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      font-size: 14px;
+      background: white;
+      color: var(--text);
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .checkbox-row input {
+      width: auto;
+      transform: scale(1.15);
+    }
+
+    .checkbox-row label {
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 9px;
+      padding: 11px 15px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .btn-secondary:hover {
+      background: #d1d5db;
+    }
+
+    .status {
+      margin-top: 12px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .status.success {
+      color: var(--success);
+    }
+
+    .status.error {
+      color: var(--danger);
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      background: var(--code-bg);
+      color: var(--code-text);
+      border-radius: 12px;
+      padding: 18px;
+      min-height: 420px;
+      overflow: auto;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .small-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="header">
+      <h1>🇩🇰 Danish Resident NRI Investment and Tax Planner 🇮🇳</h1>
+      <p>
+        Enter your Indian savings, Danish tax residency details, investment preferences,
+        and compliance status. The planner will estimate key tax and investment planning points.
+      </p>
+    </div>
+
+    <div class="layout">
+      <div class="card">
+        <h3 class="section-title">Residency and Compliance</h3>
+
+        <div class="field">
+          <label for="residency_country">Residency country</label>
+          <input id="residency_country" type="text" value="Denmark" />
+        </div>
+
+        <div class="checkbox-row">
+          <input id="tax_resident_denmark" type="checkbox" checked />
+          <label for="tax_resident_denmark">Tax resident in Denmark</label>
+        </div>
+
+        <div class="field">
+          <label for="indian_residential_status">Indian residential status</label>
+          <select id="indian_residential_status">
+            <option value="NRI" selected>NRI</option>
+            <option value="RNOR">RNOR</option>
+            <option value="Resident">Resident</option>
+            <option value="Unknown">Unknown</option>
+          </select>
+        </div>
+
+        <div class="checkbox-row">
+          <input id="has_pan" type="checkbox" checked />
+          <label for="has_pan">Has PAN</label>
+        </div>
+
+        <div class="checkbox-row">
+          <input id="has_aadhaar" type="checkbox" />
+          <label for="has_aadhaar">Has Aadhaar</label>
+        </div>
+
+        <div class="checkbox-row">
+          <input id="files_india_itr" type="checkbox" />
+          <label for="files_india_itr">Files Indian ITR</label>
+        </div>
+
+        <div class="checkbox-row">
+          <input id="declares_india_income_in_denmark" type="checkbox" />
+          <label for="declares_india_income_in_denmark">Declares Indian income in Denmark</label>
+        </div>
+
+        <h3 class="section-title">Indian Bank Accounts</h3>
+
+        <div class="checkbox-row">
+          <input id="has_nro_account" type="checkbox" checked />
+          <label for="has_nro_account">Has NRO account</label>
+        </div>
+
+        <div class="checkbox-row">
+          <input id="has_nre_account" type="checkbox" />
+          <label for="has_nre_account">Has NRE account</label>
+        </div>
+
+        <div class="checkbox-row">
+          <input id="has_fcnr_account" type="checkbox" />
+          <label for="has_fcnr_account">Has FCNR account</label>
+        </div>
+
+        <h3 class="section-title">Indian Savings</h3>
+
+        <div class="field">
+          <label for="inr_to_dkk_rate">INR to DKK exchange rate</label>
+          <input id="inr_to_dkk_rate" type="number" step="0.0001" value="0.083" />
+          <div class="small-note">Example: 1 INR = 0.083 DKK</div>
+        </div>
+
+        <div class="field">
+          <label for="india_principal_inr">Indian principal amount, INR</label>
+          <input id="india_principal_inr" type="number" step="1000" placeholder="Example: 5000000" />
+        </div>
+
+        <div class="field">
+          <label for="india_annual_interest_inr">Annual Indian interest, INR</label>
+          <input id="india_annual_interest_inr" type="number" step="1000" placeholder="Leave blank if unknown" />
+        </div>
+
+        <div class="field">
+          <label for="india_interest_rate_percent">Indian interest rate, %</label>
+          <input id="india_interest_rate_percent" type="number" step="0.01" placeholder="Example: 6.5" />
+        </div>
+
+        <div class="field">
+          <label for="indian_tds_percent">Indian TDS, %</label>
+          <input id="indian_tds_percent" type="number" step="0.01" value="10" />
+        </div>
+
+        <h3 class="section-title">Danish Income</h3>
+
+        <div class="field">
+          <label for="dk_salary_income_dkk">Danish salary income, DKK</label>
+          <input id="dk_salary_income_dkk" type="number" step="1000" placeholder="Optional" />
+        </div>
+
+        <div class="field">
+          <label for="dk_capital_income_dkk">Other Danish capital income, DKK</label>
+          <input id="dk_capital_income_dkk" type="number" step="1000" placeholder="Optional" />
+        </div>
+
+        <div class="field">
+          <label for="dk_bank_interest_dkk">Danish bank interest, DKK</label>
+          <input id="dk_bank_interest_dkk" type="number" step="100" placeholder="Optional" />
+        </div>
+
+        <h3 class="section-title">Investment Preferences</h3>
+
+        <div class="field">
+          <label for="risk_profile">Risk profile</label>
+          <select id="risk_profile">
+            <option value="conservative">Conservative</option>
+            <option value="moderate" selected>Moderate</option>
+            <option value="aggressive">Aggressive</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="investment_horizon_years">Investment horizon, years</label>
+          <input id="investment_horizon_years" type="number" step="1" value="7" />
+        </div>
+
+        <div class="field">
+          <label for="monthly_expenses_dkk">Monthly expenses, DKK</label>
+          <input id="monthly_expenses_dkk" type="number" step="500" placeholder="Optional" />
+        </div>
+
+        <div class="field">
+          <label for="emergency_months">Emergency fund months</label>
+          <input id="emergency_months" type="number" step="1" value="6" />
+        </div>
+
+        <div class="checkbox-row">
+          <input id="needs_liquidity" type="checkbox" checked />
+          <label for="needs_liquidity">Needs liquidity</label>
+        </div>
+
+        <div class="checkbox-row">
+          <input id="wants_india_exposure" type="checkbox" checked />
+          <label for="wants_india_exposure">Wants India exposure</label>
+        </div>
+
+        <div class="checkbox-row">
+          <input id="wants_denmark_investments" type="checkbox" checked />
+          <label for="wants_denmark_investments">Wants Denmark investments</label>
+        </div>
+
+        <h3 class="section-title">Notes</h3>
+
+        <div class="field">
+          <label for="notes">Extra notes</label>
+          <textarea
+            id="notes"
+            placeholder="Optional: write your goals, concerns, relocation plans, Indian account details, tax questions, etc."
+          ></textarea>
+        </div>
+
+        <div class="button-row">
+          <button class="btn-secondary" type="button" onclick="previewPayload()">Preview Payload</button>
+          <button class="btn-primary" type="button" onclick="runPlanner()">Run Planner</button>
+        </div>
+
+        <div id="status" class="status">Ready.</div>
+      </div>
+
+      <div class="card">
+        <h3 class="section-title">Planner Output</h3>
+        <pre id="output">Planner result will appear here.</pre>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function getElement(id) {
+      const el = document.getElementById(id);
+      if (!el) {
+        console.warn("Missing field:", id);
+      }
+      return el;
+    }
+
+    function getValue(id, fallback = null) {
+      const el = getElement(id);
+      if (!el) return fallback;
+
+      const value = String(el.value || "").trim();
+
+      if (value === "") {
+        return fallback;
+      }
+
+      return value;
+    }
+
+    function getNumber(id, fallback = null) {
+      const el = getElement(id);
+
+      if (!el) {
+        console.warn("Missing number field:", id);
+        return fallback;
+      }
+
+      const raw = String(el.value || "").trim();
+
+      if (raw === "") {
+        return fallback;
+      }
+
+      const cleaned = raw.replaceAll(",", "");
+      const num = Number(cleaned);
+
+      if (Number.isNaN(num)) {
+        console.warn("Invalid number for field:", id, raw);
+        return fallback;
+      }
+
+      return num;
+    }
+
+    function getInteger(id, fallback = null) {
+      const num = getNumber(id, fallback);
+
+      if (num === null || num === undefined) {
+        return fallback;
+      }
+
+      return Math.trunc(num);
+    }
+
+    function getBool(id, fallback = false) {
+      const el = getElement(id);
+      if (!el) return fallback;
+      return Boolean(el.checked);
+    }
+
+    function buildPayload() {
+      return {
+        residency_country: getValue("residency_country", "Denmark"),
+        tax_resident_denmark: getBool("tax_resident_denmark", true),
+        indian_residential_status: getValue("indian_residential_status", "NRI"),
+
+        has_pan: getBool("has_pan", true),
+        has_aadhaar: getBool("has_aadhaar", false),
+        files_india_itr: getBool("files_india_itr", false),
+        declares_india_income_in_denmark: getBool("declares_india_income_in_denmark", false),
+
+        has_nro_account: getBool("has_nro_account", true),
+        has_nre_account: getBool("has_nre_account", false),
+        has_fcnr_account: getBool("has_fcnr_account", false),
+
+        inr_to_dkk_rate: getNumber("inr_to_dkk_rate", 0.083),
+
+        india_principal_inr: getNumber("india_principal_inr", null),
+        india_annual_interest_inr: getNumber("india_annual_interest_inr", null),
+        india_interest_rate_percent: getNumber("india_interest_rate_percent", null),
+        indian_tds_percent: getNumber("indian_tds_percent", 10),
+
+        dk_salary_income_dkk: getNumber("dk_salary_income_dkk", null),
+        dk_capital_income_dkk: getNumber("dk_capital_income_dkk", null),
+        dk_bank_interest_dkk: getNumber("dk_bank_interest_dkk", null),
+
+        risk_profile: getValue("risk_profile", "moderate"),
+        investment_horizon_years: getInteger("investment_horizon_years", 7),
+        monthly_expenses_dkk: getNumber("monthly_expenses_dkk", null),
+        emergency_months: getInteger("emergency_months", 6),
+
+        needs_liquidity: getBool("needs_liquidity", true),
+        wants_india_exposure: getBool("wants_india_exposure", true),
+        wants_denmark_investments: getBool("wants_denmark_investments", true),
+
+        notes: getValue("notes", null)
+      };
+    }
+
+    function setStatus(message, type = "") {
+      const status = document.getElementById("status");
+      status.textContent = message;
+      status.className = "status";
+
+      if (type) {
+        status.classList.add(type);
+      }
+    }
+
+    function setOutput(text) {
+      document.getElementById("output").textContent = text;
+    }
+
+    function previewPayload() {
+      const payload = buildPayload();
+      console.log("Preview payload:", payload);
+      setOutput(JSON.stringify(payload, null, 2));
+      setStatus("Payload preview generated.", "success");
+    }
+
+    async function runPlanner() {
+      const payload = buildPayload();
+
+      console.log("Sending payload to backend:", payload);
+
+      setStatus("Running planner...", "");
+      setOutput("Running planner...");
+
+      try {
+        const response = await fetch("/api/agent", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        console.log("Backend status:", response.status);
+        console.log("Backend response:", data);
+
+        if (!response.ok) {
+          setStatus("Backend error.", "error");
+          setOutput(
+            data.output ||
+            data.error ||
+            JSON.stringify(data, null, 2)
+          );
+          return;
+        }
+
+        const output =
+          data.output ||
+          data.summary ||
+          JSON.stringify(data, null, 2);
+
+        setOutput(output);
+        setStatus("Planner completed successfully.", "success");
+
+      } catch (error) {
+        console.error("Frontend error:", error);
+        setStatus("Frontend error. Check browser console.", "error");
+        setOutput("Frontend error: " + error.message);
+      }
+    }
+  </script>
+</body>
+</html>
