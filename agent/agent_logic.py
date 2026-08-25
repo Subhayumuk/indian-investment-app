@@ -3,6 +3,39 @@ from typing import Dict, Any, Optional, Tuple, List
 
 
 # -----------------------------
+# Multi-country reference data
+# -----------------------------
+
+# Whether India has a Double Taxation Avoidance Agreement in force with each
+# supported country of tax residency. Extend this as more countries are added.
+DTAA_COUNTRIES: Dict[str, bool] = {
+    "Denmark": True,
+    "USA": True,
+    "UK": True,
+    "UAE": False,
+    "Singapore": True,
+    "Canada": True,
+    "Australia": True,
+    "Germany": True,
+    "Netherlands": True,
+    "Sweden": True,
+    "Norway": True,
+    "New Zealand": True,
+    "Switzerland": True,
+    "France": True,
+    "Japan": True,
+}
+
+# LRS = Liberalised Remittance Scheme, an RBI scheme for resident Indians
+# remitting funds abroad. Not directly applicable to NRIs repatriating their
+# own NRO/NRE/FCNR funds, but relevant context for family remittances.
+LRS_LIMIT_USD = 250_000
+
+# Per financial year, current income plus balances, per RBI rules.
+NRO_REPATRIATION_LIMIT_USD = 1_000_000
+
+
+# -----------------------------
 # Utility helpers
 # -----------------------------
 
@@ -64,6 +97,22 @@ def _truthy_interest(val: Any) -> Tuple[bool, Optional[float]]:
 def _money_inr(amount: Any) -> str:
     value = _to_float(amount, 0)
     return f"INR {value:,.0f}"
+
+
+def _money_local(amount: Any, currency: str) -> str:
+    value = _to_float(amount, 0)
+    return f"{currency or 'local currency'} {value:,.2f}"
+
+
+def _optional_float(value: Any) -> Optional[float]:
+    """Like _to_float, but returns None instead of 0.0 when unset, so a
+    genuine value of 0 is not silently discarded."""
+    if value in (None, ""):
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
 
 
 # -----------------------------
@@ -280,11 +329,20 @@ def build_denmark_tax_actions(
     india_interest_has: bool,
     india_interest_value: Optional[float],
     india_withholding_info: Any,
+    country: str = "Denmark",
+    currency: str = "DKK",
 ) -> List[Dict[str, Any]]:
     """
-    Creates Denmark reporting/tax action list.
+    Creates residency-country reporting/tax action list.
     This is intentionally cautious and high-level.
+
+    Historically Denmark-specific (hence the function/field names), now
+    generalized to any country of tax residency via the `country`/`currency`
+    parameters.
     """
+
+    country = country or "Denmark"
+    currency = currency or "DKK"
 
     dk_residency_norm = _normalize_text(dk_residency)
     prev_declared_norm = _normalize_text(dk_prev_declared)
@@ -310,8 +368,8 @@ def build_denmark_tax_actions(
                 "dividends and capital gains where applicable."
             ),
             "action": (
-                "Include Indian income/returns in the Danish tax reporting "
-                "process using DKK conversion."
+                f"Include Indian income/returns in your {country} tax reporting "
+                f"process using {currency} conversion."
             ),
         })
 
@@ -319,8 +377,8 @@ def build_denmark_tax_actions(
             "area": "Foreign bank accounts/assets",
             "declare_in_denmark": True,
             "what_to_declare": (
-                "Indian bank accounts, balances and income depending on Danish "
-                "reporting requirements."
+                f"Indian bank accounts, balances and income depending on "
+                f"{country} reporting requirements."
             ),
             "action": (
                 "Keep bank statements, year-end balances, interest certificates "
@@ -337,8 +395,8 @@ def build_denmark_tax_actions(
                     f"INR {india_interest_value:,.0f}."
                 ),
                 "action": (
-                    "Convert INR interest to DKK using a consistent/relevant "
-                    "exchange rate and report under the correct Danish category."
+                    f"Convert INR interest to {currency} using a consistent/relevant "
+                    f"exchange rate and report under the correct {country} category."
                 ),
             })
         else:
@@ -349,8 +407,8 @@ def build_denmark_tax_actions(
                     "Interest amount was not provided or was indicated as zero."
                 ),
                 "action": (
-                    "Confirm actual annual interest from Indian bank statements "
-                    "before filing in Denmark."
+                    f"Confirm actual annual interest from Indian bank statements "
+                    f"before filing in {country}."
                 ),
             })
 
@@ -362,8 +420,8 @@ def build_denmark_tax_actions(
                     "Indian withholding tax/TDS may be relevant for double-taxation relief."
                 ),
                 "action": (
-                    "Keep TDS certificates/Form 16A and ask whether foreign tax "
-                    "credit can be claimed in Denmark."
+                    f"Keep TDS certificates/Form 16A and ask whether foreign tax "
+                    f"credit can be claimed in {country}."
                 ),
             })
 
@@ -376,8 +434,9 @@ def build_denmark_tax_actions(
                     "require correction."
                 ),
                 "action": (
-                    "Consider contacting SKAT or a Danish tax adviser to assess "
-                    "whether past Danish tax filings need correction."
+                    f"Consider contacting your local tax authority or a qualified "
+                    f"tax adviser in {country} to assess whether past filings "
+                    f"need correction."
                 ),
             })
 
@@ -386,22 +445,23 @@ def build_denmark_tax_actions(
             "area": "Tax residency uncertainty",
             "declare_in_denmark": "Depends",
             "what_to_declare": (
-                "Danish declaration obligations depend on whether you are tax "
-                "resident or otherwise taxable in Denmark."
+                f"{country} declaration obligations depend on whether you are "
+                f"tax resident or otherwise taxable in {country}."
             ),
             "action": (
-                "Confirm Danish tax residency status before deciding reporting obligations."
+                f"Confirm your {country} tax residency status before deciding "
+                f"reporting obligations."
             ),
         })
 
-    # Account-specific Denmark notes
+    # Account-specific residency-country notes
     if "nro" in account_type_norm:
         actions.append({
             "area": "NRO account",
             "declare_in_denmark": is_dk_tax_resident,
             "what_to_declare": (
-                "NRO interest and income may be taxable in India and reportable "
-                "in Denmark if Danish tax resident."
+                f"NRO interest and income may be taxable in India and "
+                f"reportable in {country} if you are tax resident there."
             ),
             "action": "Keep Indian TDS documentation and interest certificates.",
         })
@@ -411,12 +471,12 @@ def build_denmark_tax_actions(
             "area": "NRE account",
             "declare_in_denmark": is_dk_tax_resident,
             "what_to_declare": (
-                "NRE interest may be exempt in India for eligible NRIs, but "
-                "Denmark may still tax/report it for Danish tax residents."
+                f"NRE interest may be exempt in India for eligible NRIs, but "
+                f"{country} may still tax/report it for its tax residents."
             ),
             "action": (
-                "Do not assume Indian exemption means Danish exemption. Verify "
-                "Danish reporting treatment."
+                f"Do not assume Indian exemption means {country} exemption. "
+                f"Verify {country} reporting treatment."
             ),
         })
 
@@ -425,12 +485,13 @@ def build_denmark_tax_actions(
             "area": "FCNR account",
             "declare_in_denmark": is_dk_tax_resident,
             "what_to_declare": (
-                "Foreign currency deposit balance and interest may need Danish reporting."
+                f"Foreign currency deposit balance and interest may need "
+                f"{country} reporting."
             ),
-            "action": "Track both INR/foreign currency value and DKK conversion.",
+            "action": f"Track both INR/foreign currency value and {currency} conversion.",
         })
 
-    # Investment-specific Denmark notes
+    # Investment-specific residency-country notes
     for allocation in investment_allocation:
         inv_type = allocation["investment_type"]
 
@@ -440,8 +501,8 @@ def build_denmark_tax_actions(
                 "declare_in_denmark": is_dk_tax_resident,
                 "what_to_declare": "FD interest income and deposit balance.",
                 "action": (
-                    "Track interest accrual/receipt, TDS if any, maturity "
-                    "proceeds and DKK conversion."
+                    f"Track interest accrual/receipt, TDS if any, maturity "
+                    f"proceeds and {currency} conversion."
                 ),
             })
 
@@ -454,12 +515,12 @@ def build_denmark_tax_actions(
                 "area": "Indian equity mutual funds / ETFs",
                 "declare_in_denmark": is_dk_tax_resident,
                 "what_to_declare": (
-                    "Holdings, dividends/distributions, realized gains/losses "
-                    "and potentially annual taxation depending on Danish classification."
+                    f"Holdings, dividends/distributions, realized gains/losses "
+                    f"and potentially annual taxation depending on {country} classification."
                 ),
                 "action": (
-                    "Check Danish tax classification of foreign funds before investing. "
-                    "Danish rules for foreign funds can be complex."
+                    f"Check {country} tax classification of foreign funds before "
+                    f"investing. {country} rules for foreign funds can be complex."
                 ),
             })
 
@@ -469,8 +530,8 @@ def build_denmark_tax_actions(
                 "declare_in_denmark": is_dk_tax_resident,
                 "what_to_declare": "Holdings, distributions and gains/losses.",
                 "action": (
-                    "Review Danish taxation carefully; debt/investment fund "
-                    "classification may affect timing and category of taxation."
+                    f"Review {country} taxation carefully; debt/investment fund "
+                    f"classification may affect timing and category of taxation."
                 ),
             })
 
@@ -482,8 +543,8 @@ def build_denmark_tax_actions(
                     "Holdings, dividends/distributions, gains/losses and fund classification."
                 ),
                 "action": (
-                    "Check whether Denmark treats the fund as equity-based, "
-                    "bond-based or another category."
+                    f"Check whether {country} treats the fund as equity-based, "
+                    f"bond-based or another category."
                 ),
             })
 
@@ -495,12 +556,241 @@ def build_denmark_tax_actions(
                     "Share holdings, dividends and realized capital gains/losses."
                 ),
                 "action": (
-                    "Maintain trade contract notes, dividend statements, cost "
-                    "basis and sale records in DKK terms."
+                    f"Maintain trade contract notes, dividend statements, cost "
+                    f"basis and sale records in {currency} terms."
                 ),
             })
 
     return actions
+
+
+# -----------------------------
+# FEMA compliance
+# -----------------------------
+
+def build_fema_compliance(
+    india_account_type: str,
+    wants_repatriation: bool,
+    repatriation_amount_inr: Optional[float],
+) -> List[str]:
+    """
+    High-level FEMA (Foreign Exchange Management Act) compliance notes
+    covering repatriation rules for NRE/NRO/FCNR accounts.
+    """
+
+    account_type_norm = _normalize_text(india_account_type)
+
+    notes = [
+        (
+            f"LRS (Liberalised Remittance Scheme) limit is USD {LRS_LIMIT_USD:,} "
+            "per financial year. This governs resident Indians remitting funds "
+            "abroad and is generally not a cap on an NRI repatriating their own "
+            "NRE/NRO/FCNR funds, but is relevant if family in India is remitting "
+            "funds to you."
+        ),
+        "NRE account balances (principal and interest) are freely and fully repatriable outside India, with no RBI limit.",
+        (
+            f"NRO account repatriation is capped at USD {NRO_REPATRIATION_LIMIT_USD:,} "
+            "per financial year (current income plus balances), subject to "
+            "submission of Form 15CA/15CB and payment of applicable Indian taxes."
+        ),
+        "FCNR (Foreign Currency Non-Resident) deposits are freely repatriable in the deposit currency, both principal and interest.",
+    ]
+
+    if wants_repatriation:
+        if repatriation_amount_inr:
+            notes.append(
+                f"You indicated a desired repatriation of approximately "
+                f"{_money_inr(repatriation_amount_inr)}. Confirm the source "
+                f"account type (NRE/NRO/FCNR), since repatriation limits and "
+                f"documentation requirements differ by account."
+            )
+        else:
+            notes.append(
+                "You indicated you want to repatriate funds but did not specify "
+                "an amount. Provide an estimated amount so limits (e.g. the "
+                "NRO account's USD 1,000,000/year cap) can be checked."
+            )
+
+        if "nro" in account_type_norm:
+            notes.append(
+                "Since you hold an NRO account, repatriation requires a "
+                "Chartered Accountant certificate (Form 15CB) and remitter "
+                "declaration (Form 15CA) before the bank processes the transfer."
+            )
+
+    return notes
+
+
+# -----------------------------
+# DTAA benefits
+# -----------------------------
+
+def build_dtaa_benefits(tax_residency_country: str) -> List[str]:
+    """
+    Notes on Double Taxation Avoidance Agreement status/benefits between
+    India and the user's country of tax residency.
+    """
+
+    country = (tax_residency_country or "Denmark").strip()
+    has_dtaa = DTAA_COUNTRIES.get(country)
+
+    if has_dtaa is None:
+        return [
+            f"DTAA status between India and {country} is not in our reference "
+            f"list; verify directly whether a Double Taxation Avoidance "
+            f"Agreement exists.",
+            "If a DTAA exists, you may be able to claim a foreign tax credit "
+            "or a reduced withholding rate on Indian-sourced income; confirm "
+            "with a local tax adviser.",
+        ]
+
+    if has_dtaa:
+        return [
+            f"India and {country} have a Double Taxation Avoidance Agreement (DTAA) in force.",
+            (
+                f"You may be able to claim a foreign tax credit in {country} "
+                "for Indian TDS paid on NRO interest, mutual fund gains or "
+                "dividends, avoiding double taxation on the same income."
+            ),
+            (
+                "The DTAA may also provide reduced withholding tax rates versus "
+                "the domestic Indian rate; check the relevant treaty article and "
+                "submit Form 10F plus a Tax Residency Certificate (TRC) to the "
+                "Indian payer to claim the treaty rate at source."
+            ),
+            f"Keep TDS certificates (Form 16A) as evidence when claiming foreign tax credit in {country}.",
+        ]
+
+    return [
+        f"India and {country} do not currently have a Double Taxation Avoidance Agreement (DTAA) in force.",
+        (
+            "Indian-sourced income will generally be taxed in India at "
+            f"domestic rates without treaty relief; check whether {country} "
+            "provides unilateral foreign tax credit instead."
+        ),
+        f"Confirm with a tax adviser in {country} how Indian TDS is treated for local tax purposes without a DTAA.",
+    ]
+
+
+# -----------------------------
+# TDS summary
+# -----------------------------
+
+def build_tds_summary(
+    india_account_type: str,
+    has_mutual_funds: bool,
+    mutual_fund_value_inr: Optional[float],
+    has_stocks: bool,
+    stocks_value_inr: Optional[float],
+) -> List[str]:
+    """
+    Reference TDS (Tax Deducted at Source) rates applicable in India for the
+    account types and asset classes the user reported.
+    """
+
+    account_type_norm = _normalize_text(india_account_type)
+    summary = []
+
+    if "nre" in account_type_norm:
+        summary.append("NRE account interest: 0% tax in India (exempt for qualifying NRIs).")
+
+    if "fcnr" in account_type_norm:
+        summary.append("FCNR deposit interest: exempt from Indian tax for qualifying NRIs, similar to NRE treatment.")
+
+    if "nro" in account_type_norm or not account_type_norm or account_type_norm == "unknown":
+        summary.append("NRO account interest: 30% TDS deducted at source in India (plus applicable surcharge/cess).")
+
+    if has_mutual_funds:
+        value_text = (
+            f" on your holding of approximately {_money_inr(mutual_fund_value_inr)}"
+            if mutual_fund_value_inr else ""
+        )
+        summary.append(
+            f"Mutual fund gains{value_text}: long-term capital gains taxed at "
+            "20%, short-term capital gains taxed at 30% (verify current-year "
+            "rates and indexation rules before filing)."
+        )
+
+    if has_stocks:
+        value_text = (
+            f" on your holding of approximately {_money_inr(stocks_value_inr)}"
+            if stocks_value_inr else ""
+        )
+        summary.append(
+            f"Direct equity/stock gains{value_text}: long-term capital gains "
+            "(holding period over 1 year) taxed at 10% above an INR 1,00,000 "
+            "exemption per year; short-term capital gains taxed at 15%."
+        )
+
+    if not summary:
+        summary.append(
+            "No specific TDS category identified from the provided accounts/"
+            "holdings; provide account type (NRE/NRO/FCNR) and asset holdings "
+            "for a precise TDS summary."
+        )
+
+    return summary
+
+
+# -----------------------------
+# Investment recommendations (narrative)
+# -----------------------------
+
+def build_investment_recommendations(
+    investment_allocation: List[Dict[str, Any]],
+    has_mutual_funds: bool,
+    mutual_fund_value_inr: Optional[float],
+    has_stocks: bool,
+    stocks_value_inr: Optional[float],
+    has_property: bool,
+    property_value_inr: Optional[float],
+    tax_residency_country: str,
+) -> List[str]:
+    """
+    Narrative (sentence-form) version of the investment allocation table,
+    plus notes on any existing mutual fund/stock/property holdings.
+    """
+
+    country = tax_residency_country or "Denmark"
+    recommendations = []
+
+    for item in investment_allocation:
+        recommendations.append(
+            f"Allocate {item['percentage']}% (~{_money_inr(item['amount_inr'])}) "
+            f"to {item['investment_type']}: {item['reason']}"
+        )
+
+    if has_mutual_funds and mutual_fund_value_inr:
+        recommendations.append(
+            f"You already hold approximately {_money_inr(mutual_fund_value_inr)} "
+            f"in Indian mutual funds; review the fund category (equity/debt/"
+            f"hybrid) and confirm how {country} taxes foreign mutual fund "
+            f"holdings before adding further investment."
+        )
+
+    if has_stocks and stocks_value_inr:
+        recommendations.append(
+            f"You already hold approximately {_money_inr(stocks_value_inr)} in "
+            "direct Indian shares; track cost basis and holding period in INR "
+            "for LTCG/STCG classification."
+        )
+
+    if has_property and property_value_inr:
+        recommendations.append(
+            f"You hold Indian property valued at approximately "
+            f"{_money_inr(property_value_inr)}; rental income and eventual "
+            "capital gains on sale are taxable in India regardless of NRI "
+            "status, and TDS under Section 195 applies to the buyer when an "
+            "NRI sells property."
+        )
+
+    if not recommendations:
+        recommendations.append(
+            "No investable surplus or existing holdings identified for recommendations."
+        )
+
+    return recommendations
 
 
 # -----------------------------
@@ -679,26 +969,38 @@ def build_display_text(result: Dict[str, Any]) -> str:
     allocation = result["investment_recommendation"]
     dk_actions = result["denmark_tax_actions"]
     india_notes = result["india_tax_notes"]
+    fema_compliance = result["fema_compliance"]
+    dtaa_benefits = result["dtaa_benefits"]
+    tds_summary = result["tds_summary"]
+    investment_recommendations = result["investment_recommendations"]
+
+    country = inputs.get("tax_residency_country") or "Denmark"
+    currency = inputs.get("tax_residency_currency") or "DKK"
 
     lines = []
 
-    lines.append("## 🇮🇳🇩🇰 NRI India Savings, Investment & Denmark Tax Planning Summary")
+    lines.append(f"## 🇮🇳 NRI India Savings, Investment & {country} Tax Planning Summary")
     lines.append("")
 
     lines.append("### 📌 Important disclaimer")
     lines.append("- This is general educational information only.")
     lines.append("- It is not tax, legal or investment advice.")
-    lines.append("- Danish taxation of foreign funds, shares and bank income can be complex.")
-    lines.append("- Please confirm with a qualified Danish tax adviser and Indian tax adviser before acting.")
+    lines.append(f"- {country} taxation of foreign funds, shares and bank income can be complex.")
+    lines.append(f"- Please confirm with a qualified tax adviser in {country} and an Indian tax adviser before acting.")
     lines.append("")
 
     lines.append("### 🧾 1) Inputs understood")
-    lines.append(f"- Denmark residency status: `{inputs.get('dk_residency')}`")
-    lines.append(f"- Previously declared Indian/foreign accounts in Denmark: `{inputs.get('dk_prev_declared_foreign_accounts')}`")
+    lines.append(f"- Tax residency country: `{country}` (`{currency}`)")
+    lines.append(f"- {country} residency status: `{inputs.get('dk_residency')}`")
+    lines.append(f"- Previously declared Indian/foreign accounts in {country}: `{inputs.get('dk_prev_declared_foreign_accounts')}`")
     lines.append(f"- Indian account type: `{inputs.get('india_account_type')}`")
-    lines.append(f"- Indian amount reviewed: **{_money_inr(inputs.get('india_principal_inr', 0))}**")
+    lines.append(f"- Indian principal amount reviewed: **{_money_inr(inputs.get('india_principal_inr', 0))}**")
     lines.append(f"- Indian annual interest: `{inputs.get('india_annual_interest_inr')}`")
     lines.append(f"- Indian withholding/TDS info: `{inputs.get('india_withholding_info')}`")
+    lines.append(f"- Mutual funds: `{inputs.get('has_mutual_funds')}` ({_money_inr(inputs.get('mutual_fund_value_inr', 0))})")
+    lines.append(f"- Stocks: `{inputs.get('has_stocks')}` ({_money_inr(inputs.get('stocks_value_inr', 0))})")
+    lines.append(f"- Property: `{inputs.get('has_property')}` ({_money_inr(inputs.get('property_value_inr', 0))})")
+    lines.append(f"- Total India assets reviewed: **{_money_inr(inputs.get('total_india_assets_inr', 0))}** (~{_money_local(inputs.get('total_india_assets_local'), currency)})")
     lines.append(f"- Risk profile: `{inputs.get('risk_profile')}`")
     lines.append(f"- Investment horizon: `{inputs.get('investment_horizon_years')} years`")
     lines.append("")
@@ -721,22 +1023,42 @@ def build_display_text(result: Dict[str, Any]) -> str:
         lines.append("- No investable surplus identified after keeping liquid reserve.")
     lines.append("")
 
-    lines.append("### 🇩🇰 4) Denmark tax/reporting implications and actions")
+    lines.append("### 💡 4) Investment recommendations")
+    for line in investment_recommendations:
+        lines.append(f"- {line}")
+    lines.append("")
+
+    lines.append("### 🌍 5) FEMA compliance & repatriation")
+    for line in fema_compliance:
+        lines.append(f"- {line}")
+    lines.append("")
+
+    lines.append(f"### 🤝 6) DTAA benefits (India ↔ {country})")
+    for line in dtaa_benefits:
+        lines.append(f"- {line}")
+    lines.append("")
+
+    lines.append("### 🧮 7) TDS summary")
+    for line in tds_summary:
+        lines.append(f"- {line}")
+    lines.append("")
+
+    lines.append(f"### 🌐 8) {country} tax/reporting implications and actions")
     for action in dk_actions:
         lines.append(f"- **{action['area']}**")
-        lines.append(f"  - Declare in Denmark: `{action['declare_in_denmark']}`")
+        lines.append(f"  - Declare in {country}: `{action['declare_in_denmark']}`")
         lines.append(f"  - What to declare/check: {action['what_to_declare']}")
         lines.append(f"  - Action: {action['action']}")
     lines.append("")
 
-    lines.append("### 🇮🇳 5) India tax notes")
+    lines.append("### 🇮🇳 9) India tax notes")
     for note in india_notes:
         lines.append(f"- **{note['area']}**")
         lines.append(f"  - India tax treatment: {note['india_tax_treatment']}")
         lines.append(f"  - Action: {note['action']}")
     lines.append("")
 
-    lines.append("### 🛠️ 6) Practical documents to keep")
+    lines.append("### 🛠️ 10) Practical documents to keep")
     lines.append("- Indian bank statements")
     lines.append("- Interest certificates")
     lines.append("- TDS certificates/Form 16A, if applicable")
@@ -744,11 +1066,11 @@ def build_display_text(result: Dict[str, Any]) -> str:
     lines.append("- Share contract notes")
     lines.append("- Dividend statements")
     lines.append("- Purchase/sale dates and values")
-    lines.append("- INR to DKK exchange-rate evidence")
-    lines.append("- Prior Danish tax filing records")
+    lines.append(f"- INR to {currency} exchange-rate evidence")
+    lines.append(f"- Prior {country} tax filing records")
     lines.append("")
 
-    lines.append("### 🧠 7) Questions for better accuracy")
+    lines.append("### 🧠 11) Questions for better accuracy")
     for question in result["follow_up_questions"]:
         lines.append(f"- {question}")
 
@@ -792,6 +1114,41 @@ def analyze_tax(inputs: Dict[str, Any]) -> Dict[str, Any]:
     )
 
     india_interest_has, india_interest_value = _truthy_interest(india_interest_raw)
+
+    # -----------------------------
+    # Multi-country tax residency inputs
+    # -----------------------------
+    tax_residency_country = inputs.get("tax_residency_country") or "Denmark"
+    tax_residency_currency = inputs.get("tax_residency_currency") or "DKK"
+    exchange_rate_to_inr = _to_float(inputs.get("exchange_rate_to_inr"), 0.0)
+
+    has_mutual_funds = bool(inputs.get("has_mutual_funds"))
+    mutual_fund_value_inr = _optional_float(
+        inputs.get("india_mutual_fund_value_inr", inputs.get("mutual_fund_value_inr"))
+    )
+
+    has_stocks = bool(inputs.get("has_stocks"))
+    stocks_value_inr = _optional_float(
+        inputs.get("india_stocks_value_inr", inputs.get("stocks_value_inr"))
+    )
+
+    has_property = bool(inputs.get("has_property"))
+    property_value_inr = _optional_float(
+        inputs.get("india_property_value_inr", inputs.get("property_value_inr"))
+    )
+
+    wants_repatriation = bool(inputs.get("wants_repatriation"))
+    repatriation_amount_inr = _optional_float(inputs.get("repatriation_amount_inr"))
+
+    total_india_assets_inr = (
+        india_amount
+        + (mutual_fund_value_inr or 0)
+        + (stocks_value_inr or 0)
+        + (property_value_inr or 0)
+    )
+    total_india_assets_local = (
+        total_india_assets_inr / exchange_rate_to_inr if exchange_rate_to_inr > 0 else 0
+    )
 
     # -----------------------------
     # Confidence / unknown handling
@@ -842,6 +1199,8 @@ def analyze_tax(inputs: Dict[str, Any]) -> Dict[str, Any]:
         india_interest_has=india_interest_has,
         india_interest_value=india_interest_value,
         india_withholding_info=india_withholding_info,
+        country=tax_residency_country,
+        currency=tax_residency_currency,
     )
 
     # -----------------------------
@@ -854,6 +1213,36 @@ def analyze_tax(inputs: Dict[str, Any]) -> Dict[str, Any]:
     )
 
     # -----------------------------
+    # FEMA compliance, DTAA benefits, TDS summary, investment recommendations
+    # -----------------------------
+    fema_compliance = build_fema_compliance(
+        india_account_type=india_account_type,
+        wants_repatriation=wants_repatriation,
+        repatriation_amount_inr=repatriation_amount_inr,
+    )
+
+    dtaa_benefits = build_dtaa_benefits(tax_residency_country)
+
+    tds_summary = build_tds_summary(
+        india_account_type=india_account_type,
+        has_mutual_funds=has_mutual_funds,
+        mutual_fund_value_inr=mutual_fund_value_inr,
+        has_stocks=has_stocks,
+        stocks_value_inr=stocks_value_inr,
+    )
+
+    investment_recommendations = build_investment_recommendations(
+        investment_allocation=investment_recommendation,
+        has_mutual_funds=has_mutual_funds,
+        mutual_fund_value_inr=mutual_fund_value_inr,
+        has_stocks=has_stocks,
+        stocks_value_inr=stocks_value_inr,
+        has_property=has_property,
+        property_value_inr=property_value_inr,
+        tax_residency_country=tax_residency_country,
+    )
+
+    # -----------------------------
     # Structured result
     # -----------------------------
     structured_result: Dict[str, Any] = {
@@ -861,11 +1250,24 @@ def analyze_tax(inputs: Dict[str, Any]) -> Dict[str, Any]:
             "dk_residency": dk_residency,
             "dk_capital_income_dkk": dk_capital_income,
             "dk_prev_declared_foreign_accounts": dk_prev_declared,
+            "tax_residency_country": tax_residency_country,
+            "tax_residency_currency": tax_residency_currency,
+            "exchange_rate_to_inr": exchange_rate_to_inr,
             "india_account_type": india_account_type,
             "india_principal_inr": india_amount,
             "india_interest_received_selected": bool(india_interest_has),
             "india_annual_interest_inr": india_interest_value,
             "india_withholding_info": india_withholding_info,
+            "has_mutual_funds": has_mutual_funds,
+            "mutual_fund_value_inr": mutual_fund_value_inr,
+            "has_stocks": has_stocks,
+            "stocks_value_inr": stocks_value_inr,
+            "has_property": has_property,
+            "property_value_inr": property_value_inr,
+            "total_india_assets_inr": total_india_assets_inr,
+            "total_india_assets_local": total_india_assets_local,
+            "wants_repatriation": wants_repatriation,
+            "repatriation_amount_inr": repatriation_amount_inr,
             "risk_profile": risk_profile,
             "investment_horizon_years": investment_horizon_years,
             "monthly_expenses_inr": _to_float(inputs.get("monthly_expenses_inr"), 0),
@@ -880,25 +1282,30 @@ def analyze_tax(inputs: Dict[str, Any]) -> Dict[str, Any]:
             "withholding": withholding_confidence,
         },
         "summary": (
-            "This is a tax-aware NRI investment planning summary for Indian "
-            "savings with Denmark reporting considerations."
+            f"This is a tax-aware NRI investment planning summary for Indian "
+            f"savings with {tax_residency_country} reporting considerations."
         ),
         "liquidity_plan": liquidity_plan,
         "investment_recommendation": investment_recommendation,
+        "allocation": investment_recommendation,
         "denmark_tax_actions": denmark_tax_actions,
         "india_tax_notes": india_tax_notes,
+        "fema_compliance": fema_compliance,
+        "dtaa_benefits": dtaa_benefits,
+        "tds_summary": tds_summary,
+        "investment_recommendations": investment_recommendations,
         "follow_up_questions": build_follow_up_questions(inputs),
         "assumptions_used": [
             "Assumption: the user wants general educational guidance, not regulated financial advice.",
-            "Assumption: Denmark tax residency is decisive for worldwide income reporting.",
+            f"Assumption: {tax_residency_country} tax residency is decisive for worldwide income reporting.",
             "Assumption: Indian tax treatment depends heavily on whether the account is NRE, NRO or FCNR.",
-            "Assumption: Danish treatment of Indian mutual funds/shares should be verified before investment.",
+            f"Assumption: {tax_residency_country} treatment of Indian mutual funds/shares should be verified before investment.",
         ],
         "warnings": [
             "This is not tax, legal or investment advice.",
             "Tax laws change and depend on personal facts.",
-            "Danish taxation of foreign investment funds can be complex.",
-            "Check with SKAT/a Danish tax adviser and an Indian tax adviser before acting.",
+            f"{tax_residency_country} taxation of foreign investment funds can be complex.",
+            f"Check with a qualified tax adviser in {tax_residency_country} and an Indian tax adviser before acting.",
         ],
         "disclaimer": (
             "This is general educational information only and should not be "

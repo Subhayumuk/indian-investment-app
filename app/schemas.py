@@ -11,6 +11,11 @@ class PlannerInput(BaseModel):
     tax_resident_denmark: Optional[bool] = True
     indian_residential_status: Optional[str] = "NRI"
 
+    # Multi-country tax residency
+    tax_residency_country: Optional[str] = "Denmark"
+    tax_residency_currency: Optional[str] = "DKK"
+    exchange_rate_to_inr: Optional[float] = 11.5
+
     # Indian compliance
     has_pan: Optional[bool] = True
     has_aadhaar: Optional[bool] = None
@@ -27,6 +32,18 @@ class PlannerInput(BaseModel):
     india_annual_interest_inr: Optional[float] = None
     india_interest_rate_percent: Optional[float] = None
     indian_tds_percent: Optional[float] = 10.0
+
+    # Other Indian investments
+    has_mutual_funds: Optional[bool] = False
+    mutual_fund_value_inr: Optional[float] = None
+    has_stocks: Optional[bool] = False
+    stocks_value_inr: Optional[float] = None
+    has_property: Optional[bool] = False
+    property_value_inr: Optional[float] = None
+
+    # Repatriation
+    wants_repatriation: Optional[bool] = False
+    repatriation_amount_inr: Optional[float] = None
 
     # Danish income / capital income
     dk_salary_income_dkk: Optional[float] = None
@@ -55,6 +72,9 @@ DISPLAY_ORDER = [
     "residency_country",
     "tax_resident_denmark",
     "indian_residential_status",
+    "tax_residency_country",
+    "tax_residency_currency",
+    "exchange_rate_to_inr",
     "has_pan",
     "has_aadhaar",
     "inr_to_dkk_rate",
@@ -62,6 +82,14 @@ DISPLAY_ORDER = [
     "india_annual_interest_inr",
     "india_interest_rate_percent",
     "indian_tds_percent",
+    "has_mutual_funds",
+    "mutual_fund_value_inr",
+    "has_stocks",
+    "stocks_value_inr",
+    "has_property",
+    "property_value_inr",
+    "wants_repatriation",
+    "repatriation_amount_inr",
     "dk_salary_income_dkk",
     "dk_capital_income_dkk",
     "dk_bank_interest_dkk",

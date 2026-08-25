@@ -59,4 +59,20 @@ def adapt_planner_inputs(inputs: dict[str, Any]) -> dict[str, Any]:
     if "dk_capital_income_dkk" in inputs and "dk_capital_income" not in inputs:
         adapted["dk_capital_income"] = inputs.get("dk_capital_income_dkk")
 
+    # Multi-country investment holdings: map to the "india_*_value_inr"
+    # naming convention agent_logic already uses for India-side amounts.
+    if "mutual_fund_value_inr" in inputs and "india_mutual_fund_value_inr" not in inputs:
+        adapted["india_mutual_fund_value_inr"] = inputs.get("mutual_fund_value_inr")
+
+    if "stocks_value_inr" in inputs and "india_stocks_value_inr" not in inputs:
+        adapted["india_stocks_value_inr"] = inputs.get("stocks_value_inr")
+
+    if "property_value_inr" in inputs and "india_property_value_inr" not in inputs:
+        adapted["india_property_value_inr"] = inputs.get("property_value_inr")
+
+    # tax_residency_country, tax_residency_currency, exchange_rate_to_inr,
+    # has_mutual_funds/has_stocks/has_property and wants_repatriation/
+    # repatriation_amount_inr already use the exact names agent_logic
+    # expects, so they pass through unchanged via the dict(inputs) copy above.
+
     return adapted
