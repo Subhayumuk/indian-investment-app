@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+/* Tailwind v4 defaults `dark:` to prefers-color-scheme; redefine it to
+   respond to a `.dark` class instead, so our toggle button can override
+   the system preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+html {
+  color-scheme: light dark;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased;
+}
