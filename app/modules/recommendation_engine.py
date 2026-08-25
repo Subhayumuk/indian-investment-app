@@ -112,7 +112,7 @@ class RecommendationEngine:
         into the flat attribute shape the allocation/eligibility/confidence/
         explanation modules expect."""
         indian_status = profile.residency.indian_residential_status
-        account_types = [str(a) for a in profile.residency.account_types_held]
+        account_types = [a.value for a in profile.residency.account_types_held]
 
         bank_total = sum(float(a.get("balance_inr", 0) or 0) for a in profile.financial.bank_accounts)
         mf_total = sum(float(m.get("current_value_inr", 0) or 0) for m in profile.financial.mutual_funds)
@@ -128,7 +128,7 @@ class RecommendationEngine:
             investment_goal=str(profile.investment.primary_goal),
             investment_horizon_years=profile.investment.investment_horizon_years,
             tax_residency_country=profile.residency.tax_residency_country,
-            nri_status=str(indian_status) in ("non_resident", "rnor"),
+            nri_status=indian_status.value in ("non_resident", "rnor"),
             has_nre_account="NRE" in account_types,
             has_nro_account="NRO" in account_types,
             has_pan=profile.residency.has_pan,
