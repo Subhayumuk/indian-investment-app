@@ -125,7 +125,7 @@ class RecommendationEngine:
         return SimpleNamespace(
             age=profile.personal.age,
             risk_tolerance=profile.investment.risk_tolerance.value,
-            investment_goal=str(profile.investment.primary_goal),
+            investment_goal=profile.investment.primary_goal.value,
             investment_horizon_years=profile.investment.investment_horizon_years,
             tax_residency_country=profile.residency.tax_residency_country,
             nri_status=indian_status.value in ("non_resident", "rnor"),
