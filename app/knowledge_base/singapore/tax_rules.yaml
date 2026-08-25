@@ -1,0 +1,17 @@
+---
+version: "2024-2025"
+personal_income_tax: true
+capital_gains_tax: false
+wealth_tax: false
+currency: "SGD"
+notes:
+  - "No capital gains tax in Singapore"
+  - "Foreign-sourced income not remitted to Singapore generally not taxable"
+  - "Indian investment income may not be taxable in Singapore if not remitted"
+  - "Very favorable for Indian NRI investors"
+india_specific:
+  overall_assessment: "Highly favorable — no CGT, foreign income rules beneficial"
+  nre_interest_taxable_sg: false
+  nro_interest_taxable_sg: "Possibly if remitted — seek advice"
+  indian_mf_eligible: true
+  key_advantage: "Capital gains from Indian investments not taxed in Singapore"

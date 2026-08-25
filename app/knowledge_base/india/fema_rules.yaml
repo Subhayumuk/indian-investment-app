@@ -1,0 +1,35 @@
+---
+version: "2024-2025"
+last_updated: "2025-01-01"
+source: "FEMA 1999, RBI Master Directions on NRI Investments"
+
+repatriation_rules:
+  nre_account:
+    freely_repatriable: true
+    limit: "No limit"
+    documentation: "Standard bank KYC"
+
+  nro_account:
+    freely_repatriable: false
+    annual_limit_usd: 1000000
+    documentation:
+      - "Form 15CA (online declaration)"
+      - "Form 15CB (CA certificate for amounts > INR 5 lakhs)"
+      - "Bank transfer instructions"
+
+  capital_gains_repatriation:
+    from_nre: "Freely repatriable"
+    from_nro: "Subject to USD 1M annual limit"
+
+prohibited_investments_for_nri:
+  - "Agricultural land (purchase)"
+  - "Plantation property"
+  - "Farm house"
+  - "Print media companies"
+  - "Lottery/gambling businesses"
+  - "Chit funds"
+  - "Nidhi companies"
+
+fema_nri_definition:
+  description: "Person resident outside India for > 182 days in preceding FY for employment/business"
+  note: "FEMA definition differs from Income Tax Act definition"

@@ -1,0 +1,49 @@
+---
+version: "2024-2025"
+last_updated: "2025-01-01"
+source: "India-Denmark DTAA 1989, Protocol amendments"
+
+treaty_details:
+  signed: "1989"
+  in_force: true
+  relief_method: "Credit method (Denmark credits Indian tax paid)"
+
+article_provisions:
+  interest:
+    max_withholding_india: 10.0
+    taxable_in_denmark: true
+    credit_in_denmark: true
+    user_action: "Submit TRC + Form 10F to Indian bank to get 10% TDS instead of 30%"
+
+  dividends:
+    max_withholding_india: 15.0
+    taxable_in_denmark: true
+    credit_in_denmark: true
+
+  capital_gains:
+    primary_taxing_right: "Country of residence (Denmark)"
+    india_may_also_tax: true
+    credit_available_in_denmark: true
+
+  employment_income:
+    taxable_in: "Country where work performed"
+
+practical_steps_for_denmark_resident:
+  step_1: "Apply for Tax Residency Certificate (TRC) from Skattestyrelsen"
+  step_2: "Submit TRC + Form 10F to each Indian bank/AMC"
+  step_3: "Indian bank deducts TDS at 10% instead of 30% on NRO FD interest"
+  step_4: "Declare all Indian income in Danish tax return"
+  step_5: "Claim credit for Indian taxes paid (attach TDS certificates)"
+  step_6: "Pay net difference to Danish tax authority"
+
+example_calculation:
+  nro_fd_interest_inr: 100000
+  india_tds_without_dtaa: 30000
+  india_tds_with_dtaa: 10000
+  danish_tax_rate: 37.0
+  danish_tax_amount: 37000
+  dtaa_credit: 10000
+  net_danish_tax_payable: 27000
+  total_tax_paid: 37000
+  effective_rate: 37.0
+  saving_vs_no_dtaa: 20000

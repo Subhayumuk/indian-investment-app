@@ -57,3 +57,8 @@ yarn-error.log*
 
 # Deployment/local config
 .render/
+
+# Real personal/financial statements used for local testing — never commit these
+CASStatement.pdf
+*.cas.pdf
+/*.pdf

@@ -1,0 +1,109 @@
+---
+version: "2024-2025"
+last_updated: "2025-01-01"
+
+products:
+  equity_mutual_funds:
+    nri_eligible: true
+    us_canada_restriction: true
+    us_canada_note: "Most AMCs do not accept investments from US/Canada residents due to FATCA/SEC compliance"
+    pan_required: true
+    kyc_required: true
+    demat_required: false
+    account_types_allowed: ["NRE", "NRO"]
+    repatriable_from_nre: true
+    repatriable_from_nro: true
+    repatriation_nro_limit: "USD 1M per FY"
+    fatca_crs_reporting: true
+    min_investment_inr: 500
+    sip_allowed: true
+
+  debt_mutual_funds:
+    nri_eligible: true
+    us_canada_restriction: true
+    pan_required: true
+    kyc_required: true
+    account_types_allowed: ["NRE", "NRO"]
+    repatriable_from_nre: true
+    fatca_crs_reporting: true
+    note: "Post April 2023, LTCG benefit removed — taxed at slab rate"
+
+  nre_fixed_deposit:
+    nri_eligible: true
+    us_canada_restriction: false
+    pan_required: true
+    kyc_required: true
+    account_types_allowed: ["NRE"]
+    interest_tax_free_india: true
+    repatriable: true
+    min_tenure_months: 12
+    max_tenure_years: 5
+    typical_rate_range_percent: [6.5, 7.5]
+
+  nro_fixed_deposit:
+    nri_eligible: true
+    pan_required: true
+    kyc_required: true
+    account_types_allowed: ["NRO"]
+    interest_tds_rate: 30.0
+    repatriable: true
+    repatriation_limit: "USD 1M per FY"
+    typical_rate_range_percent: [6.5, 7.5]
+
+  fcnr_deposit:
+    nri_eligible: true
+    pan_required: true
+    kyc_required: true
+    account_types_allowed: ["FCNR"]
+    interest_tax_free_india: true
+    repatriable: true
+    currency_risk: "None — denominated in foreign currency"
+    typical_rate_usd_percent: [4.5, 5.5]
+    typical_rate_eur_percent: [3.0, 4.0]
+
+  sgb:
+    full_name: "Sovereign Gold Bond"
+    nri_eligible: false
+    nri_note: "NRIs cannot invest in new SGB issuances. Can hold existing bonds acquired before becoming NRI."
+    resident_only: true
+
+  ppf:
+    full_name: "Public Provident Fund"
+    nri_eligible: false
+    nri_note: "NRIs cannot open new PPF accounts. Existing accounts can be maintained till maturity but no extension."
+    resident_only: true
+
+  nps:
+    full_name: "National Pension System"
+    nri_eligible: true
+    pan_required: true
+    kyc_required: true
+    repatriation_on_exit: "Restricted — annuity must be purchased from Indian insurer"
+    note: "Suitable only if planning to return to India"
+
+  reits:
+    full_name: "Real Estate Investment Trusts"
+    nri_eligible: true
+    us_canada_restriction: false
+    demat_required: true
+    pan_required: true
+    account_types_allowed: ["NRE", "NRO"]
+    dividend_tds: 10.0
+    capital_gains_equity_treatment: true
+
+  direct_equity:
+    full_name: "Listed Shares on NSE/BSE"
+    nri_eligible: true
+    us_canada_restriction: false
+    requires: "PIS (Portfolio Investment Scheme) permission from RBI via bank"
+    demat_required: true
+    pan_required: true
+    account_types_allowed: ["NRE", "NRO"]
+    pis_account_required: true
+
+  etf:
+    nri_eligible: true
+    us_canada_restriction: true
+    demat_required: true
+    pan_required: true
+    account_types_allowed: ["NRE", "NRO"]

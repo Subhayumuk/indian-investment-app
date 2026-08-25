@@ -1,0 +1,26 @@
+---
+version: "2024-2025"
+personal_income_tax: true
+capital_gains_tax: true
+wealth_tax: false
+currency: "USD"
+reporting_authority: "IRS"
+
+critical_warnings:
+  pfic_warning: "Indian mutual funds are classified as Passive Foreign Investment Companies (PFICs) under US law"
+  pfic_consequence: "PFIC taxation is extremely punitive — excess distribution method or mark-to-market election required"
+  fbar_requirement: "Foreign bank accounts > USD 10,000 aggregate must be reported on FBAR (FinCEN 114)"
+  fatca_requirement: "Foreign financial assets > USD 50,000 must be reported on Form 8938"
+  fatca_impact: "Most Indian AMCs refuse investments from US residents due to FATCA compliance burden"
+
+income_tax_rates:
+  ordinary_income_top: 37.0
+  long_term_cgt_top: 20.0
+  net_investment_income_tax: 3.8
+
+india_specific:
+  nre_interest_taxable_usa: true
+  nro_interest_taxable_usa: true
+  indian_mf_eligible: false
+  indian_mf_note: "Avoid Indian MFs entirely if US resident — PFIC rules make them extremely tax-inefficient"
+  recommended_alternatives: ["US-based India ETFs like INDA, INDY", "Direct stocks via PIS account"]

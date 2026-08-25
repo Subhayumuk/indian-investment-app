@@ -1,0 +1,93 @@
+---
+version: "2024-2025"
+last_updated: "2025-01-01"
+source: "CBDT DTAA Notifications"
+
+dtaa_countries:
+  denmark:
+    treaty_in_force: true
+    treaty_year: 1989
+    interest_withholding_max: 10.0
+    dividend_withholding_max: 15.0
+    capital_gains_taxable_in: "residence_country"
+    capital_gains_note: "Gains from shares may be taxed in India if substantial interest"
+    tiebreaker_rule: "competent authority determination"
+    relief_method: "credit_method"
+    india_tds_on_nro_interest_with_dtaa: 10.0
+    india_tds_on_dividend_with_dtaa: 15.0
+    key_benefit: "NRO FD TDS reduced from 30% to 10% with Form 10F + Tax Residency Certificate"
+
+  uae:
+    treaty_in_force: true
+    treaty_year: 1993
+    interest_withholding_max: 0.0
+    dividend_withholding_max: 0.0
+    capital_gains_taxable_in: "source_country"
+    relief_method: "exemption_method"
+    india_tds_on_nro_interest_with_dtaa: 0.0
+    key_benefit: "Very favorable — UAE has no personal tax, India-sourced income taxed only in India"
+
+  uk:
+    treaty_in_force: true
+    treaty_year: 1993
+    interest_withholding_max: 15.0
+    dividend_withholding_max: 15.0
+    capital_gains_taxable_in: "both_countries_with_credit"
+    relief_method: "credit_method"
+    india_tds_on_nro_interest_with_dtaa: 15.0
+    key_benefit: "UK tax credit available for Indian TDS paid"
+
+  usa:
+    treaty_in_force: true
+    treaty_year: 1989
+    interest_withholding_max: 15.0
+    dividend_withholding_max: 25.0
+    capital_gains_note: "Complex — PFIC rules apply to Indian MFs"
+    relief_method: "credit_method"
+    pfic_warning: true
+    key_benefit: "Limited — PFIC treatment makes Indian MFs very tax-inefficient for US residents"
+
+  singapore:
+    treaty_in_force: true
+    treaty_year: 1994
+    interest_withholding_max: 15.0
+    dividend_withholding_max: 10.0
+    capital_gains_taxable_in: "residence_country"
+    relief_method: "exemption_method"
+    key_benefit: "Singapore has no CGT — capital gains from Indian assets not taxed in Singapore"
+
+  canada:
+    treaty_in_force: true
+    treaty_year: 1996
+    interest_withholding_max: 15.0
+    dividend_withholding_max: 25.0
+    capital_gains_taxable_in: "both_countries_with_credit"
+    pfic_equivalent_warning: true
+    key_benefit: "Limited — similar PFIC-like treatment issues as USA"
+
+  germany:
+    treaty_in_force: true
+    treaty_year: 1996
+    interest_withholding_max: 10.0
+    dividend_withholding_max: 10.0
+    capital_gains_taxable_in: "residence_country"
+    relief_method: "credit_method"
+    india_tds_on_nro_interest_with_dtaa: 10.0
+    key_benefit: "NRO FD TDS reduced to 10% with TRC + Form 10F"
+
+  australia:
+    treaty_in_force: true
+    treaty_year: 1991
+    interest_withholding_max: 15.0
+    dividend_withholding_max: 15.0
+    capital_gains_taxable_in: "both_countries_with_credit"
+    relief_method: "credit_method"
+    key_benefit: "Australia allows 50% CGT discount for assets held > 12 months"
+
+dtaa_claim_procedure:
+  step_1: "Obtain Tax Residency Certificate (TRC) from country of residence"
+  step_2: "Submit Form 10F to Indian bank or AMC"
+  step_3: "Submit self-declaration of no PE in India"
+  step_4: "Bank/AMC applies reduced TDS rate"
+  renewal: "TRC must be renewed annually"
+  note: "Without TRC + Form 10F, default TDS rates apply"

@@ -26,3 +26,5 @@ class Settings:
         for origin in os.getenv("CORS_ORIGINS", "*").split(",")
         if origin.strip()
     ]
+
+    GOLD_API_KEY: str = os.getenv("GOLD_API_KEY", "")

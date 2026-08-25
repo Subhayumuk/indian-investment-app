@@ -1,0 +1,22 @@
+---
+version: "2024-2025"
+personal_income_tax: true
+capital_gains_tax: true
+wealth_tax: false
+currency: "EUR"
+reporting_authority: "Finanzamt"
+abgeltungsteuer:
+  description: "Flat withholding tax on investment income"
+  rate: 25.0
+  solidarity_surcharge: 5.5
+  church_tax: "8-9% if applicable"
+  effective_rate_without_church: 26.375
+  annual_exemption_eur_single: 1000
+  annual_exemption_eur_couple: 2000
+india_specific:
+  nro_interest_dtaa_tds: 10.0
+  germany_tax_on_interest: 26.375
+  dtaa_credit_available: true
+  indian_mf_eligible: true
+  us_canada_restriction: false
+  overall_assessment: "Moderate — DTAA available, Abgeltungsteuer applies to investment income"

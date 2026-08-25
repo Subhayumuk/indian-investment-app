@@ -1,0 +1,19 @@
+---
+version: "2024-2025"
+personal_income_tax: false
+capital_gains_tax: false
+wealth_tax: false
+foreign_income_taxable: false
+currency: "AED"
+notes:
+  - "UAE has no personal income tax as of 2024"
+  - "Corporate tax introduced 2023 (9%) but not applicable to individuals"
+  - "No tax on Indian investment income for UAE residents"
+  - "India may still deduct TDS — this is the final tax"
+  - "NRE interest: 0% tax total"
+  - "NRO interest: 30% TDS in India (or 0% with DTAA) — no UAE tax"
+  - "Equity MF LTCG: 10% in India — no UAE tax"
+india_specific:
+  overall_assessment: "Most tax-efficient country for Indian NRI investments"
+  recommended_accounts: ["NRE", "FCNR"]
+  key_advantage: "All India-sourced income taxed only in India at relatively low rates"

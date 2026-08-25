@@ -1,0 +1,88 @@
+---
+version: "2024-2025"
+last_updated: "2025-01-01"
+source: "Skattestyrelsen (Danish Tax Authority)"
+
+overview:
+  personal_income_tax: true
+  capital_gains_tax: true
+  wealth_tax: false
+  inheritance_tax: true
+  foreign_income_taxable: true
+  tax_year: "Calendar year (Jan-Dec)"
+  currency: "DKK"
+  reporting_authority: "Skattestyrelsen"
+  tax_return_deadline: "May 1 of following year"
+
+tax_categories:
+  personal_income:
+    description: "Salary, business income, pension"
+    rates:
+      bottom_tax: 12.09
+      top_tax: 15.0
+      top_tax_threshold_dkk: 588900
+      municipal_tax_avg: 25.0
+      total_effective_max: 52.07
+      am_bidrag: 8.0
+      note: "AM-bidrag (labour market contribution) 8% on gross, then income tax on remainder"
+
+  share_income:
+    description: "Dividends and capital gains from shares (including foreign)"
+    rates:
+      below_threshold_rate: 27.0
+      above_threshold_rate: 42.0
+      threshold_dkk_single: 61000
+      threshold_dkk_couple: 122000
+    applies_to: ["dividends", "capital_gains_from_shares", "equity_mutual_funds"]
+    foreign_shares: "Same rates apply to foreign shares including Indian shares"
+
+  capital_income:
+    description: "Interest income, bond income"
+    rates:
+      positive_net_rate: 37.0
+      negative_net_deductible: true
+    applies_to: ["bank_interest", "bond_interest", "foreign_fd_interest"]
+    foreign_interest: "Indian FD/NRE/NRO interest taxable in Denmark as capital income"
+
+  lagerbeskatning:
+    description: "Mark-to-market taxation — tax on unrealised gains annually"
+    applies_to:
+      - "Foreign investment funds (including Indian MFs not on Danish approved list)"
+      - "ETFs not on Danish approved list"
+    rate: 42.0
+    note: "Indian mutual funds are almost certainly subject to lagerbeskatning in Denmark"
+    implication: "Even unrealised gains taxed annually — significant cash flow impact"
+
+foreign_income_reporting:
+  required: true
+  method: "Include in annual tax return (årsopgørelse)"
+  foreign_tax_credit: true
+  credit_limit: "Cannot exceed Danish tax on same income"
+  form: "Oplysningsskema (tax information form)"
+
+foreign_asset_reporting:
+  required: true
+  threshold: "All foreign accounts and assets must be reported"
+  form: "Blanket 04.063 for foreign bank accounts"
+  penalty_for_non_reporting: "Significant fines"
+
+india_specific_notes:
+  nre_interest:
+    taxable_in_denmark: true
+    taxable_in_india: false
+    net_effect: "Tax-free in India but fully taxable in Denmark as capital income at ~37%"
+  nro_interest:
+    taxable_in_denmark: true
+    taxable_in_india: true
+    dtaa_credit: "Indian TDS (reduced to 10% via DTAA) credited against Danish tax"
+    net_effective_rate: "~37% total (10% India TDS credited against Danish 37%)"
+  indian_equity_mf:
+    lagerbeskatning_applies: true
+    rate_in_denmark: 42.0
+    rate_in_india: "10% LTCG or 15% STCG"
+    double_tax_risk: "High — both countries may tax, credit mechanism complex"
+  indian_dividends:
+    taxable_in_denmark: true
+    dtaa_withholding_india: 15.0
+    denmark_share_income_rate: 27.0
+    credit_available: true

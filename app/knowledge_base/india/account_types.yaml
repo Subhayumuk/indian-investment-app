@@ -1,0 +1,54 @@
+---
+version: "2024-2025"
+last_updated: "2025-01-01"
+source: "FEMA 1999, RBI Master Directions"
+
+accounts:
+  NRE:
+    full_name: "Non-Resident External Account"
+    currency: "INR"
+    funding: "Foreign earnings converted to INR"
+    interest_taxable_india: false
+    interest_taxable_abroad: true
+    repatriable: true
+    repatriation_limit: "Freely repatriable — no limit"
+    joint_account_with_resident: false
+    joint_account_with_nri: true
+    suitable_for: ["parking foreign earnings", "freely repatriable investments"]
+    products_linkable: ["equity_mf", "debt_mf", "nre_fd", "sgb", "reit"]
+
+  NRO:
+    full_name: "Non-Resident Ordinary Account"
+    currency: "INR"
+    funding: "India-sourced income (rent, dividends, pension)"
+    interest_taxable_india: true
+    interest_tds_rate: 30.0
+    interest_taxable_abroad: true
+    repatriable: true
+    repatriation_limit: "USD 1 million per FY (net of taxes)"
+    joint_account_with_resident: true
+    joint_account_with_nri: true
+    suitable_for: ["India-sourced income", "local expenses"]
+    products_linkable: ["equity_mf", "debt_mf", "nro_fd", "real_estate_rent"]
+
+  FCNR:
+    full_name: "Foreign Currency Non-Resident (Bank) Account"
+    currency: ["USD", "EUR", "GBP", "JPY", "CAD", "AUD"]
+    funding: "Foreign currency deposits"
+    interest_taxable_india: false
+    interest_taxable_abroad: true
+    repatriable: true
+    repatriation_limit: "Freely repatriable — no limit"
+    joint_account_with_resident: false
+    joint_account_with_nri: true
+    suitable_for: ["avoiding INR currency risk", "fixed-term foreign currency savings"]
+    tenure_years: [1, 2, 3, 4, 5]
+    note: "Protects against INR depreciation"
+
+  RFC:
+    full_name: "Resident Foreign Currency Account"
+    currency: ["USD", "EUR", "GBP"]
+    who_can_open: "Returning NRIs becoming residents"
+    interest_taxable_india: false
+    repatriable: true
+    suitable_for: ["NRIs returning to India"]

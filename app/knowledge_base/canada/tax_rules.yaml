@@ -1,0 +1,16 @@
+---
+version: "2024-2025"
+personal_income_tax: true
+capital_gains_tax: true
+wealth_tax: false
+currency: "CAD"
+critical_warnings:
+  - "Similar PFIC-like issues as USA for Indian MFs"
+  - "Most Indian AMCs restrict investments from Canadian residents"
+  - "Foreign income reporting requirements (T1135 for foreign assets > CAD 100,000)"
+capital_gains_inclusion_rate: 50.0
+federal_top_rate: 33.0
+india_specific:
+  indian_mf_eligible: false
+  indian_mf_note: "Most AMCs restrict Canada residents — similar to USA"
+  recommended: ["NRE FD", "FCNR", "Direct equity via PIS"]

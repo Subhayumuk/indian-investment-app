@@ -1,0 +1,97 @@
+---
+version: "2024-2025"
+last_updated: "2025-01-01"
+source: "Income Tax Act 1961, Finance Act 2024"
+
+residency_rules:
+  resident_ordinary:
+    description: "Present in India >= 182 days in the FY, or >= 60 days in FY and >= 365 days in preceding 4 FYs"
+    tax_on_global_income: true
+  rnor:
+    description: "Resident but Not Ordinarily Resident — transitional status"
+    conditions:
+      - "NRI for 9 out of 10 preceding FYs"
+      - "Present in India <= 729 days in preceding 7 FYs"
+    tax_on_global_income: false
+    tax_on_india_income: true
+  non_resident:
+    description: "Does not meet resident criteria"
+    tax_on_global_income: false
+    tax_on_india_income: true
+
+tds_rates:
+  nri_interest_nro_fd: 30.0
+  nri_interest_nro_savings: 30.0
+  nri_interest_nre_fd: 0.0
+  nri_interest_nre_savings: 0.0
+  nri_interest_fcnr: 0.0
+  nri_equity_mf_stcg: 15.0
+  nri_equity_mf_ltcg: 10.0
+  nri_debt_mf_stcg: 30.0
+  nri_debt_mf_ltcg: 20.0
+  nri_equity_shares_stcg: 15.0
+  nri_equity_shares_ltcg: 10.0
+  nri_rental_income: 30.0
+  nri_dividend: 20.0
+  nri_sgb_interest: 0.0
+  nri_sgb_redemption_ltcg: 0.0
+  surcharge_threshold_50L: 10.0
+  surcharge_threshold_1Cr: 15.0
+  health_education_cess: 4.0
+
+capital_gains:
+  equity_shares:
+    stcg_holding_months: 12
+    stcg_rate: 15.0
+    ltcg_rate: 10.0
+    ltcg_exemption_limit_inr: 125000
+    ltcg_grandfathering_date: "2018-01-31"
+  equity_mutual_funds:
+    stcg_holding_months: 12
+    stcg_rate: 15.0
+    ltcg_rate: 10.0
+    ltcg_exemption_limit_inr: 125000
+  debt_mutual_funds:
+    stcg_holding_months: 36
+    stcg_rate: "slab_rate"
+    ltcg_rate: 20.0
+    ltcg_indexation: true
+    note: "Post April 2023, debt MF gains taxed at slab rate regardless of holding"
+    post_april_2023_rule: "all_gains_at_slab_rate"
+  real_estate:
+    stcg_holding_months: 24
+    stcg_rate: "slab_rate"
+    ltcg_rate: 20.0
+    ltcg_indexation: true
+  gold_etf:
+    stcg_holding_months: 36
+    stcg_rate: "slab_rate"
+    ltcg_rate: 20.0
+    ltcg_indexation: true
+  sgb:
+    redemption_at_maturity_tax: 0.0
+    premature_redemption_ltcg: 20.0
+    premature_redemption_stcg: "slab_rate"
+    interest_taxable: true
+    interest_tds: false
+
+slab_rates_new_regime_fy2024_25:
+  - range: [0, 300000]
+    rate: 0.0
+  - range: [300001, 700000]
+    rate: 5.0
+  - range: [700001, 1000000]
+    rate: 10.0
+  - range: [1000001, 1200000]
+    rate: 15.0
+  - range: [1200001, 1500000]
+    rate: 20.0
+  - range: [1500001, null]
+    rate: 30.0
+
+special_provisions_nri:
+  section_115E: "NRI can opt for special rates on investment income"
+  section_115F: "Rollover relief on capital gains if reinvested in specified assets"
+  section_115G: "NRI not required to file return if tax fully deducted"
+  section_115H: "NRI can continue special rates after becoming resident"
+  section_115I: "NRI can opt out of special provisions"

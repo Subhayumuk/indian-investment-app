@@ -1,0 +1,20 @@
+---
+version: "2024-2025"
+personal_income_tax: true
+capital_gains_tax: true
+wealth_tax: false
+currency: "AUD"
+reporting_authority: "ATO"
+cgt_discount:
+  available: true
+  holding_period_months: 12
+  discount_rate: 50.0
+  applies_to: "Australian residents on foreign assets held > 12 months"
+income_tax_top_rate: 45.0
+india_specific:
+  nro_interest_dtaa_tds: 15.0
+  australia_tax_on_interest: 45.0
+  dtaa_credit_available: true
+  indian_mf_eligible: true
+  cgt_discount_on_indian_shares: true
+  overall_assessment: "Moderate — high income tax but CGT discount beneficial for long-term equity"

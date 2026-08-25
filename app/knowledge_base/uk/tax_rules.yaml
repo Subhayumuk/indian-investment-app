@@ -1,0 +1,35 @@
+---
+version: "2024-2025"
+personal_income_tax: true
+capital_gains_tax: true
+wealth_tax: false
+currency: "GBP"
+tax_year: "April 6 to April 5"
+reporting_authority: "HMRC"
+
+income_tax_bands:
+  personal_allowance_gbp: 12570
+  basic_rate: 20.0
+  basic_rate_band_gbp: [12571, 50270]
+  higher_rate: 40.0
+  higher_rate_band_gbp: [50271, 125140]
+  additional_rate: 45.0
+  additional_rate_above_gbp: 125140
+
+capital_gains_tax:
+  annual_exempt_amount_gbp: 3000
+  basic_rate_taxpayer: 10.0
+  higher_rate_taxpayer: 20.0
+  residential_property_higher: 24.0
+
+foreign_income:
+  taxable: true
+  remittance_basis_available: "For non-domiciled residents (complex rules)"
+  foreign_tax_credit: true
+
+india_specific:
+  nre_interest_taxable_uk: true
+  nro_interest_taxable_uk: true
+  dtaa_tds_rate_india: 15.0
+  uk_credit_for_india_tds: true
+  indian_mf_treatment: "Offshore fund rules may apply — complex"
