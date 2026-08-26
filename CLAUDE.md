@@ -9,7 +9,8 @@ The legacy Denmark-only pipeline (`agent/`, `app/schemas.py`, `app/services/`, `
 Current state:
 - `.venv\Scripts\python.exe -m pytest -v` → **126/126 passing.**
 - `frontend/` builds cleanly (`npm run build`) and `app/main.py` serves the build output at `/` (falls back to a JSON "not built yet" message if `frontend/dist` doesn't exist — see Architecture).
-- Not yet done: a real deploy story for the frontend build (no Vercel/static config exists; `render.yaml`/`railway.toml`/`Procfile` only run the Python backend — see Deployment); the Pydantic v2 `class Config` deprecation in `app/models/user_profile.py` is unfixed but harmless.
+- Render deploy is now Docker-based single-origin (see Deployment) — `render.yaml` builds `Dockerfile`, which compiles the frontend in a Node stage and copies `frontend/dist` into the Python runtime stage, so `render.yaml` no longer needs its own buildCommand/PYTHON_VERSION.
+- Not yet done: `railway.toml`/`Procfile` still only run the Python backend (untouched — Render is the deploy target in use); the Pydantic v2 `class Config` deprecation in `app/models/user_profile.py` is unfixed but harmless.
 
 ## What this is
 
@@ -70,4 +71,8 @@ Known dead code worth knowing about if you touch routing: `app/api/recommendatio
 
 ## Deployment
 
-Backend deploy configs exist for Render (`render.yaml`) and Railway (`railway.toml`), both running `uvicorn main:app --host 0.0.0.0 --port $PORT`; `Procfile` covers Heroku-style platforms — none of these currently build the frontend, so as configured they'd serve the "frontend build not found" JSON fallback rather than the app. Before deploying, either add a Node build step ahead of `uvicorn` (single-origin: FastAPI serves `frontend/dist`) or deploy `frontend/` separately (e.g. Vercel/Netlify) and scope `CORS_ORIGINS` (comma-separated, defaults to `*`) to that origin.
+**Render** (`render.yaml`) is the active deploy target: `runtime: docker`, building the root `Dockerfile`. That Dockerfile is a two-stage build — a `node:20-alpine` stage runs `npm ci && npm run build` in `frontend/`, then a `python:3.12.8-slim` stage installs `requirements.txt` and copies the Node stage's `frontend/dist` in alongside `app/`/`main.py`. Single origin: FastAPI serves the built frontend at `/` and the API under `/api`, exactly as in local dev after `npm run build`. The container's `CMD` reads Render's injected `$PORT` (`sh -c 'uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}'`); `.dockerignore` keeps `.venv`/`node_modules`/`.git`/tests out of the build context.
+
+**Railway** (`railway.toml`) and **`Procfile`** (Heroku-style) are unchanged — still native Python-only configs (`uvicorn main:app --host 0.0.0.0 --port $PORT`), so as configured they'd serve the "frontend build not found" JSON fallback rather than the app. If either of these becomes the actual deploy target, point them at the same `Dockerfile` (Railway supports a Docker builder; Heroku-style platforms would need a container-based deploy instead of `Procfile`) rather than re-deriving a native buildCommand — Render's Python runtime doesn't ship Node either, which is why this repo moved to Docker instead of patching buildCommand.
+
+`CORS_ORIGINS` (comma-separated, defaults to `*`) only matters if the frontend is ever deployed separately (e.g. Vercel/Netlify) instead of single-origin — not needed for the current Render setup.
