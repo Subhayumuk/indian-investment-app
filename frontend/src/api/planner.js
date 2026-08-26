@@ -1,4 +1,11 @@
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://127.0.0.1:8000'
+// In dev (`npm run dev`), the frontend runs on its own Vite port (5173) and
+// must reach the backend directly on 127.0.0.1:8000. In a production build
+// (`npm run build`), the backend serves this same build from one origin
+// (see app/main.py), so requests should be relative — an absolute
+// 127.0.0.1 URL baked into the build would point at *the visitor's own
+// machine*, not the server, once deployed.
+export const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ?? (import.meta.env.DEV ? 'http://127.0.0.1:8000' : '')
 
 export function extractErrorMessage(data, status) {
   // FastAPI HTTPException -> {"detail": "message"}
