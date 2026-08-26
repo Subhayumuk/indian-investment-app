@@ -35,10 +35,12 @@ def _parse_nav_all_text(text: str) -> Dict[str, SchemeRecord]:
     The file interleaves AMC-name and category-header lines (no semicolons)
     and blank-line separators among the actual data rows, so each line is
     validated independently (field count + numeric scheme code) rather than
-    assumed to be data. Columns: Scheme Code; ISIN Div Payout/Growth;
-    ISIN Div Reinvestment; Scheme Name; NAV; Repurchase Price; Sale Price; Date.
-    A scheme can have two ISIN variants (growth / dividend-reinvestment)
-    sharing the same scheme code/NAV — both are indexed to the same record.
+    assumed to be data. Live columns (verified against the real file, not
+    just documentation — AMFI has changed this layout over time): Scheme
+    Code; ISIN Div Payout/ISIN Growth; ISIN Div Reinvestment; Scheme Name;
+    Plan; Option; Net Asset Value; Date. A scheme can have two ISIN variants
+    (growth / dividend-reinvestment) sharing the same scheme code/NAV — both
+    are indexed to the same record.
     """
     index: Dict[str, SchemeRecord] = {}
     for line in text.splitlines():
@@ -50,9 +52,12 @@ def _parse_nav_all_text(text: str) -> Dict[str, SchemeRecord]:
             continue
         isin_growth = parts[1].strip()
         isin_div_reinvestment = parts[2].strip()
-        scheme_name = parts[3].strip()
+        base_name = parts[3].strip()
+        plan = parts[4].strip()
+        option = parts[5].strip()
+        scheme_name = " - ".join(p for p in (base_name, plan, option) if p)
         try:
-            latest_nav = float(parts[4].strip())
+            latest_nav = float(parts[6].strip())
         except ValueError:
             latest_nav = None
         record = SchemeRecord(scheme_code=scheme_code, scheme_name=scheme_name, latest_nav=latest_nav)
@@ -81,7 +86,10 @@ class AmfiNavClient:
             if self._http_client is not None:
                 response = await self._http_client.get(NAV_ALL_URL, timeout=REQUEST_TIMEOUT_SECONDS)
             else:
-                async with httpx.AsyncClient(timeout=REQUEST_TIMEOUT_SECONDS) as client:
+                # AMFI redirects www.amfiindia.com -> portal.amfiindia.com for
+                # this file (confirmed against the live endpoint); httpx does
+                # not follow redirects by default.
+                async with httpx.AsyncClient(timeout=REQUEST_TIMEOUT_SECONDS, follow_redirects=True) as client:
                     response = await client.get(NAV_ALL_URL)
             if response.status_code != 200:
                 raise ValueError(f"AMFI NAVAll.txt returned status {response.status_code}")

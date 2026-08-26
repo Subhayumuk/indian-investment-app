@@ -4,13 +4,15 @@ import pytest
 
 from app.modules.amfi_nav_client import AmfiNavClient, _parse_nav_all_text
 
-# Real AMFI NAVAll.txt shape: AMC-name and category-header lines (no
-# semicolons) and blank-line separators interleaved with data rows.
+# Real AMFI NAVAll.txt shape (verified against the live file, not just
+# documentation): AMC-name and category-header lines (no semicolons) and
+# blank-line separators interleaved with data rows in
+# Scheme Code;ISIN Growth;ISIN Div Reinvestment;Scheme Name;Plan;Option;NAV;Date order.
 SAMPLE_NAV_ALL_TEXT = """Aditya Birla Sun Life Mutual Fund
-Open Ended Schemes(Growth)
+Open Ended Schemes(Debt Scheme - Banking and PSU Fund)
 
-118989;INF209K01397;INF209K01405;Aditya Birla Sun Life Dividend Yield Fund-Growth;26.6400;26.5000;26.7000;19-Dec-2025
-118990;N.A.;INF209K01413;Aditya Birla Sun Life Some Other Fund-IDCW;15.1200;15.0000;15.2000;19-Dec-2025
+118989;INF209K01397;INF209K01405;Aditya Birla Sun Life Dividend Yield Fund;Direct Plan;Growth;26.6400;19-Dec-2025
+118990;N.A.;INF209K01413;Aditya Birla Sun Life Some Other Fund;Regular Plan;IDCW;15.1200;19-Dec-2025
 """
 
 
@@ -31,7 +33,7 @@ class FakeHttpClient:
 def test_parse_nav_all_text_indexes_both_isin_variants_to_same_scheme():
     index = _parse_nav_all_text(SAMPLE_NAV_ALL_TEXT)
     assert index["INF209K01397"].scheme_code == "118989"
-    assert index["INF209K01397"].scheme_name == "Aditya Birla Sun Life Dividend Yield Fund-Growth"
+    assert index["INF209K01397"].scheme_name == "Aditya Birla Sun Life Dividend Yield Fund - Direct Plan - Growth"
     assert index["INF209K01397"].latest_nav == pytest.approx(26.64)
     assert index["INF209K01405"].scheme_code == "118989"  # dividend-reinvestment ISIN, same scheme
 
