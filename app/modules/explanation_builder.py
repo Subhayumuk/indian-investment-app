@@ -36,6 +36,17 @@ class ExplanationBuilder:
             insights.append("Starting early gives you the most powerful investment advantage: time. Even small SIPs grow substantially over 20-30 years due to compounding.")
         if getattr(profile, "has_nre_account", False):
             insights.append("Your NRE account allows tax-free interest income in India and full repatriation — ideal for parking foreign earnings meant for India investment.")
+
+        annual_income = getattr(profile, "annual_income_inr", 0) or 0
+        insurance_sum_assured = getattr(profile, "insurance_sum_assured_inr", 0) or 0
+        if insurance_sum_assured > 0 and annual_income > 0:
+            recommended_cover = annual_income * 10
+            if insurance_sum_assured < recommended_cover:
+                insights.append(
+                    f"Your life insurance cover (₹{insurance_sum_assured:,.0f}) looks low against the commonly "
+                    f"used rule of thumb of ~10x annual income (₹{recommended_cover:,.0f}) — consider a top-up, "
+                    "ideally via low-cost term insurance rather than diverting money meant for investing."
+                )
         return insights[:5]
 
     def build_action_steps(self, profile: UserProfile, instruments: List[Any]) -> List[str]:
@@ -44,6 +55,8 @@ class ExplanationBuilder:
             steps.append("🔴 Apply for PAN card immediately — mandatory for all Indian investments above ₹50,000")
         if not getattr(profile, "has_nre_account", False) and not getattr(profile, "has_nro_account", False):
             steps.append("🔴 Open NRE/NRO bank account with an Indian bank (SBI, HDFC, ICICI offer NRI services)")
+        if not getattr(profile, "insurance_sum_assured_inr", 0):
+            steps.append("🔴 Get a term life insurance policy — pure protection is inexpensive and should be in place before investing surplus income")
         steps.append("📋 Complete KYC with NRI status at your chosen broker/AMC (HDFC Securities, ICICI Direct, or NRI platforms like SBNRI)")
         steps.append("📑 Obtain a Certificate of Residence from your country's tax authority to claim DTAA benefits")
         if profile.tax_residency_country and profile.tax_residency_country.lower() == "usa":

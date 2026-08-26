@@ -16,7 +16,7 @@ import pdfplumber
 from fastapi import APIRouter, File, HTTPException, UploadFile
 from pdfminer.pdfdocument import PDFEncryptionError
 
-from app.models.cas import CASParseResponse, ParsedMutualFund, ParsedStock
+from app.models.cas import CASParseResponse, ParsedLifeInsurance, ParsedMutualFund, ParsedStock
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -57,6 +57,21 @@ STOCK_ROW_RE = re.compile(
     r"\s*$"
 )
 
+# The NSDL CAS "Your e-Insurance Account (eIA)" summary (page 1) has one
+# clean line per policy type, e.g.:
+#   "Life Insurance 1 1 10,00,000.00"
+#   columns: Type of Policy, No. of Policies, No. of Insurance Companies, Total Sum Assured
+# This is far more reliable to parse than the detailed per-policy table
+# further in the statement, which wraps each cell across several lines with
+# no consistent column alignment — the summary row is enough to know
+# whether/how much cover exists, which is what the planner needs.
+INSURANCE_SUMMARY_RE = re.compile(
+    r"^(?P<policy_type>Life Insurance|Health Insurance|General Insurance)\s+"
+    r"(?P<num_policies>\d+)\s+"
+    r"(?P<num_companies>\d+)\s+"
+    r"(?P<sum_assured>[\d,]+\.\d{2})\s*$"
+)
+
 
 def _to_float(raw: str) -> float:
     try:
@@ -72,12 +87,26 @@ def _extract_mutual_funds(lines: List[str]) -> List[ParsedMutualFund]:
         if match:
             funds.append(ParsedMutualFund(
                 fund_name=match.group("name").strip(),
+                isin=match.group("isin"),
                 folio=match.group("folio"),
                 units=_to_float(match.group("units")),
                 nav=_to_float(match.group("nav")),
                 current_value_inr=_to_float(match.group("value")),
             ))
     return funds
+
+
+def _extract_life_insurance(lines: List[str]) -> List[ParsedLifeInsurance]:
+    policies: List[ParsedLifeInsurance] = []
+    for line in lines:
+        match = INSURANCE_SUMMARY_RE.match(line.strip())
+        if match:
+            policies.append(ParsedLifeInsurance(
+                policy_type=match.group("policy_type"),
+                num_policies=int(match.group("num_policies")),
+                sum_assured_inr=_to_float(match.group("sum_assured")),
+            ))
+    return policies
 
 
 def _extract_stocks(lines: List[str]) -> List[ParsedStock]:
@@ -146,12 +175,13 @@ async def parse_cas(file: UploadFile = File(...)):
 
     mutual_funds = _extract_mutual_funds(all_lines)
     stocks = _extract_stocks(all_lines)
+    life_insurance = _extract_life_insurance(all_lines)
 
-    if not mutual_funds and not stocks:
+    if not mutual_funds and not stocks and not life_insurance:
         status = "failed"
         notes = (
-            "No mutual fund or stock holdings could be automatically detected "
-            "in this statement. This parser uses best-effort text matching "
+            "No mutual fund, stock, or insurance holdings could be automatically "
+            "detected in this statement. This parser uses best-effort text matching "
             "and may not support your CAS provider's exact layout — please "
             "add holdings manually."
         )
@@ -163,7 +193,9 @@ async def parse_cas(file: UploadFile = File(...)):
         parse_status=status,
         mutual_funds=mutual_funds,
         stocks=stocks,
+        life_insurance=life_insurance,
         total_mf_value_inr=round(sum(f.current_value_inr for f in mutual_funds), 2),
         total_stock_value_inr=round(sum(s.current_value_inr for s in stocks), 2),
+        total_life_insurance_sum_assured_inr=round(sum(p.sum_assured_inr for p in life_insurance), 2),
         parse_notes=notes,
     )

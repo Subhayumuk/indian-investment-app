@@ -24,6 +24,7 @@ const INITIAL_STATE = {
   goldValueInr: '',
   goldInputMode: 'inr', // 'grams' | 'inr'
   otherSavings: [], // rows: { id, type, valueInr }
+  insuranceSumAssuredInr: '',
 
   // Step 3: Financial Goals
   riskProfile: 'moderate',
@@ -111,6 +112,8 @@ function buildPayload(form) {
       emergency_fund_months: form.emergencyMonths ?? 6,
       existing_debt_inr: 0,
       monthly_emi_inr: 0,
+      insurance_coverage: (parseFloat(form.insuranceSumAssuredInr) || 0) > 0,
+      insurance_sum_assured_inr: parseFloat(form.insuranceSumAssuredInr) || 0,
       existing_investments_inr: 0,
       bank_accounts: (form.bankAccounts ?? []).map((a) => ({
         bank_name: a.bankName,
@@ -119,10 +122,12 @@ function buildPayload(form) {
       })),
       mutual_funds: (form.mutualFunds ?? []).map((f) => ({
         fund_name: f.fundName,
+        isin: f.isin || '',
         current_value_inr: parseFloat(f.currentValueInr) || 0,
       })),
       stocks: (form.stocks ?? []).map((s) => ({
         stock_name: s.stockName,
+        isin: s.isin || '',
         current_value_inr: parseFloat(s.currentValueInr) || 0,
       })),
       properties: (form.properties ?? []).map((p) => ({

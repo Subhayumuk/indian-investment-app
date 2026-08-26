@@ -135,6 +135,8 @@ class RecommendationEngine:
             annual_income_inr=profile.financial.monthly_income_inr * 12,
             monthly_expenses_inr=profile.financial.monthly_expenses_inr,
             existing_investments_inr=profile.financial.existing_investments_inr,
+            insurance_coverage=profile.financial.insurance_coverage,
+            insurance_sum_assured_inr=profile.financial.insurance_sum_assured_inr,
             lump_sum_investable_inr=profile.investment.lump_sum_investable_inr,
             monthly_investable_inr=profile.investment.monthly_investable_inr,
             bank_accounts=profile.financial.bank_accounts,

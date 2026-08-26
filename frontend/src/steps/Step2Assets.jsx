@@ -99,6 +99,7 @@ export default function Step2Assets({ form, setField, onNext, onBack }) {
             id: genId(),
             fundName: m.fund_name,
             folio: m.folio,
+            isin: m.isin,
             currentValueInr: m.current_value_inr,
           })),
         ])
@@ -109,9 +110,16 @@ export default function Step2Assets({ form, setField, onNext, onBack }) {
           ...data.stocks.map((s) => ({
             id: genId(),
             stockName: s.stock_name,
+            isin: s.isin,
             currentValueInr: s.current_value_inr,
           })),
         ])
+      }
+      if (data.total_life_insurance_sum_assured_inr) {
+        setField(
+          'insuranceSumAssuredInr',
+          (parseFloat(form.insuranceSumAssuredInr) || 0) + data.total_life_insurance_sum_assured_inr
+        )
       }
       setCasMessage(data.parse_notes || null)
     } catch (err) {
@@ -242,6 +250,20 @@ export default function Step2Assets({ form, setField, onNext, onBack }) {
           <div className="mt-2">
             <Subtotal label="Total stocks value" amount={stocksTotal} />
           </div>
+        </div>
+      </Section>
+
+      <Section
+        title="Life Insurance"
+        subtitle="Auto-filled from your CAS upload above if it includes an e-Insurance Account (eIA) summary, or enter your total sum assured manually."
+      >
+        <div className="max-w-xs">
+          <NumberField
+            label="Total sum assured"
+            prefix="INR"
+            value={form.insuranceSumAssuredInr}
+            onChange={(v) => setField('insuranceSumAssuredInr', v)}
+          />
         </div>
       </Section>
 
