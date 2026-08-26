@@ -1,8 +1,12 @@
 # How This App Works (Plain-Language Guide)
 
-This explains, in simple terms, what this app actually does, what happens when
-you click things, and — new since the last update — what "deploying to
-Render with Docker" actually means. No prior background assumed.
+This explains, in simple terms, what this app actually does, what happens
+when you click things, what "deploying to Render with Docker" actually
+means, a couple of real bugs we found and fixed along the way, and — the
+newest, still-in-progress piece — how the app is learning to look at your
+*actual* mutual funds using real market data instead of a fixed list. No
+prior background assumed; written so you could explain any of it to someone
+else without notes.
 
 ## 1. What is this app, in one paragraph?
 
@@ -196,7 +200,195 @@ build and redeploy on its own, with no manual button-click required.
 | **Health check** | Render periodically asking "are you still alive and working?" — if the app stops answering, Render knows something's wrong |
 | **Cold start** | On Render's free plan, the app goes to sleep after 15 minutes of no visitors, and takes a moment to wake up on the next visit |
 
-## 6. Where things stand
+## 6. A detective story: the bug that only broke for strangers
+
+Right after the first real deploy, something strange happened: uploading a
+statement worked fine when we tried it, but failed for anyone else visiting
+the site, with an error saying "Failed to fetch."
+
+Here's what was actually going on, with no jargon: the website's button was
+built with an address baked into it — like a sticky note on a phone that
+says "always call this exact number." While the app was being built on a
+developer's own laptop, that number happened to be *the developer's own
+laptop* — so it worked. But once the app went live for real visitors, that
+same sticky note still said "call the developer's laptop," which makes no
+sense for anyone else — their computer has no idea what that means, so the
+call just fails silently.
+
+The fix wasn't to change the phone number — it was to remove the sticky
+note entirely and replace it with an instruction: "call whoever's house this
+message is already sitting in." Now, whether you open the site on your
+laptop, your phone, or anyone else's device, the button correctly calls
+*that visitor's own copy of the app*, not a specific hardcoded computer.
+
+The lesson worth keeping: something can work perfectly when *you* test it
+and still be completely broken for everyone else, because your own test
+might be accidentally special (e.g. things happening to be on the same
+machine) in a way real visitors' situations aren't. That's why we always
+tested with a real second visitor's-eye view — an incognito browser window,
+with zero memory of anything from before — rather than trusting "it worked
+when I tried it."
+
+## 7. Teaching the app about your life insurance
+
+Small addition, same day: your real CAS statement turned out to include a
+life insurance summary (policy count + total cover amount), not just
+mutual funds and stocks. Two things happened:
+
+1. The app learned to *read* that section from the PDF (it was being
+   ignored entirely before).
+2. A field for it already secretly existed in the app's data model
+   (`insurance_sum_assured_inr`) — built at some earlier point, but nothing
+   ever filled it in or looked at it. It was a labeled shelf with nothing on
+   it. We filled the shelf, and taught the recommendation logic to actually
+   check it: compare your cover against a common rule of thumb (roughly 10x
+   your annual income) and say something if it looks low, or flag it
+   entirely if there's no cover at all.
+
+Small on its own, but a good example of a pattern worth naming: **software
+projects often have unused pieces sitting around** — a field, a function, a
+setting — built for a reason that got lost or deferred. Part of good
+maintenance is periodically asking "is this shelf actually being used?"
+
+## 8. Teaching the app to know your funds for real
+
+This was the bigger project today, and it's not finished yet — this section
+explains what we built and, just as importantly, *why*, so tomorrow's
+continuation (Phase B) makes sense.
+
+### The problem we're solving
+
+Until today, when the app suggested "here are some mutual funds to
+consider," it was picking from a **fixed, mostly-illustrative list of about
+a dozen funds** written directly into the code — the same list for every
+single person, regardless of what they actually own, and not connected to
+any real, current market data. It's the equivalent of a restaurant handing
+every customer the exact same laminated menu regardless of what's actually
+in the kitchen that day.
+
+What we actually want: look at the funds *you* specifically already own,
+and say something real about them — using real, current numbers, not a
+fixed script.
+
+### The three-piece puzzle: identity, history, and judgment
+
+To say anything real about one of your specific funds, the app needs three
+separate things, and — this is the part worth understanding — **we
+deliberately used a different tool for each one**, rather than one tool
+trying to do everything:
+
+```mermaid
+flowchart LR
+    CAS["Your CAS statement\n(uploaded PDF)"] -- "extracts" --> ISIN["A fund's ISIN\n(its unique ID number)"]
+    ISIN -- "1. Who exactly is this fund?" --> AMFI["AMFI\n(India's official mutual fund registry)"]
+    AMFI -- "hands back a scheme code" --> MFAPI["mfapi.in\n(a free history-keeping service)"]
+    MFAPI -- "2. How has it performed\nover the last 1/3/5 years?" --> Numbers["Real return numbers"]
+    Numbers -- "3. Judged against simple rules" --> Verdict["Aligned / Worth reviewing /\nToo concentrated / etc."]
+```
+
+**Why not just search by fund name?** Because names extracted from a PDF
+are messy — your statement literally shows fund names getting cut off
+mid-word ("Aditya Birla Sun" with no indication of *which* Aditya Birla Sun
+fund). Guessing from a half-cut name is unreliable. So instead, every fund
+has an **ISIN** — think of it like a fingerprint or a passport number for
+that exact fund, no ambiguity possible. Two funds can have very similar
+names; they can never have the same ISIN. That's why the very first fix
+today was making sure the ISIN wasn't accidentally being thrown away while
+reading your PDF (it was! — the code was reading it, then discarding it
+without saving it, a genuine bug fixed today).
+
+**What is AMFI, in plain terms?** AMFI (Association of Mutual Funds in
+India) is the official, free, public record book for every mutual fund
+scheme in India — think of it as a national phone book. Hand it a
+fingerprint (ISIN), and it tells you: which fund this actually is, its
+official name, and today's price per unit (its "NAV").
+
+**What is mfapi.in, and why do we need a second service at all?** AMFI's
+phone book tells you *who* a fund is *today* — it doesn't keep a history
+book of prices going back years. For that, we use a free public service
+called mfapi.in, which happens to use the *exact same* ID numbers as AMFI
+(confirmed for real today, not assumed) — so once AMFI tells us "this is
+scheme #100474," we hand that same number to mfapi.in and ask "show me its
+price history," which lets us calculate how much it actually grew over the
+last 1, 3, and 5 years.
+
+**What does "trailing return" actually mean?** If a fund's price was ₹50
+three years ago and is ₹100 today, it roughly doubled — but "doubled over 3
+years" isn't a single yearly number you can compare across funds. So we
+convert it into "if this grew at a *steady* rate every year, what would
+that yearly rate have to be?" — that steady-yearly-rate number is the
+"trailing return" (technically called CAGR). It's just a fair, comparable
+way to describe growth over different time periods.
+
+### The most important design decision: rules decide, AI only explains
+
+This matters enough to say plainly, since eventually (tomorrow or later)
+an AI model gets added to this feature: **the AI will never be the one
+deciding whether a fund looks good or bad.** That decision — "this fund's
+return looks low for its category," "this is too large a slice of your
+money in one place" — will always come from a fixed, readable rule, exactly
+like the tax rules already in this app. The AI's only job, later, will be
+turning an already-decided verdict into a well-written sentence — the way a
+translator explains a decision, without being the one who made it.
+
+Why this matters: an AI model can occasionally state something confidently
+that isn't true (this is a well-known limitation, not a flaw specific to
+this project). For something touching real money, that's an unacceptable
+risk *for the decision itself* — but perfectly fine for polishing how a
+decision is *phrased*, as long as it's never allowed to invent the decision
+too. This split is also why this stays honest to explain to anyone: "the
+computer's fixed rules decided this; a language model just wrote it up
+nicely" is a sentence you can say with a straight face.
+
+### What we actually finished today vs. what's still ahead
+
+Today (**Phase A**, in the plan): the "identity" and "history" pieces above
+— proven to work against your real fund, live, on the real deployed app.
+Nothing about this is visible on the website yet; it's plumbing underneath.
+
+Tomorrow (**Phase B**): the actual judgment rules (comparing your fund's
+real return against a benchmark, flagging over-concentration) — still no
+AI involved, fully rule-based and testable, and the first point where this
+becomes something you could actually see working end-to-end.
+
+Later (**Phase C and D**): the AI narration layer, and an actual button on
+the results page to try it.
+
+## 9. A bigger lesson for the journey: how real software actually gets built
+
+A few habits showed up repeatedly today that are worth naming explicitly,
+since they apply far beyond this one app:
+
+- **Break big goals into small, checkable pieces ("phases").** "Make
+  recommendations use real data and AI" is too big a thing to build in one
+  go and trust blindly. Splitting it into A (data plumbing) → B (judgment
+  rules) → C (AI writing) → D (the button you actually click) means each
+  piece can be tested and trusted before the next one leans on it.
+- **Pause at natural checkpoints, on purpose.** After Phase A, we stopped
+  and actually verified it against your real data before writing a single
+  line of Phase B — because Phase B would have been built on top of
+  assumptions we hadn't actually confirmed yet.
+- **Test against the real world, not just your best guess.** The plan
+  assumed one file format for AMFI's data, based on research. The *real*
+  live file turned out to have a different column order. If we'd trusted
+  the assumption and moved straight to Phase B, every single number shown
+  to you would have been wrong — quietly, with no error message, since
+  wrong-column-math still produces *a* number, just the wrong one. The only
+  way this got caught was by deliberately checking a real, live answer
+  before trusting the code.
+- **When something breaks, ask *why*, not just *how do I make the error go
+  away*.** The "Failed to fetch" bug (section 6) could have been
+  papered over in a dozen shallow ways. Understanding *why* it only
+  happened for other people, not for us, is what led to an actual fix
+  instead of a lucky patch.
+
+If you take one thing from today into your own learning: a professional
+approach to building something isn't about writing perfect code on the
+first try — it's about building in small enough pieces that you can catch
+your own wrong assumptions early, cheaply, and with real evidence instead
+of guesswork.
+
+## 10. Where things stand
 
 See `CLAUDE.md` for the always-current technical status (test counts, what's
 built, what's still open). This document explains the *why* and *how* in
