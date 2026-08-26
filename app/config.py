@@ -29,3 +29,5 @@ class Settings:
     ]
 
     GOLD_API_KEY: str = os.getenv("GOLD_API_KEY", "")
+
+    AMFI_NAV_CACHE_TTL_SECONDS: int = int(os.getenv("AMFI_NAV_CACHE_TTL_SECONDS", "21600"))
