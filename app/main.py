@@ -7,7 +7,6 @@ from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.api.cas_parser import router as cas_router
-from app.api.debug_diagnostics import router as debug_router  # TEMPORARY, see app/api/debug_diagnostics.py
 from app.api.gold_price import router as gold_router
 from app.api.recommendations import router as recommendations_router
 from app.config import get_settings
@@ -51,7 +50,6 @@ def create_app() -> FastAPI:
     application.include_router(recommendations_router, prefix="/api")
     application.include_router(cas_router, prefix="/api")
     application.include_router(gold_router, prefix="/api")
-    application.include_router(debug_router, prefix="/api")  # TEMPORARY, see app/api/debug_diagnostics.py
 
     # Serve the built React app (frontend/, `npm run build`) as the site root.
     # Registered last so the API routers above always match first — Starlette
