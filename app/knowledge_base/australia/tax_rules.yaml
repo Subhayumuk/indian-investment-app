@@ -1,5 +1,7 @@
 ---
 version: "2024-2025"
+source: "Australian Taxation Office (ATO)"
+source_url: "https://www.ato.gov.au/individuals-and-families/coming-to-australia-or-going-overseas/your-tax-residency/foreign-and-temporary-residents"
 personal_income_tax: true
 capital_gains_tax: true
 wealth_tax: false

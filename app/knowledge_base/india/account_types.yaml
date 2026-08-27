@@ -2,6 +2,7 @@
 version: "2024-2025"
 last_updated: "2025-01-01"
 source: "FEMA 1999, RBI Master Directions"
+source_url: "https://www.rbi.org.in/commonman/Upload/English/FAQs/PDFs/Accountresidents16012025.pdf"
 
 accounts:
   NRE:

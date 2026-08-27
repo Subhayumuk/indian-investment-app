@@ -1,5 +1,7 @@
 ---
 version: "2024-2025"
+source: "Bundeszentralamt für Steuern (BZSt)"
+source_url: "https://www.bzst.de/EN/Businesses/Withholding_taxes/Withholding_Overview/withholding_overview_node.html"
 personal_income_tax: true
 capital_gains_tax: true
 wealth_tax: false

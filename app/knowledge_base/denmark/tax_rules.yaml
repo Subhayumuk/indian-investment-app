@@ -2,6 +2,7 @@
 version: "2024-2025"
 last_updated: "2025-01-01"
 source: "Skattestyrelsen (Danish Tax Authority)"
+source_url: "https://skat.dk/en-us/individuals/taxation-in-denmark"
 
 overview:
   personal_income_tax: true

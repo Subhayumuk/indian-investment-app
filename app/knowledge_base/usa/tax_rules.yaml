@@ -1,5 +1,7 @@
 ---
 version: "2024-2025"
+source: "Internal Revenue Service (IRS) — International Taxpayers"
+source_url: "https://www.irs.gov/individuals/international-taxpayers"
 personal_income_tax: true
 capital_gains_tax: true
 wealth_tax: false

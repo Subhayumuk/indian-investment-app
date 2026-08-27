@@ -1,6 +1,8 @@
 ---
 version: "2024-2025"
 last_updated: "2025-01-01"
+source: "SEBI (Mutual Funds) Regulations 1996; RBI FEMA repatriation rules"
+source_url: "https://www.sebi.gov.in/legal/regulations/dec-1996/sebi-mutual-funds-regulations-1996_19376.html"
 
 products:
   equity_mutual_funds:

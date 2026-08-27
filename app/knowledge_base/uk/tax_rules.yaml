@@ -1,5 +1,7 @@
 ---
 version: "2024-2025"
+source: "HM Revenue & Customs (HMRC)"
+source_url: "https://www.gov.uk/tax-uk-income-live-abroad"
 personal_income_tax: true
 capital_gains_tax: true
 wealth_tax: false

@@ -1,0 +1,71 @@
+name: Knowledge base freshness check
+
+on:
+  schedule:
+    # 06:00 UTC on the 1st of every month. Monthly (not yearly) mainly so
+    # GitHub doesn't auto-disable the schedule after 60 days of repo
+    # inactivity - see the note in scripts/check_kb_freshness.py.
+    - cron: "0 6 1 * *"
+  workflow_dispatch: {}
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PyYAML
+        run: pip install "PyYAML>=6.0,<7.0"
+
+      - name: Run freshness checker
+        id: check
+        run: |
+          set +e
+          python scripts/check_kb_freshness.py > report.txt
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          cat report.txt
+
+      - name: Open tracking issue if anything needs review
+        if: steps.check.outputs.exit_code != '0'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require("fs");
+            const report = fs.readFileSync("report.txt", "utf8");
+            const label = "kb-freshness";
+
+            const open = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              labels: label,
+            });
+
+            if (open.data.length > 0) {
+              console.log(`Open issue already exists: #${open.data[0].number} - not creating another.`);
+              return;
+            }
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "Knowledge base data needs review",
+              labels: [label],
+              body: [
+                "The monthly knowledge base freshness check (`scripts/check_kb_freshness.py`) found files that need a human to re-verify against the real source. This only reports which files to look at - it never edits tax data itself.",
+                "",
+                "```",
+                report,
+                "```",
+                "",
+                "For each flagged file: open its `source_url`, confirm the numbers still match current law, then bump `last_updated` (and `version` if a number actually changed) and close this issue.",
+              ].join("\n"),
+            });

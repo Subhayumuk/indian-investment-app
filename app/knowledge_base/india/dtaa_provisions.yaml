@@ -2,6 +2,7 @@
 version: "2024-2025"
 last_updated: "2025-01-01"
 source: "CBDT DTAA Notifications"
+source_url: "https://www.incometaxindia.gov.in/dtaa"
 
 dtaa_countries:
   denmark:

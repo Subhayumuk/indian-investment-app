@@ -1,5 +1,7 @@
 ---
 version: "2024-2025"
+source: "Inland Revenue Authority of Singapore (IRAS)"
+source_url: "https://www.iras.gov.sg/"
 personal_income_tax: true
 capital_gains_tax: false
 wealth_tax: false

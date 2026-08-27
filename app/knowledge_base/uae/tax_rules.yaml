@@ -1,5 +1,7 @@
 ---
 version: "2024-2025"
+source: "Federal Tax Authority (UAE)"
+source_url: "https://tax.gov.ae/en/"
 personal_income_tax: false
 capital_gains_tax: false
 wealth_tax: false
