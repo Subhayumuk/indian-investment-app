@@ -10,7 +10,7 @@ on:
 
 permissions:
   issues: write
-  contents: read
+  contents: write
 
 jobs:
   check:
@@ -25,21 +25,42 @@ jobs:
       - name: Install PyYAML
         run: pip install "PyYAML>=6.0,<7.0"
 
-      - name: Run freshness checker
-        id: check
+      - name: Run source-change detector
+        id: source_check
         run: |
           set +e
-          python scripts/check_kb_freshness.py > report.txt
+          python scripts/check_kb_source_changes.py > source_report.txt
           echo "exit_code=$?" >> "$GITHUB_OUTPUT"
-          cat report.txt
+          cat source_report.txt
+
+      - name: Run freshness backstop (24-month calendar check)
+        id: freshness_check
+        run: |
+          set +e
+          python scripts/check_kb_freshness.py --max-age-months 24 > freshness_report.txt
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          cat freshness_report.txt
+
+      - name: Commit updated source fingerprints
+        run: |
+          if ! git diff --quiet -- scripts/kb_source_state.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add scripts/kb_source_state.json
+            git commit -m "Update knowledge base source fingerprints [skip ci]"
+            git push
+          else
+            echo "No fingerprint changes to commit."
+          fi
 
       - name: Open tracking issue if anything needs review
-        if: steps.check.outputs.exit_code != '0'
+        if: steps.source_check.outputs.exit_code != '0' || steps.freshness_check.outputs.exit_code != '0'
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require("fs");
-            const report = fs.readFileSync("report.txt", "utf8");
+            const sourceReport = fs.readFileSync("source_report.txt", "utf8");
+            const freshnessReport = fs.readFileSync("freshness_report.txt", "utf8");
             const label = "kb-freshness";
 
             const open = await github.rest.issues.listForRepo({
@@ -60,10 +81,18 @@ jobs:
               title: "Knowledge base data needs review",
               labels: [label],
               body: [
-                "The monthly knowledge base freshness check (`scripts/check_kb_freshness.py`) found files that need a human to re-verify against the real source. This only reports which files to look at - it never edits tax data itself.",
+                "One or both monthly knowledge base checks found something worth a look. Neither check edits data itself - a human still decides what, if anything, changes.",
                 "",
+                "## Source change detector",
+                "A source_url's page content differs from what was recorded last month. This can be a false positive (unrelated part of the page changed) - go compare it against the YAML before assuming the number itself moved.",
                 "```",
-                report,
+                sourceReport,
+                "```",
+                "",
+                "## Freshness backstop (24-month calendar check)",
+                "Fires only as a safety net - if a file shows up here, its source hasn't registered a detected change in 2 years *or* it has no source_url/last_updated at all, so it's worth a manual look regardless.",
+                "```",
+                freshnessReport,
                 "```",
                 "",
                 "For each flagged file: open its `source_url`, confirm the numbers still match current law, then bump `last_updated` (and `version` if a number actually changed) and close this issue.",

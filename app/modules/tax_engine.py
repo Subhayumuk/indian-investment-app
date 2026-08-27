@@ -7,7 +7,7 @@ class TaxEngine:
             "equity_ltcg": {"rate": 0.125, "holding_months": 12, "exemption_inr": 125000, "description": "Long-term capital gains on equity (held > 12 months), exempt up to ₹1.25L"},
             "debt_stcg": {"rate": None, "slab": True, "description": "Short-term capital gains on debt taxed at income slab rate"},
             "debt_ltcg": {"rate": 0.125, "holding_months": 24, "description": "Long-term capital gains on debt (held > 24 months) at 12.5%"},
-            "fd_interest": {"rate": None, "slab": True, "tds": 0.10, "description": "FD interest taxed at slab rate, TDS 10%"},
+            "fd_interest": {"rate": None, "slab": True, "tds": 0.30, "description": "NRO FD interest taxed at slab rate, TDS 30% under section 195 (10% is the resident rate under section 194A, not NRI)"},
             "rental_income": {"rate": None, "slab": True, "standard_deduction": 0.30, "description": "Rental income taxed at slab, 30% standard deduction"},
             "dividend": {"rate": None, "slab": True, "tds": 0.20, "description": "Dividend taxed at slab rate for NRI, TDS 20%"},
             "gold_stcg": {"rate": None, "slab": True, "holding_months": 24, "description": "Short-term gold gains at slab rate"},
