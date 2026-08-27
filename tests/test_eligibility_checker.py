@@ -3,6 +3,7 @@ from types import SimpleNamespace
 import pytest
 
 from app.modules.eligibility_checker import EligibilityChecker
+from app.utils.kb_loader import load_india_kb
 
 checker = EligibilityChecker()
 
@@ -77,3 +78,31 @@ def test_fema_summary_uses_country_specific_currency_and_rate():
 def test_fema_summary_unknown_country_falls_back_to_usd():
     summary = checker.get_fema_summary(make_profile("Atlantis"))
     assert summary["currency"] == "USD"
+
+
+def test_sgb_is_not_eligible_for_new_nri_subscriptions():
+    # Real bug found 2026-08-27: this was hardcoded eligible=True, directly
+    # contradicting product_rules.yaml (NRIs can't subscribe to new SGB
+    # issuances, only hold ones bought before becoming NRI) - and reachable
+    # by every real user via check_all_eligibility. Now sourced from the
+    # YAML, so it can't silently drift from it again.
+    result = checker.check_instrument_eligibility("sgb", make_profile("Denmark"))
+    assert result["eligible"] is False
+
+
+def test_etf_is_restricted_for_usa_and_canada():
+    # Previously the hardcoded country_restrictions list only named
+    # equity_mf/debt_mf, missing "etf" despite product_rules.yaml already
+    # flagging it (us_canada_restriction: true). Now derived from that flag.
+    assert "etf" in checker.country_restrictions["usa"]
+    assert "etf" in checker.country_restrictions["canada"]
+
+
+def test_nro_fd_account_type_is_read_from_the_yaml_not_hardcoded():
+    kb_account_types = load_india_kb("product_rules.yaml")["products"]["nro_fixed_deposit"]["account_types_allowed"]
+    assert checker.nri_eligible_instruments["nro_fd"]["account_type"] == kb_account_types
+
+
+def test_nro_repatriation_limit_is_read_from_the_yaml_not_hardcoded():
+    kb_limit = load_india_kb("fema_rules.yaml")["repatriation_rules"]["nro_account"]["annual_limit_usd"]
+    assert checker.fema_limits["nro_repatriation_usd"] == kb_limit
