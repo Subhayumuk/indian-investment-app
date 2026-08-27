@@ -3,6 +3,7 @@ version: "2024-2025"
 last_updated: "2025-01-01"
 source: "Income Tax Act 1961, Finance Act 2024"
 source_url: "https://www.incometaxindia.gov.in/"
+monitor_url: "https://www.incometax.gov.in/iec/foportal/latest-news"
 
 residency_rules:
   resident_ordinary:

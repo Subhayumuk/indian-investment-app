@@ -99,3 +99,27 @@ def test_fingerprint_ignores_tag_structure_around_same_text():
     a = fingerprint("<div><p>Rate: 20%</p></div>")
     b = fingerprint("<span>Rate: 20%</span>")
     assert a == b
+
+
+def test_monitor_url_is_fetched_instead_of_blocked_source_url(tmp_path):
+    kb_root = tmp_path / "kb"
+    kb_root.mkdir()
+    path = kb_root / "a.yaml"
+    path.write_text(
+        'version: "2025"\n'
+        'source_url: "https://blocked.example.com/law"\n'
+        'monitor_url: "https://news.example.com/feed"\n',
+        encoding="utf-8",
+    )
+    state_path = tmp_path / "state.json"
+
+    fetched_urls = []
+
+    def fake_fetch(url):
+        fetched_urls.append(url)
+        return "<html>news</html>"
+
+    results = check_all(kb_root=kb_root, state_path=state_path, fetch=fake_fetch)
+
+    assert fetched_urls == ["https://news.example.com/feed"]
+    assert results[0].source_url == "https://news.example.com/feed"

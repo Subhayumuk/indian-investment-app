@@ -109,16 +109,19 @@ def check_all(
     for yaml_path in sorted(kb_root.rglob("*.yaml")):
         rel = str(yaml_path.relative_to(kb_root))
         data = yaml.safe_load(yaml_path.read_text(encoding="utf-8")) or {}
-        source_url = data.get("source_url")
+        # monitor_url lets a file point the checker at a scrapable page (e.g.
+        # a department's news feed) when source_url itself blocks scripted
+        # requests but is still the right thing to show a human.
+        fetch_url = data.get("monitor_url") or data.get("source_url")
 
-        if not source_url:
+        if not fetch_url:
             results.append(SourceCheckResult(rel, None, "NO_SOURCE_URL"))
             continue
 
         try:
-            html = fetch(source_url)
+            html = fetch(fetch_url)
         except Exception as exc:  # noqa: BLE001 - any fetch failure is reportable, not fatal
-            results.append(SourceCheckResult(rel, source_url, "FETCH_FAILED", str(exc)))
+            results.append(SourceCheckResult(rel, fetch_url, "FETCH_FAILED", str(exc)))
             continue
 
         fp = fingerprint(html)
@@ -133,12 +136,12 @@ def check_all(
             status = "UNCHANGED"
 
         state[rel] = {
-            "source_url": source_url,
+            "monitored_url": fetch_url,
             "fingerprint": fp,
             "last_checked": checked_at,
             "last_changed": checked_at if status == "CHANGED" else (previous or {}).get("last_changed"),
         }
-        results.append(SourceCheckResult(rel, source_url, status))
+        results.append(SourceCheckResult(rel, fetch_url, status))
 
     _save_state(state_path, state)
     return results
