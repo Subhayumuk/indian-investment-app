@@ -1,8 +1,42 @@
 import pytest
 
 from app.modules.tax_engine import TaxEngine
+from app.utils.kb_loader import load_india_kb
 
 engine = TaxEngine()
+
+
+def test_equity_mf_ltcg_rate_is_read_from_the_yaml_not_hardcoded():
+    # Proves get_india_tax reflects app/knowledge_base/india/nri_taxation.yaml
+    # rather than a Python copy of it - if this fails after a legitimate YAML
+    # edit, TaxEngine itself needs updating, not this test.
+    kb_rate = load_india_kb("nri_taxation.yaml")["capital_gains"]["equity_mutual_funds"]["ltcg_rate"] / 100
+    engine_rate = engine.get_india_tax("equity_mf", holding_period_months=13)["rate"]
+    assert engine_rate == kb_rate
+
+
+def test_equity_shares_stcg_rate_is_read_from_the_yaml_not_hardcoded():
+    kb_rate = load_india_kb("nri_taxation.yaml")["capital_gains"]["equity_shares"]["stcg_rate"] / 100
+    engine_rate = engine.get_india_tax("stocks", holding_period_months=3)["rate"]
+    assert engine_rate == kb_rate
+
+
+def test_fd_tds_is_read_from_the_yaml_not_hardcoded():
+    kb_tds = load_india_kb("nri_taxation.yaml")["tds_rates"]["nri_interest_nro_fd"] / 100
+    engine_tds = engine.get_india_tax("fd")["tds"]
+    assert engine_tds == kb_tds
+
+
+def test_dividend_tds_is_read_from_the_yaml_not_hardcoded():
+    kb_tds = load_india_kb("nri_taxation.yaml")["tds_rates"]["nri_dividend"] / 100
+    engine_tds = engine.get_india_tax("dividend")["tds"]
+    assert engine_tds == kb_tds
+
+
+def test_sgb_rate_is_read_from_the_yaml_not_hardcoded():
+    kb_rate = load_india_kb("nri_taxation.yaml")["capital_gains"]["sgb"]["redemption_at_maturity_tax"] / 100
+    engine_rate = engine.get_india_tax("sgb")["rate"]
+    assert engine_rate == kb_rate
 
 
 @pytest.mark.parametrize("instrument_type,months,expected_rate", [

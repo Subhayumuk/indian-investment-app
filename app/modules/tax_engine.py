@@ -1,18 +1,27 @@
 from typing import Dict, Any, Optional, Tuple
 
+from app.utils.kb_loader import load_india_kb
+
+
 class TaxEngine:
     def __init__(self):
+        kb = load_india_kb("nri_taxation.yaml")
+        self._tds = kb["tds_rates"]
+        self._capital_gains = kb["capital_gains"]
+
+        # Debt fund, real estate, and gold LTCG treatment are NOT wired to the
+        # YAML yet - the 2026-08-27 rate audit flagged these as genuinely
+        # unresolved (debt funds have two overlapping rule changes from 2023
+        # and 2024; real estate has a property-only grandfather choice whose
+        # NRI treatment is disputed across sources). Wiring them here would
+        # mean guessing at a legal question this project deliberately leaves
+        # to a human - see HOW_IT_WORKS.md §8. Kept hardcoded until verified.
         self.india_tax_rules = {
-            "equity_stcg": {"rate": 0.20, "holding_months": 12, "description": "Short-term capital gains on equity (held < 12 months)"},
-            "equity_ltcg": {"rate": 0.125, "holding_months": 12, "exemption_inr": 125000, "description": "Long-term capital gains on equity (held > 12 months), exempt up to ₹1.25L"},
             "debt_stcg": {"rate": None, "slab": True, "description": "Short-term capital gains on debt taxed at income slab rate"},
             "debt_ltcg": {"rate": 0.125, "holding_months": 24, "description": "Long-term capital gains on debt (held > 24 months) at 12.5%"},
-            "fd_interest": {"rate": None, "slab": True, "tds": 0.30, "description": "NRO FD interest taxed at slab rate, TDS 30% under section 195 (10% is the resident rate under section 194A, not NRI)"},
             "rental_income": {"rate": None, "slab": True, "standard_deduction": 0.30, "description": "Rental income taxed at slab, 30% standard deduction"},
-            "dividend": {"rate": None, "slab": True, "tds": 0.20, "description": "Dividend taxed at slab rate for NRI, TDS 20%"},
             "gold_stcg": {"rate": None, "slab": True, "holding_months": 24, "description": "Short-term gold gains at slab rate"},
             "gold_ltcg": {"rate": 0.125, "holding_months": 24, "description": "Long-term gold gains at 12.5%"},
-            "sgb_redemption": {"rate": 0.0, "description": "Sovereign Gold Bond redemption at maturity - tax exempt"},
             "nps_withdrawal": {"rate": 0.0, "partial_taxable": 0.40, "description": "NPS: 60% tax-free on maturity, 40% must buy annuity"},
             "ppf": {"rate": 0.0, "description": "PPF interest and maturity fully exempt (NRIs cannot open new, can continue existing)"},
         }
@@ -27,15 +36,35 @@ class TaxEngine:
             "uae": {"treaty_year": 1993, "dividend_rate": 0.0, "interest_rate": 0.0, "capital_gains": "residence_country", "tie_breaker": False},
         }
 
+    def _equity_rule(self, section: str, holding_period_months: int) -> Dict[str, Any]:
+        cg = self._capital_gains[section]
+        threshold = cg["stcg_holding_months"]
+        if holding_period_months < threshold:
+            return {
+                "rate": cg["stcg_rate"] / 100,
+                "holding_months": threshold,
+                "description": f"Short-term capital gains on equity (held < {threshold} months)",
+            }
+        return {
+            "rate": cg["ltcg_rate"] / 100,
+            "holding_months": threshold,
+            "exemption_inr": cg["ltcg_exemption_limit_inr"],
+            "description": f"Long-term capital gains on equity (held >= {threshold} months), exempt up to ₹{cg['ltcg_exemption_limit_inr']:,}",
+        }
+
     def get_india_tax(self, instrument_type: str, holding_period_months: int = 13) -> Dict[str, Any]:
-        if instrument_type in ["equity_mf", "stocks", "etf"]:
-            if holding_period_months < 12:
-                rule = self.india_tax_rules["equity_stcg"]
-            else:
-                rule = self.india_tax_rules["equity_ltcg"]
+        if instrument_type == "stocks":
+            rule = self._equity_rule("equity_shares", holding_period_months)
+        elif instrument_type in ["equity_mf", "etf"]:
+            rule = self._equity_rule("equity_mutual_funds", holding_period_months)
         elif instrument_type in ["debt_mf", "bonds", "fd"]:
             if instrument_type == "fd":
-                rule = self.india_tax_rules["fd_interest"]
+                rule = {
+                    "rate": None,
+                    "slab": True,
+                    "tds": self._tds["nri_interest_nro_fd"] / 100,
+                    "description": "NRO FD interest taxed at slab rate, TDS under section 195",
+                }
             elif holding_period_months < 24:
                 rule = self.india_tax_rules["debt_stcg"]
             else:
@@ -48,13 +77,21 @@ class TaxEngine:
             else:
                 rule = self.india_tax_rules["gold_ltcg"]
         elif instrument_type == "sgb":
-            rule = self.india_tax_rules["sgb_redemption"]
+            rule = {
+                "rate": self._capital_gains["sgb"]["redemption_at_maturity_tax"] / 100,
+                "description": "Sovereign Gold Bond redemption at maturity - tax exempt",
+            }
         elif instrument_type == "nps":
             rule = self.india_tax_rules["nps_withdrawal"]
         elif instrument_type == "ppf":
             rule = self.india_tax_rules["ppf"]
         elif instrument_type == "dividend":
-            rule = self.india_tax_rules["dividend"]
+            rule = {
+                "rate": None,
+                "slab": True,
+                "tds": self._tds["nri_dividend"] / 100,
+                "description": "Dividend taxed at slab rate for NRI, TDS under section 195",
+            }
         else:
             rule = {"rate": None, "slab": True, "description": "Taxed at applicable slab rate"}
         return rule

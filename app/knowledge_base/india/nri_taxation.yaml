@@ -1,7 +1,7 @@
 ---
-version: "2024-2025"
-last_updated: "2025-01-01"
-source: "Income Tax Act 1961, Finance Act 2024"
+version: "2025-2026"
+last_updated: "2026-08-27"
+source: "Income Tax Act 1961, Finance Act 2024 (Budget 2024 capital gains changes eff. 23 Jul 2024)"
 source_url: "https://www.incometaxindia.gov.in/"
 monitor_url: "https://www.incometax.gov.in/iec/foportal/latest-news"
 
@@ -27,12 +27,12 @@ tds_rates:
   nri_interest_nre_fd: 0.0
   nri_interest_nre_savings: 0.0
   nri_interest_fcnr: 0.0
-  nri_equity_mf_stcg: 15.0
-  nri_equity_mf_ltcg: 10.0
+  nri_equity_mf_stcg: 20.0
+  nri_equity_mf_ltcg: 12.5
   nri_debt_mf_stcg: 30.0
   nri_debt_mf_ltcg: 20.0
-  nri_equity_shares_stcg: 15.0
-  nri_equity_shares_ltcg: 10.0
+  nri_equity_shares_stcg: 20.0
+  nri_equity_shares_ltcg: 12.5
   nri_rental_income: 30.0
   nri_dividend: 20.0
   nri_sgb_interest: 0.0
@@ -44,14 +44,14 @@ tds_rates:
 capital_gains:
   equity_shares:
     stcg_holding_months: 12
-    stcg_rate: 15.0
-    ltcg_rate: 10.0
+    stcg_rate: 20.0
+    ltcg_rate: 12.5
     ltcg_exemption_limit_inr: 125000
     ltcg_grandfathering_date: "2018-01-31"
   equity_mutual_funds:
     stcg_holding_months: 12
-    stcg_rate: 15.0
-    ltcg_rate: 10.0
+    stcg_rate: 20.0
+    ltcg_rate: 12.5
     ltcg_exemption_limit_inr: 125000
   debt_mutual_funds:
     stcg_holding_months: 36
@@ -77,18 +77,21 @@ capital_gains:
     interest_taxable: true
     interest_tds: false
 
-slab_rates_new_regime_fy2024_25:
-  - range: [0, 300000]
+slab_rates_new_regime_fy2025_26_note: "Section 87A rebate (effectively zeroes tax up to ₹12L for residents) does NOT apply to NRIs - these bracket rates apply directly."
+slab_rates_new_regime_fy2025_26:
+  - range: [0, 400000]
     rate: 0.0
-  - range: [300001, 700000]
+  - range: [400001, 800000]
     rate: 5.0
-  - range: [700001, 1000000]
+  - range: [800001, 1200000]
     rate: 10.0
-  - range: [1000001, 1200000]
+  - range: [1200001, 1600000]
     rate: 15.0
-  - range: [1200001, 1500000]
+  - range: [1600001, 2000000]
     rate: 20.0
-  - range: [1500001, null]
+  - range: [2000001, 2400000]
+    rate: 25.0
+  - range: [2400001, null]
     rate: 30.0
 
 special_provisions_nri:
