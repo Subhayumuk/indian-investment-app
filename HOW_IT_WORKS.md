@@ -47,9 +47,147 @@ flowchart LR
 
 Everything — the questions form *and* the server that answers it — is
 shipped and run together as **one single app** once deployed. More on why
-that matters in section 5.
+that matters in section 6.
 
-## 3. Walking through what you actually experience
+## 3. The complete map — every component, and how it all ties together
+
+*(as of 2026-08-27 — read this section if you want the whole picture in
+one place; sections 6 onward tell the dated, blow-by-blow story of how we
+got here, if you want the history instead)*
+
+### The cast of characters
+
+Think of it like a small clinic. You (the browser) walk in and hand your
+paperwork to a receptionist (the API), who sends you to six specialists
+in a fixed order, then hands you back one combined report. Nobody sees
+you except the receptionist; the specialists never talk to each other
+directly, only through the receptionist — this is the same relay
+described back in section 2, just with all six specialists named instead
+of grouped into one "Engine" box.
+
+| Specialist (a file in `app/modules/`) | What it actually decides |
+|---|---|
+| **Residency Engine** | Are you tax-resident in India, "resident but not ordinarily resident," or a non-resident — from day-count rules |
+| **Eligibility Checker** | Given your residency, what you can legally buy (mutual funds, FDs, SGBs, PPF...), and what's off-limits |
+| **Tax Engine** | What tax you'd owe — in India, in your country of residence, and after any DTAA (double-tax treaty) relief |
+| **Allocation Engine** | How your money should be split across equity/debt/gold/real estate/cash, based on your age, goal, and time horizon |
+| **Confidence Scorer** | How much this specific plan should be trusted, given how complete your answers were |
+| **Explanation Builder** | Turns everyone else's findings into the plain-English insights and action steps you actually read |
+
+Two more things sit behind the specialists:
+
+- **The Knowledge Base** (`app/knowledge_base/`) — a shelf of reference
+  books, one YAML file per country/topic (India's tax rules, each of the
+  8 residence countries' tax rules, DTAA treaties, account types, FEMA
+  repatriation limits...). The idea from day one: specialists consult
+  this shelf instead of memorizing facts themselves, so correcting a rule
+  is "edit a book," not "retrain a specialist."
+- **The Maintenance Crew** (new as of today, `scripts/` + a scheduled
+  robot) — nobody was checking the shelf for outdated books on their own,
+  so once a month an automated check now taps each book and says "this
+  might be outdated, go look." It never edits anything itself — see the
+  diagram below.
+
+### Not every specialist actually reads the shelf yet
+
+Here's what we found out today, the hard way: **saying** "specialists
+consult the shelf" and **actually wiring every specialist to open the
+book** turned out to be two different things.
+
+| Specialist | Actually reads the Knowledge Base? |
+|---|---|
+| Residency Engine | **Yes, fully** — always has |
+| Eligibility Checker | **Partly, as of today** — which instruments you can buy, country restrictions, and repatriation limits now come from the shelf. A couple of things (FATCA/FBAR-style compliance paperwork, live currency exchange rates) still don't, on purpose — explained below |
+| Tax Engine | **Partly, as of today** — equity tax rates, FD interest TDS, dividend TDS, and Sovereign Gold Bond tax now come from the shelf. Debt fund, real estate, and gold tax rules still don't, because today's audit found the actual law here is genuinely unsettled — and guessing at unsettled law is exactly what this app is built never to do (same "a human decides, nothing guesses" principle from section 9, just applied to whoever edits the code, not just to AI) |
+| Allocation Engine, Confidence Scorer | **No — and that's fine.** These aren't facts from a tax authority at all. "Shift 15% from equity to debt after age 55" is this app's own judgment call, not something a Finance Act changes. There was never a book for these to read, and there doesn't need to be one. |
+
+Before today, *most* specialists were quietly working from memory
+(numbers written directly into their own Python file) instead of the
+shelf — which defeats the entire point of having a shelf. Two of those
+memorized numbers turned out to be wrong, and neither one raised an
+error — both just quietly gave a confident, wrong answer:
+
+- **NRI FD interest TDS was memorized as 10%.** The real number is 30% —
+  10% is what a *resident* Indian pays, not an NRI.
+- **Sovereign Gold Bonds were memorized as "NRIs can buy these."** They
+  can't — NRIs can keep SGBs they already owned before becoming an NRI,
+  but can't subscribe to new ones. The shelf had this right all along;
+  the specialist just wasn't reading it.
+
+Both are fixed now. It's the same lesson as the "Failed to fetch" bug in
+section 7 and the AMFI column-order surprise in section 9: something can
+look fine until you actually check it against reality.
+
+### The map, drawn out
+
+```mermaid
+flowchart TB
+    Wizard["You — the React Wizard"] -->|"your answers"| API["/api/recommend"]
+
+    subgraph Chain["The six specialists, called in this order"]
+        direction TB
+        Res["Residency Engine"]
+        Elig["Eligibility Checker"]
+        Tax["Tax Engine"]
+        Alloc["Allocation Engine"]
+        Conf["Confidence Scorer"]
+        Exp["Explanation Builder"]
+        Res --> Elig --> Tax --> Alloc --> Conf --> Exp
+    end
+
+    API --> Res
+    Exp --> API
+    API -->|"your finished plan"| Wizard
+
+    KB[("Knowledge Base\nYAML, one file per country/topic")]
+    Res -. "residency rules" .-> KB
+    Elig -. "eligibility + repatriation rules" .-> KB
+    Tax -. "equity/FD/dividend/SGB rates" .-> KB
+
+    Crew["Maintenance check\n(runs monthly, on its own)"]
+    Crew -. "flags likely changes - never edits anything" .-> KB
+```
+
+### The supporting cast
+
+A few more pieces that aren't part of the specialist chain but matter:
+
+- **CAS Parser** (`app/api/cas_parser.py`) — reads your uploaded
+  statement PDF: mutual funds, stocks, and (added recently) your life
+  insurance cover.
+- **AMFI + mfapi.in clients** — look up your specific funds' real
+  identity and real historical returns. This is "Holdings Review, Phase
+  A" from section 9 — built and verified live, but not yet connected to
+  anything you can see on the results page (that's Phase B onward).
+- **Gold price lookup, currency converter, disclaimer generator** —
+  small utilities: a live gold price with a hardcoded fallback,
+  INR/foreign-currency conversion, and the "this is educational, not
+  professional advice" text on every response.
+
+### Where things actually stand, in plain terms
+
+- **Built and live**: the full wizard-to-plan flow, CAS upload
+  (including insurance), both bugs above fixed, monthly automated checks
+  on the Knowledge Base's freshness.
+- **Half-finished, on purpose, and now clearly labeled instead of
+  hidden**: the "specialists read the shelf" design is true for 2 of 6
+  specialists so far (Residency fully; Eligibility and Tax partly). The
+  rest either don't need it (Allocation, Confidence) or haven't been
+  migrated yet (parts of Tax Engine).
+- **In progress**: Holdings Review — Phase A (know your real funds) is
+  done; Phase B (judge them against a benchmark) hasn't started.
+- **Known, written-down gaps** rather than hidden ones: 3 of the 8
+  residence countries' tax pages block automated checking (India found a
+  workaround; Australia/Canada/Germany haven't yet); the other 8
+  countries' tax rules have never been checked against real current law
+  the way India's just was.
+
+For the exact technical detail behind any of this — file names, test
+counts, what's hardcoded where and why — `CLAUDE.md` and
+`ARCHITECTURE.md` are kept current; this section is the plain-English map
+to keep in your head between visits.
+
+## 4. Walking through what you actually experience
 
 1. **Step 1 — Residency**: where you live now, your Indian residency status.
 2. **Step 2 — Assets**: what you already hold (you can upload a CAS PDF —
@@ -61,7 +199,7 @@ that matters in section 5.
    how to allocate your money, specific products, expected tax treatment,
    and a written explanation of why.
 
-## 4. What happens the instant you click "Get my plan"
+## 5. What happens the instant you click "Get my plan"
 
 ```mermaid
 sequenceDiagram
@@ -96,7 +234,7 @@ actual numbers (tax rates, contribution limits, DTAA provisions) from plain
 YAML files in `app/knowledge_base/`, organized one folder per country. If a
 tax rate changes next year, someone edits a YAML file — no code change needed.
 
-## 5. The deployment story: Render, Docker, and why they matter
+## 6. The deployment story: Render, Docker, and why they matter
 
 This is the part that's new. Here's every term you've seen, explained with
 an analogy.
@@ -200,7 +338,7 @@ build and redeploy on its own, with no manual button-click required.
 | **Health check** | Render periodically asking "are you still alive and working?" — if the app stops answering, Render knows something's wrong |
 | **Cold start** | On Render's free plan, the app goes to sleep after 15 minutes of no visitors, and takes a moment to wake up on the next visit |
 
-## 6. A detective story: the bug that only broke for strangers
+## 7. A detective story: the bug that only broke for strangers
 
 Right after the first real deploy, something strange happened: uploading a
 statement worked fine when we tried it, but failed for anyone else visiting
@@ -229,7 +367,7 @@ tested with a real second visitor's-eye view — an incognito browser window,
 with zero memory of anything from before — rather than trusting "it worked
 when I tried it."
 
-## 7. Teaching the app about your life insurance
+## 8. Teaching the app about your life insurance
 
 Small addition, same day: your real CAS statement turned out to include a
 life insurance summary (policy count + total cover amount), not just
@@ -250,7 +388,7 @@ projects often have unused pieces sitting around** — a field, a function, a
 setting — built for a reason that got lost or deferred. Part of good
 maintenance is periodically asking "is this shelf actually being used?"
 
-## 8. Teaching the app to know your funds for real
+## 9. Teaching the app to know your funds for real
 
 This was the bigger project today, and it's not finished yet — this section
 explains what we built and, just as importantly, *why*, so tomorrow's
@@ -354,7 +492,7 @@ becomes something you could actually see working end-to-end.
 Later (**Phase C and D**): the AI narration layer, and an actual button on
 the results page to try it.
 
-## 9. A bigger lesson for the journey: how real software actually gets built
+## 10. A bigger lesson for the journey: how real software actually gets built
 
 A few habits showed up repeatedly today that are worth naming explicitly,
 since they apply far beyond this one app:
@@ -377,7 +515,7 @@ since they apply far beyond this one app:
   way this got caught was by deliberately checking a real, live answer
   before trusting the code.
 - **When something breaks, ask *why*, not just *how do I make the error go
-  away*.** The "Failed to fetch" bug (section 6) could have been
+  away*.** The "Failed to fetch" bug (section 7) could have been
   papered over in a dozen shallow ways. Understanding *why* it only
   happened for other people, not for us, is what led to an actual fix
   instead of a lucky patch.
@@ -388,7 +526,7 @@ first try — it's about building in small enough pieces that you can catch
 your own wrong assumptions early, cheaply, and with real evidence instead
 of guesswork.
 
-## 10. Where things stand
+## 11. Where things stand
 
 See `CLAUDE.md` for the always-current technical status (test counts, what's
 built, what's still open). This document explains the *why* and *how* in
