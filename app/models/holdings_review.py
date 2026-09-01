@@ -37,6 +37,7 @@ class FundHoldingAnalysis(BaseModel):
     current_value_inr: float = 0.0
     market_data: FundMarketData
     verdict: HoldingVerdictLabel
+    residence_tax_note: str = ""  # what keeping/switching this fund means in the user's country
     commentary: str = ""  # filled in by Phase C's LLM layer; empty until then
     warnings: List[str] = []
 

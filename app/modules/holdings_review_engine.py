@@ -22,6 +22,7 @@ from app.models.holdings_review import (
     MatchConfidence,
 )
 from app.models.user_profile import UserProfile
+from app.modules import instrument_catalog
 from app.modules.benchmark_engine import BenchmarkEngine
 from app.modules.market_data_client import MarketDataClient
 from app.modules.recommendation_engine import ASSET_CLASS_RETURN, RecommendationEngine
@@ -63,12 +64,24 @@ def _verdict_for_return_gap(diff_pp: float) -> HoldingVerdictLabel:
     return HoldingVerdictLabel.UNDERPERFORMING_CATEGORY
 
 
-def _analyze_fund(fund: dict, total_corpus_inr: float, market_data: FundMarketData) -> FundHoldingAnalysis:
+def _analyze_fund(fund: dict, total_corpus_inr: float, market_data: FundMarketData, country: str) -> FundHoldingAnalysis:
     fund_name = fund.get("fund_name", "")
     isin = fund.get("isin", "")
     value = float(fund.get("current_value_inr", 0) or 0)
     share = (value / total_corpus_inr) if total_corpus_inr > 0 else 0.0
     warnings: List[str] = []
+
+    # Computed regardless of verdict path - what holding or switching a
+    # fund means tax-wise doesn't depend on whether we could also compute
+    # a return-based verdict for it. Every Holdings Review entry is a
+    # mutual fund scheme by definition (that's what AMFI's NAVAll.txt
+    # lists), so instrument_catalog's fund-oriented notes apply uniformly;
+    # only the equity/debt vs. hybrid distinction (which a few countries'
+    # notes, e.g. Denmark's, actually differentiate) comes from the same
+    # name-based category guess used for the benchmark comparison below.
+    asset_class = _infer_asset_class(market_data.matched_scheme_name or fund_name)
+    note_instrument_type = "hybrid_mf" if asset_class == "hybrid" else "equity_mf"
+    residence_tax_note = instrument_catalog.residence_tax_note(country, note_instrument_type)
 
     if share > OVERCONCENTRATION_THRESHOLD:
         verdict = HoldingVerdictLabel.OVERCONCENTRATED
@@ -83,7 +96,6 @@ def _analyze_fund(fund: dict, total_corpus_inr: float, market_data: FundMarketDa
         verdict = HoldingVerdictLabel.DATA_UNAVAILABLE
         warnings.append("Matched the fund, but not enough price history was available to compute a 3-year return.")
     else:
-        asset_class = _infer_asset_class(market_data.matched_scheme_name or fund_name)
         benchmark_pct = ASSET_CLASS_RETURN[asset_class] * 100
         diff = market_data.trailing_return_3yr_pct - benchmark_pct
         verdict = _verdict_for_return_gap(diff)
@@ -98,6 +110,7 @@ def _analyze_fund(fund: dict, total_corpus_inr: float, market_data: FundMarketDa
         current_value_inr=value,
         market_data=market_data,
         verdict=verdict,
+        residence_tax_note=residence_tax_note,
         warnings=warnings,
     )
 
@@ -143,7 +156,7 @@ class HoldingsReviewEngine:
         for fund, market_data in zip(funds, market_data_results):
             if market_data.match_confidence == MatchConfidence.UNMATCHED:
                 unmatched_count += 1
-            fund_analyses.append(_analyze_fund(fund, total_corpus, market_data))
+            fund_analyses.append(_analyze_fund(fund, total_corpus, market_data, flat.tax_residency_country))
 
         disclaimers = [
             "This is educational, comparative information, not personalized investment advice.",

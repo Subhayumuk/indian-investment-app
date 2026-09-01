@@ -21,7 +21,7 @@ class FakeMarketDataClient:
         return FundMarketData(isin=isin, match_confidence=MatchConfidence.UNMATCHED, data_source="unavailable")
 
 
-def make_profile(mutual_funds, gold_value_inr=0) -> UserProfile:
+def make_profile(mutual_funds, gold_value_inr=0, country="denmark") -> UserProfile:
     payload = {
         "session_id": "test-001",
         "personal": {
@@ -36,7 +36,7 @@ def make_profile(mutual_funds, gold_value_inr=0) -> UserProfile:
             "gold_value_inr": gold_value_inr,
         },
         "residency": {
-            "country_of_stay": "denmark", "tax_residency_country": "denmark",
+            "country_of_stay": country, "tax_residency_country": country,
             "days_in_india_current_fy": 0, "days_in_india_last_4_fy": 0,
             "indian_residential_status": "non_resident", "has_indian_bank_accounts": True,
             "account_types_held": ["NRO"], "has_pan": True, "has_kyc": True,
@@ -188,6 +188,63 @@ def test_multiple_funds_are_matched_to_the_correct_analysis_in_order():
     assert result.fund_analyses[1].verdict == HoldingVerdictLabel.UNDERPERFORMING_CATEGORY
     assert result.fund_analyses[2].verdict == HoldingVerdictLabel.DATA_UNAVAILABLE
     assert result.unmatched_fund_count == 1
+
+
+def test_fund_analysis_carries_a_country_specific_residence_tax_note():
+    fund = {"fund_name": "Some Equity Fund", "current_value_inr": 100000, "isin": "INF008"}
+    market_data = {"INF008": FundMarketData(
+        isin="INF008", matched_scheme_name="Some Equity Fund", trailing_return_3yr_pct=12.0,
+        match_confidence=MatchConfidence.ISIN_MATCH, data_source="amfi+mfapi",
+    )}
+    engine = HoldingsReviewEngine(market_data_client=FakeMarketDataClient(market_data))
+    profile = make_profile([fund], gold_value_inr=900000, country="usa")
+
+    result = asyncio.run(engine.review(profile))
+
+    assert "PFIC" in result.fund_analyses[0].residence_tax_note
+
+
+def test_residence_tax_note_is_present_even_when_verdict_is_data_unavailable():
+    # Tax treatment of a fund doesn't depend on whether we could also
+    # compute a return-based verdict for it.
+    fund = {"fund_name": "Unknown Fund", "current_value_inr": 100000, "isin": "INF_UNKNOWN2"}
+    engine = HoldingsReviewEngine(market_data_client=FakeMarketDataClient({}))
+    profile = make_profile([fund], gold_value_inr=900000, country="uk")
+
+    result = asyncio.run(engine.review(profile))
+
+    assert result.fund_analyses[0].verdict == HoldingVerdictLabel.DATA_UNAVAILABLE
+    assert result.fund_analyses[0].residence_tax_note
+    assert "offshore fund" in result.fund_analyses[0].residence_tax_note.lower()
+
+
+def test_residence_tax_note_is_present_even_when_overconcentrated():
+    fund = {"fund_name": "Big Fund", "current_value_inr": 800000, "isin": "INF009"}
+    market_data = {"INF009": FundMarketData(
+        isin="INF009", matched_scheme_name="Big Fund", trailing_return_3yr_pct=20.0,
+        match_confidence=MatchConfidence.ISIN_MATCH, data_source="amfi+mfapi",
+    )}
+    engine = HoldingsReviewEngine(market_data_client=FakeMarketDataClient(market_data))
+    profile = make_profile([fund], gold_value_inr=200000, country="denmark")
+
+    result = asyncio.run(engine.review(profile))
+
+    assert result.fund_analyses[0].verdict == HoldingVerdictLabel.OVERCONCENTRATED
+    assert "lagerbeskatning" in result.fund_analyses[0].residence_tax_note.lower()
+
+
+def test_hybrid_fund_gets_the_hybrid_specific_denmark_note():
+    fund = {"fund_name": "HDFC Balanced Advantage Fund", "current_value_inr": 100000, "isin": "INF010"}
+    market_data = {"INF010": FundMarketData(
+        isin="INF010", matched_scheme_name="HDFC Balanced Advantage Fund", trailing_return_3yr_pct=9.0,
+        match_confidence=MatchConfidence.ISIN_MATCH, data_source="amfi+mfapi",
+    )}
+    engine = HoldingsReviewEngine(market_data_client=FakeMarketDataClient(market_data))
+    profile = make_profile([fund], gold_value_inr=900000, country="denmark")
+
+    result = asyncio.run(engine.review(profile))
+
+    assert "classification" in result.fund_analyses[0].residence_tax_note.lower()
 
 
 def test_review_with_no_mutual_funds_returns_empty_analysis_list():
