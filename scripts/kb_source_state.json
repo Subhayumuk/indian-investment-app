@@ -1,4 +1,16 @@
 {
+  "denmark/india_dtaa.yaml": {
+    "fingerprint": "9e834f1d102badfe7bce32f411e57fc76a8ac2d11e94385b0ff5cda14799ced7",
+    "last_changed": null,
+    "last_checked": "2026-09-01T10:45:27+00:00",
+    "monitored_url": "https://www.incometax.gov.in/iec/foportal/latest-news"
+  },
+  "denmark/tax_rules.yaml": {
+    "fingerprint": "284316ee5b195276f9791ed1490997970f52da99ea682743ef0711a1d3fcb033",
+    "last_changed": null,
+    "last_checked": "2026-09-01T10:45:28+00:00",
+    "monitored_url": "https://skat.dk/en-us/individuals/taxation-in-denmark"
+  },
   "denmark\\india_dtaa.yaml": {
     "fingerprint": "c6eeb391f5905c34fa80102a4a36aaa79a5837499b1d6d82fb8c37470313dc5d",
     "last_changed": null,
@@ -10,6 +22,42 @@
     "last_changed": null,
     "last_checked": "2026-08-27T17:10:35+00:00",
     "monitored_url": "https://skat.dk/en-us/individuals/taxation-in-denmark"
+  },
+  "germany/tax_rules.yaml": {
+    "fingerprint": "89bfbaafde30f3f5da4d9f66dcf99dda920cd54c6824d6c77606f6889a421adc",
+    "last_changed": null,
+    "last_checked": "2026-09-01T10:45:29+00:00",
+    "monitored_url": "https://www.bzst.de/EN/Businesses/Withholding_taxes/Withholding_Overview/withholding_overview_node.html"
+  },
+  "india/account_types.yaml": {
+    "fingerprint": "f575fcabf1fcdb88c2a6f4dfeec828c9c81f4f17df3f44d67e85f710c4d9b670",
+    "last_changed": null,
+    "last_checked": "2026-09-01T10:45:30+00:00",
+    "monitored_url": "https://www.rbi.org.in/commonman/Upload/English/FAQs/PDFs/Accountresidents16012025.pdf"
+  },
+  "india/dtaa_provisions.yaml": {
+    "fingerprint": "9e834f1d102badfe7bce32f411e57fc76a8ac2d11e94385b0ff5cda14799ced7",
+    "last_changed": null,
+    "last_checked": "2026-09-01T10:45:31+00:00",
+    "monitored_url": "https://www.incometax.gov.in/iec/foportal/latest-news"
+  },
+  "india/fema_rules.yaml": {
+    "fingerprint": "f575fcabf1fcdb88c2a6f4dfeec828c9c81f4f17df3f44d67e85f710c4d9b670",
+    "last_changed": null,
+    "last_checked": "2026-09-01T10:45:33+00:00",
+    "monitored_url": "https://www.rbi.org.in/commonman/Upload/English/FAQs/PDFs/Accountresidents16012025.pdf"
+  },
+  "india/nri_taxation.yaml": {
+    "fingerprint": "9e834f1d102badfe7bce32f411e57fc76a8ac2d11e94385b0ff5cda14799ced7",
+    "last_changed": null,
+    "last_checked": "2026-09-01T10:45:34+00:00",
+    "monitored_url": "https://www.incometax.gov.in/iec/foportal/latest-news"
+  },
+  "india/product_rules.yaml": {
+    "fingerprint": "ce1d434cf16812b91ee4454c94e221d40916332c6fa9d14616c7e4ae42652150",
+    "last_changed": null,
+    "last_checked": "2026-09-01T10:45:35+00:00",
+    "monitored_url": "https://www.sebi.gov.in/legal/regulations/dec-1996/sebi-mutual-funds-regulations-1996_19376.html"
   },
   "india\\account_types.yaml": {
     "fingerprint": "f575fcabf1fcdb88c2a6f4dfeec828c9c81f4f17df3f44d67e85f710c4d9b670",
@@ -41,11 +89,23 @@
     "last_checked": "2026-08-27T17:10:40+00:00",
     "monitored_url": "https://www.sebi.gov.in/legal/regulations/dec-1996/sebi-mutual-funds-regulations-1996_19376.html"
   },
+  "singapore/tax_rules.yaml": {
+    "fingerprint": "9632e612ee42ed37a90768b77493a1104317aafed89bbabe1bc6c097d639ff87",
+    "last_changed": null,
+    "last_checked": "2026-09-01T10:45:36+00:00",
+    "monitored_url": "https://www.iras.gov.sg/"
+  },
   "singapore\\tax_rules.yaml": {
     "fingerprint": "0071925b9b5bd17cfaa774d09e51cbbf6f9c54cd39f5e50a8929e317f1dcfb70",
     "last_changed": null,
     "last_checked": "2026-08-27T17:10:41+00:00",
     "monitored_url": "https://www.iras.gov.sg/"
+  },
+  "uae/tax_rules.yaml": {
+    "fingerprint": "f3da542faba8e332bc353a184c96267459d28bb6278b59a3e19d36a06e8721ea",
+    "last_changed": null,
+    "last_checked": "2026-09-01T10:45:39+00:00",
+    "monitored_url": "https://tax.gov.ae/en/"
   },
   "uae\\tax_rules.yaml": {
     "fingerprint": "920272cad47fcd013795a56ad1427b78161d49be1309b14139f796b3527c6a92",
@@ -53,11 +113,23 @@
     "last_checked": "2026-08-27T17:10:43+00:00",
     "monitored_url": "https://tax.gov.ae/en/"
   },
+  "uk/tax_rules.yaml": {
+    "fingerprint": "ae9a3bc5f526ab465aa60e829caf7d7649528111521a09d2d2aea8121980fc85",
+    "last_changed": null,
+    "last_checked": "2026-09-01T10:45:39+00:00",
+    "monitored_url": "https://www.gov.uk/tax-uk-income-live-abroad"
+  },
   "uk\\tax_rules.yaml": {
     "fingerprint": "ae9a3bc5f526ab465aa60e829caf7d7649528111521a09d2d2aea8121980fc85",
     "last_changed": null,
     "last_checked": "2026-08-27T17:10:43+00:00",
     "monitored_url": "https://www.gov.uk/tax-uk-income-live-abroad"
+  },
+  "usa/tax_rules.yaml": {
+    "fingerprint": "b1c3b26406d1e1b59c99f3349a0bcd2c5116afd2fed2d06b5ccefa865f909550",
+    "last_changed": null,
+    "last_checked": "2026-09-01T10:45:39+00:00",
+    "monitored_url": "https://www.irs.gov/individuals/international-taxpayers"
   },
   "usa\\tax_rules.yaml": {
     "fingerprint": "b1c3b26406d1e1b59c99f3349a0bcd2c5116afd2fed2d06b5ccefa865f909550",
