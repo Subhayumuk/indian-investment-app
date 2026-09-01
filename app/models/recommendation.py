@@ -39,7 +39,7 @@ class InvestmentInstrument(BaseModel):
     historical_return_3yr: str = ""
     historical_return_5yr: str = ""
     platform_to_invest: str = ""
-    danish_tax_note: str = ""
+    residence_tax_note: str = ""
     risk_level_label: str = ""
 
 class TaxSummary(BaseModel):

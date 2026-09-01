@@ -127,6 +127,27 @@ def test_generate_usa_resident_triggers_fatca():
     assert "fatca" in result.compliance.form_required
 
 
+def test_generate_gives_usa_resident_a_pfic_note_not_a_danish_one():
+    # Regression guard for the 2026-09-01 bug: every instrument used to
+    # carry a Denmark-specific "danish_tax_note" regardless of the user's
+    # actual country.
+    profile = make_profile(**{"residency.tax_residency_country": "usa"})
+    result = engine.generate(profile)
+    fund_instruments = [i for i in result.instruments if i.instrument_type in ("equity_mf", "debt_mf", "etf")]
+    assert fund_instruments
+    for instrument in fund_instruments:
+        assert "PFIC" in instrument.residence_tax_note
+        assert "lagerbeskatning" not in instrument.residence_tax_note.lower()
+
+
+def test_generate_denmark_resident_still_gets_the_original_lagerbeskatning_note():
+    profile = make_profile(**{"residency.tax_residency_country": "denmark"})
+    result = engine.generate(profile)
+    equity_instruments = [i for i in result.instruments if i.instrument_type == "equity_mf"]
+    assert equity_instruments
+    assert all("lagerbeskatning" in i.residence_tax_note.lower() for i in equity_instruments)
+
+
 def test_generate_projection_scenarios_are_ordered():
     result = engine.generate(make_profile())
     projection = result.projections[0]

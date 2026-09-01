@@ -214,7 +214,7 @@ class RecommendationEngine:
                 historical_return_3yr=entry["historical_return_3yr"],
                 historical_return_5yr=entry["historical_return_5yr"],
                 platform_to_invest=entry["platform_to_invest"],
-                danish_tax_note=entry["danish_tax_note"],
+                residence_tax_note=instrument_catalog.residence_tax_note(flat.tax_residency_country, entry["instrument_type"]),
                 risk_level_label=entry["risk_level_label"],
             ))
         return instruments

@@ -99,9 +99,9 @@ function InstrumentList({ instruments }) {
           </p>
           <p className="mt-1 text-slate-600 dark:text-slate-300">{item.why_nri_suitable}</p>
           <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">Invest via: {item.platform_to_invest}</p>
-          {item.danish_tax_note && (
+          {item.residence_tax_note && (
             <div className="mt-2 rounded-lg border border-sky-200 bg-sky-50 px-3 py-2 text-xs text-sky-800 dark:border-sky-900 dark:bg-sky-950/40 dark:text-sky-200">
-              🇩🇰 {item.danish_tax_note}
+              🧾 {item.residence_tax_note}
             </div>
           )}
         </div>
