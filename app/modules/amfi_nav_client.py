@@ -8,6 +8,7 @@ for historical returns, see mfapi_client.py) has no ISIN-indexed lookup,
 and fund names extracted from CAS PDFs are often truncated/inconsistent
 (see app/api/cas_parser.py), so ISIN is the only reliable matching key.
 """
+import asyncio
 import logging
 import time
 from dataclasses import dataclass
@@ -76,6 +77,11 @@ class AmfiNavClient:
         self._http_client = http_client
         self._cache: Dict[str, SchemeRecord] = {}
         self._cached_at: float = 0.0
+        # Holdings Review looks up many funds concurrently (asyncio.gather in
+        # holdings_review_engine.py) - without this lock, every one of them
+        # would see a cold cache simultaneously and each fire its own ~10MB
+        # NAVAll.txt fetch instead of sharing one.
+        self._refresh_lock = asyncio.Lock()
 
     def _is_cache_fresh(self) -> bool:
         ttl = get_settings().AMFI_NAV_CACHE_TTL_SECONDS
@@ -102,10 +108,16 @@ class AmfiNavClient:
         if not isin:
             return None
         if not self._is_cache_fresh():
-            fresh = await self._fetch_and_parse()
-            if fresh:
-                self._cache = fresh
-                self._cached_at = time.monotonic()
-            # If the fetch failed and nothing was ever cached, fall through
-            # to the (empty) cache lookup below rather than raising.
+            async with self._refresh_lock:
+                # Re-check after acquiring the lock: a concurrent lookup()
+                # may have already refreshed the cache while this one was
+                # waiting, in which case there's nothing left to do.
+                if not self._is_cache_fresh():
+                    fresh = await self._fetch_and_parse()
+                    if fresh:
+                        self._cache = fresh
+                        self._cached_at = time.monotonic()
+                    # If the fetch failed and nothing was ever cached, fall
+                    # through to the (empty) cache lookup below rather than
+                    # raising.
         return self._cache.get(isin)

@@ -8,6 +8,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app.api.cas_parser import router as cas_router
 from app.api.gold_price import router as gold_router
+from app.api.holdings_review import router as holdings_review_router
 from app.api.recommendations import router as recommendations_router
 from app.config import get_settings
 from app.routes.health import router as health_router
@@ -50,6 +51,7 @@ def create_app() -> FastAPI:
     application.include_router(recommendations_router, prefix="/api")
     application.include_router(cas_router, prefix="/api")
     application.include_router(gold_router, prefix="/api")
+    application.include_router(holdings_review_router, prefix="/api")
 
     # Serve the built React app (frontend/, `npm run build`) as the site root.
     # Registered last so the API routers above always match first — Starlette

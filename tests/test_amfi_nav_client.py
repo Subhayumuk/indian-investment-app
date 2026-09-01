@@ -30,6 +30,21 @@ class FakeHttpClient:
         return self._response
 
 
+class CountingSlowHttpClient:
+    """Tracks how many times .get() was actually called, and yields control
+    (asyncio.sleep(0)) before returning - enough for a real event loop to
+    interleave concurrent lookup() calls if they aren't properly guarded."""
+
+    def __init__(self, response):
+        self._response = response
+        self.call_count = 0
+
+    async def get(self, url, timeout=None):
+        self.call_count += 1
+        await asyncio.sleep(0)
+        return self._response
+
+
 def test_parse_nav_all_text_indexes_both_isin_variants_to_same_scheme():
     index = _parse_nav_all_text(SAMPLE_NAV_ALL_TEXT)
     assert index["INF209K01397"].scheme_code == "118989"
@@ -64,3 +79,26 @@ def test_lookup_returns_none_when_isin_blank():
 def test_lookup_degrades_to_none_on_fetch_failure_rather_than_raising():
     client = AmfiNavClient(http_client=FakeHttpClient(FakeResponse(status_code=500, text="")))
     assert asyncio.run(client.lookup("INF209K01397")) is None
+
+
+def test_concurrent_lookups_on_a_cold_cache_only_fetch_once():
+    # holdings_review_engine.py fans out lookups for many funds with
+    # asyncio.gather - without the refresh lock, every one of them would
+    # see a cold cache at the same time and each fire its own fetch.
+    http_client = CountingSlowHttpClient(FakeResponse(text=SAMPLE_NAV_ALL_TEXT))
+    client = AmfiNavClient(http_client=http_client)
+
+    async def run_concurrent_lookups():
+        # asyncio.gather() must be called from inside a running loop, not
+        # passed as a bare argument to asyncio.run() - the latter evaluates
+        # gather() before the loop exists.
+        return await asyncio.gather(
+            client.lookup("INF209K01397"),
+            client.lookup("INF209K01405"),
+            client.lookup("INF209K01413"),
+        )
+
+    results = asyncio.run(run_concurrent_lookups())
+
+    assert http_client.call_count == 1
+    assert [r.scheme_code for r in results] == ["118989", "118989", "118990"]
