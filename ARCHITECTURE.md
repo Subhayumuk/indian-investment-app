@@ -4,8 +4,8 @@
 |---|---|
 | **Document type** | Architecture Overview, High-Level Design (HLD) & Solution Design |
 | **System** | NRI Investment & Tax Planner (`indian-investment-app`) |
-| **Version** | 1.1 |
-| **Last updated** | 2026-08-27 |
+| **Version** | 1.2 |
+| **Last updated** | 2026-09-01 |
 | **Status** | Living document — kept in sync with `CLAUDE.md`; update on material architecture changes |
 | **Audience** | Enterprise/Solution Architects, technical reviewers, future maintainers |
 
@@ -172,6 +172,8 @@ choice appropriate to the current scale (see Section 9, Scalability).
 | `app/utils/disclaimer_generator.py` | Generates the legal/educational disclaimers attached to every response |
 | `app/api/cas_parser.py` | Best-effort extraction of holdings from an uploaded NSDL CAS PDF |
 | `app/api/gold_price.py` | Live gold price with hardcoded fallback |
+| `app/modules/benchmark_engine.py`, `holdings_review_engine.py`; `app/api/holdings_review.py` | Holdings Review (added 2026-09-01): per-fund verdicts against real AMFI/mfapi.in market data and a peer benchmark, reusing `RecommendationEngine`'s existing portfolio-health scoring rather than duplicating it. Fully separate, additive path — `/api/recommend` is untouched. No LLM yet (Phase C). |
+| `app/modules/amfi_nav_client.py`, `mfapi_client.py`, `market_data_client.py` | Resolve a fund's ISIN → real AMFI scheme data → mfapi.in trailing returns, for Holdings Review. Keyless, free, both async and constructor-injectable for testing. |
 
 ### 6.2 Core Sequence: Generate Recommendation
 
@@ -287,6 +289,7 @@ Added 2026-08-27, in `scripts/` (not part of the request path):
 |---|---|---|
 | `GET` | `/api/health` | Liveness check (served by `app/routes/health.py`; a duplicate route in `recommendations.py` is dead code — Starlette's first-match routing always serves the `routes/health.py` version) |
 | `POST` | `/api/recommend` | Core recommendation generation |
+| `POST` | `/api/holdings-review` | Per-fund verdicts (aligned/worth reviewing/underperforming/overconcentrated/data unavailable) against real market data and a peer benchmark, for funds in the request's `mutual_funds`. Reuses the `UserProfile` request model — no separate schema. |
 | `GET` | `/api/instruments` | Static reference list of investment instruments |
 | `POST` | `/api/parse-cas` | Best-effort CAS PDF holdings extraction |
 | `GET` | `/api/gold-price` | Current gold price (live or fallback) |
@@ -335,7 +338,7 @@ running instance.
 | **Availability/Reliability** | Render free tier: single instance, no redundancy, no SLA. The instance sleeps after ~15 minutes idle and cold-starts (roughly a minute) on the next request. No documented recovery/rollback procedure beyond re-pushing a prior commit. |
 | **Scalability** | Stateless request handling means horizontal scaling is architecturally straightforward if needed, but the current Render plan runs exactly one instance with no autoscaling configured. Knowledge-base YAML is loaded once per process and cached — negligible per-request overhead. |
 | **Performance** | No LLM inference in the path — response time is dominated by Python rule evaluation (sub-second) plus network/cold-start latency, not model latency. |
-| **Maintainability** | Rules are externalized to YAML where wired (Section 6.4); 172 automated tests cover engine modules, API endpoints, YAML-vs-code drift for the wired rules (Section 6.4), and regression cases for the known enum-flattening bug class plus the two rate/eligibility bugs found 2026-08-27. A monthly job (Section 6.5) flags when a rule's source may have changed. No linter is configured for the Python side (frontend has `oxlint`). |
+| **Maintainability** | Rules are externalized to YAML where wired (Section 6.4); 208 automated tests cover engine modules, API endpoints, YAML-vs-code drift for the wired rules (Section 6.4), and regression cases for the known enum-flattening bug class plus the rate/eligibility bugs found 2026-08-27 and the concurrency/tax-note bugs found 2026-09-01. A monthly job (Section 6.5) flags when a rule's source may have changed. No linter is configured for the Python side (frontend has `oxlint`). |
 | **Cost** | $0/month on Render's free tier as currently configured (Docker build minutes are well within the free monthly allowance). |
 | **Compliance/Disclaimer** | Every response includes generated disclaimers (`disclaimer_generator.py`) framing output as educational, not professional tax/legal/investment advice. |
 
@@ -369,6 +372,9 @@ running instance.
 | **Issue (found and fixed 2026-08-27)** | `tax_engine.py` hardcoded NRI NRO FD interest TDS at 10% (the resident rate) instead of 30% (the actual NRI rate) | Fixed, then made impossible to silently regress by wiring the value to `nri_taxation.yaml` with a regression test |
 | **Issue (found and fixed 2026-08-27)** | `eligibility_checker.py` hardcoded Sovereign Gold Bonds as `eligible: True` for NRIs; the YAML correctly says NRIs can't subscribe to new SGB issuances | Fixed the same way — wired to `product_rules.yaml`, regression test added |
 | **Issue (flagged, not fixed)** | `eligibility_checker.py`'s "$250,000/year LRS" outward remittance figure, shown to every user, is a scheme for India-resident individuals — it doesn't govern NRIs at all (their repatriation is the NRO/NRE limits shown alongside it) | Left as-is pending a product decision on what this field should actually say; not a YAML-wiring problem, since `fema_rules.yaml` has no such figure either |
+| **Issue (found and fixed 2026-09-01)** | `instrument_catalog.py` hardcoded a Danish-only tax note (`danish_tax_note`), always shown to every user regardless of actual country of residence — pre-existing, not introduced by that day's work | Renamed to `residence_tax_note`, made genuinely country-aware for all 8 supported countries, and wired into both new-money instrument suggestions and Holdings Review's existing-fund verdicts |
+| **Issue (found and fixed 2026-09-01)** | Holdings Review's fund lookups ran sequentially, so response time scaled linearly with the number of held funds; fixing that by parallelizing them would have introduced a thundering-herd bug (many concurrent lookups each re-fetching AMFI's ~10MB file on a cold cache) | Lookups now run concurrently via `asyncio.gather`; `AmfiNavClient` gained a lock so concurrent lookups share one fetch |
+| **Risk** | `eligibility_checker.py`'s and `instrument_catalog.py`'s country-specific tax notes (PFIC, offshore-fund rules, Abgeltungsteuer, etc.) are static hand-written prose informed by each country's `tax_rules.yaml`, not read from it live — same staleness risk as any hardcoded copy, mitigated only by deliberately excluding the most volatile figures (India-side domestic rates) from the note text | Acceptable for now; the 8 non-India `tax_rules.yaml` files feeding these notes have never been audited against real current law (see the item above about the other 8 countries) |
 
 ## 11. Known Technical Debt / Open Items
 

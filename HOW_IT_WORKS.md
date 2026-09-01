@@ -484,13 +484,39 @@ Today (**Phase A**, in the plan): the "identity" and "history" pieces above
 — proven to work against your real fund, live, on the real deployed app.
 Nothing about this is visible on the website yet; it's plumbing underneath.
 
-Tomorrow (**Phase B**): the actual judgment rules (comparing your fund's
-real return against a benchmark, flagging over-concentration) — still no
-AI involved, fully rule-based and testable, and the first point where this
-becomes something you could actually see working end-to-end.
+**Update, 2026-09-01 — Phase B landed.** The judgment rules above are now
+real: `POST /api/holdings-review` looks at every fund from your uploaded
+CAS statement and gives each one a verdict — *aligned*, *worth reviewing*,
+*underperforming*, *too concentrated*, or *couldn't check* — by comparing
+its real 3-year return against a benchmark for its category, alongside a
+comparison of your whole portfolio's split against what's recommended for
+someone with your risk/goal/horizon. Still zero AI involved, exactly as
+planned — every verdict is a fixed rule, not a model's opinion. Verified
+against your real 16 funds on the live site: all 16 matched, real returns
+came back, and the whole check ran in about 12 seconds.
+
+Two things broke it before it was right, both caught by testing against
+your real data instead of trusting the design on paper:
+
+- **It was checking your funds one at a time, waiting for each to finish
+  before starting the next.** With 16 funds, the wait scaled with *how
+  many* funds you own — fine today, a real problem for anyone with a
+  bigger portfolio. Fixed to check them all at once instead (now bounded
+  by the slowest single check, not the sum of all of them) — but that
+  needed a second fix too, since checking many funds simultaneously could
+  mean several parts of the app each trying to download AMFI's big daily
+  price file at the exact same moment. Now only the first one downloads
+  it; everyone else waits their turn and reuses it.
+- **Every suggested fund's tax note said "Danish," always** — even for
+  someone living in the US or UK. This had actually been true since the
+  feature was first built, well before Holdings Review existed; nobody
+  had noticed because every test so far happened to use a Danish profile.
+  Fixed for both the new-money fund suggestions and your existing funds'
+  verdicts, across all 8 countries this app supports — a US resident now
+  gets a note about PFIC tax treatment instead of Danish lagerbeskatning.
 
 Later (**Phase C and D**): the AI narration layer, and an actual button on
-the results page to try it.
+the results page to try it — both still ahead.
 
 ## 10. A bigger lesson for the journey: how real software actually gets built
 
