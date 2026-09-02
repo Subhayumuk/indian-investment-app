@@ -132,6 +132,8 @@ class RecommendationEngine:
             has_nre_account="NRE" in account_types,
             has_nro_account="NRO" in account_types,
             has_pan=profile.residency.has_pan,
+            files_india_itr=profile.residency.files_india_itr,
+            declares_india_income_in_residence_country=profile.residency.declares_india_income_in_residence_country,
             annual_income_inr=profile.financial.monthly_income_inr * 12,
             monthly_expenses_inr=profile.financial.monthly_expenses_inr,
             existing_investments_inr=profile.financial.existing_investments_inr,

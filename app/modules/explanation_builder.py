@@ -59,6 +59,19 @@ class ExplanationBuilder:
             steps.append("🔴 Get a term life insurance policy — pure protection is inexpensive and should be in place before investing surplus income")
         steps.append("📋 Complete KYC with NRI status at your chosen broker/AMC (HDFC Securities, ICICI Direct, or NRI platforms like SBNRI)")
         steps.append("📑 Obtain a Certificate of Residence from your country's tax authority to claim DTAA benefits")
+        if not getattr(profile, "files_india_itr", False):
+            steps.append(
+                "📑 Check whether you need to file an Indian ITR — NRIs with India-source income above the "
+                "basic exemption, or wanting to claim a refund/DTAA credit on TDS already deducted, generally "
+                "still need to file even without a business presence in India."
+            )
+        if not getattr(profile, "declares_india_income_in_residence_country", False):
+            country = getattr(profile, "tax_residency_country", "") or "your country of residence"
+            steps.append(
+                f"🔴 Declare your Indian investment income on your {country} tax return if it taxes worldwide "
+                "income — most residence countries do, and the DTAA credit for Indian tax already paid only "
+                "helps if you actually report the income there."
+            )
         if profile.tax_residency_country and profile.tax_residency_country.lower() == "usa":
             steps.append("🇺🇸 File FBAR (FinCEN 114) if your Indian account balances exceed USD 10,000 at any point in the year")
         steps.append("💰 Start with NRE FD or liquid funds while completing investment account setup")

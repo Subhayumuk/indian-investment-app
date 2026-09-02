@@ -106,6 +106,10 @@ class ResidencyProfile(BaseModel):
     has_trc: bool = Field(False, description="Has Tax Residency Certificate from country of residence")
     has_pan: bool = Field(True, description="Has Indian PAN card")
     has_kyc: bool = Field(True, description="KYC completed with Indian banks/AMCs")
+    files_india_itr: bool = Field(False, description="Currently files an Indian income tax return")
+    declares_india_income_in_residence_country: bool = Field(
+        False, description="Currently declares Indian-source income on the residence-country tax return"
+    )
 
 
 class InvestmentProfile(BaseModel):

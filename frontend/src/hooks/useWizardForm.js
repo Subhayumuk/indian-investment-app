@@ -7,11 +7,9 @@ const INITIAL_STATE = {
   taxResidencyCountry: 'Denmark',
   taxResidencyCurrency: 'DKK',
   exchangeRateToInr: 11.5,
-  isTaxResidentInCountry: true,
   indianResidentialStatus: 'non_resident',   // ← was 'NRI'
   age: 35,
   hasPan: true,
-  hasAadhaar: false,
   filesIndiaItr: false,
   declaresIndiaIncomeInResidenceCountry: false,
 
@@ -154,6 +152,8 @@ function buildPayload(form) {
       plans_to_return_to_india: false,
       has_pan: form.hasPan ?? false,
       has_kyc: form.hasPan ?? false,
+      files_india_itr: form.filesIndiaItr ?? false,
+      declares_india_income_in_residence_country: form.declaresIndiaIncomeInResidenceCountry ?? false,
     },
 
     investment: {

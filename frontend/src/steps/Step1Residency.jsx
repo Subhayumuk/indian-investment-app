@@ -48,19 +48,9 @@ export default function Step1Residency({ form, setField, onNext }) {
 
       <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
         <ToggleField
-          label={`Tax resident of ${form.taxResidencyCountry}`}
-          checked={form.isTaxResidentInCountry}
-          onChange={(value) => setField('isTaxResidentInCountry', value)}
-        />
-        <ToggleField
           label="Has PAN (Permanent Account Number)"
           checked={form.hasPan}
           onChange={(value) => setField('hasPan', value)}
-        />
-        <ToggleField
-          label="Has Aadhaar"
-          checked={form.hasAadhaar}
-          onChange={(value) => setField('hasAadhaar', value)}
         />
         <ToggleField
           label="Files Indian income tax return (ITR)"

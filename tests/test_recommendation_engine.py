@@ -148,6 +148,28 @@ def test_generate_denmark_resident_still_gets_the_original_lagerbeskatning_note(
     assert all("lagerbeskatning" in i.residence_tax_note.lower() for i in equity_instruments)
 
 
+def test_generate_flags_itr_and_income_declaration_when_not_done():
+    # Regression guard for the 2026-09-02 fix: "Files Indian ITR" and
+    # "Declares Indian income in <country>" used to be collected on Step 1
+    # and silently discarded - buildPayload never sent them and the
+    # backend model had nowhere to put them. Now wired into action_steps.
+    profile = make_profile()  # files_india_itr/declares_... default False
+    result = engine.generate(profile)
+    steps_text = " ".join(result.action_steps)
+    assert "file an Indian ITR" in steps_text
+    assert "Declare your Indian investment income" in steps_text
+
+
+def test_generate_omits_itr_and_income_declaration_steps_when_already_done():
+    profile = make_profile(
+        **{"residency.files_india_itr": True, "residency.declares_india_income_in_residence_country": True}
+    )
+    result = engine.generate(profile)
+    steps_text = " ".join(result.action_steps)
+    assert "file an Indian ITR" not in steps_text
+    assert "Declare your Indian investment income" not in steps_text
+
+
 def test_generate_projection_scenarios_are_ordered():
     result = engine.generate(make_profile())
     projection = result.projections[0]
