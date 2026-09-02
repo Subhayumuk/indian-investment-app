@@ -26,6 +26,7 @@ from app.modules import instrument_catalog
 from app.modules.benchmark_engine import BenchmarkEngine
 from app.modules.market_data_client import MarketDataClient
 from app.modules.recommendation_engine import ASSET_CLASS_RETURN, RecommendationEngine
+from app.utils.kb_loader import load_india_kb
 
 logger = logging.getLogger(__name__)
 
@@ -64,7 +65,40 @@ def _verdict_for_return_gap(diff_pp: float) -> HoldingVerdictLabel:
     return HoldingVerdictLabel.UNDERPERFORMING_CATEGORY
 
 
-def _analyze_fund(fund: dict, total_corpus_inr: float, market_data: FundMarketData, country: str) -> FundHoldingAnalysis:
+def _switch_considerations(asset_class: str, capital_gains_kb: dict) -> List[str]:
+    """Concrete facts to weigh before deciding whether to switch a fund -
+    deliberately facts, not a recommendation (see the 2026-09-02 decision
+    to stay comparative rather than move to imperative sell/keep
+    language). Only states specific numbers for equity, since that's the
+    one capital_gains section actually wired to nri_taxation.yaml and
+    confirmed current by the 2026-08-27 audit - debt/gold/hybrid stay
+    generic rather than repeating a number the audit already flagged as
+    unresolved."""
+    considerations = [
+        "Check this fund's exit load - many funds charge a fee (often around 1%) for "
+        "redeeming within the first year.",
+    ]
+    if asset_class == "equity":
+        cg = capital_gains_kb["equity_mutual_funds"]
+        considerations.append(
+            f"Selling equity fund units held under {cg['stcg_holding_months']} months is taxed "
+            f"at {cg['stcg_rate']}% (STCG); {cg['stcg_holding_months']} months or more, at "
+            f"{cg['ltcg_rate']}% above a combined ₹{cg['ltcg_exemption_limit_inr']:,.0f}/year "
+            "exemption (LTCG). This doesn't account for your actual purchase price or date, "
+            "which this app doesn't have."
+        )
+    else:
+        considerations.append(
+            f"{asset_class.title()} fund capital gains rules have changed more than once since "
+            "2023 and haven't been independently verified in this app yet - confirm the current "
+            "tax treatment before deciding whether to switch."
+        )
+    return considerations
+
+
+def _analyze_fund(
+    fund: dict, total_corpus_inr: float, market_data: FundMarketData, country: str, capital_gains_kb: dict
+) -> FundHoldingAnalysis:
     fund_name = fund.get("fund_name", "")
     isin = fund.get("isin", "")
     value = float(fund.get("current_value_inr", 0) or 0)
@@ -82,6 +116,13 @@ def _analyze_fund(fund: dict, total_corpus_inr: float, market_data: FundMarketDa
     asset_class = _infer_asset_class(market_data.matched_scheme_name or fund_name)
     note_instrument_type = "hybrid_mf" if asset_class == "hybrid" else "equity_mf"
     residence_tax_note = instrument_catalog.residence_tax_note(country, note_instrument_type)
+    switch_considerations = _switch_considerations(asset_class, capital_gains_kb)
+
+    benchmark_return_pct: Optional[float] = None
+    return_gap_pct: Optional[float] = None
+    if market_data.trailing_return_3yr_pct is not None:
+        benchmark_return_pct = ASSET_CLASS_RETURN[asset_class] * 100
+        return_gap_pct = round(market_data.trailing_return_3yr_pct - benchmark_return_pct, 2)
 
     if share > OVERCONCENTRATION_THRESHOLD:
         verdict = HoldingVerdictLabel.OVERCONCENTRATED
@@ -92,13 +133,11 @@ def _analyze_fund(fund: dict, total_corpus_inr: float, market_data: FundMarketDa
     elif market_data.match_confidence == MatchConfidence.UNMATCHED:
         verdict = HoldingVerdictLabel.DATA_UNAVAILABLE
         warnings.append("Couldn't match this fund to AMFI's records by ISIN - no return data available to compare.")
-    elif market_data.trailing_return_3yr_pct is None:
+    elif return_gap_pct is None:
         verdict = HoldingVerdictLabel.DATA_UNAVAILABLE
         warnings.append("Matched the fund, but not enough price history was available to compute a 3-year return.")
     else:
-        benchmark_pct = ASSET_CLASS_RETURN[asset_class] * 100
-        diff = market_data.trailing_return_3yr_pct - benchmark_pct
-        verdict = _verdict_for_return_gap(diff)
+        verdict = _verdict_for_return_gap(return_gap_pct)
         warnings.append(
             f"Category assumed as '{asset_class}' from the fund name - CAS uploads don't "
             "include a real category field, so this is a best-effort guess, not a fact."
@@ -110,7 +149,10 @@ def _analyze_fund(fund: dict, total_corpus_inr: float, market_data: FundMarketDa
         current_value_inr=value,
         market_data=market_data,
         verdict=verdict,
+        benchmark_return_pct=benchmark_return_pct,
+        return_gap_pct=return_gap_pct,
         residence_tax_note=residence_tax_note,
+        switch_considerations=switch_considerations,
         warnings=warnings,
     )
 
@@ -125,6 +167,7 @@ class HoldingsReviewEngine:
         self._recommendation_engine = recommendation_engine or RecommendationEngine()
         self._market_data_client = market_data_client or MarketDataClient()
         self._benchmark_engine = benchmark_engine or BenchmarkEngine(self._recommendation_engine)
+        self._capital_gains_kb = load_india_kb("nri_taxation.yaml")["capital_gains"]
 
     async def _lookup_with_fallback(self, isin: str, fund_name: str) -> FundMarketData:
         try:
@@ -156,13 +199,17 @@ class HoldingsReviewEngine:
         for fund, market_data in zip(funds, market_data_results):
             if market_data.match_confidence == MatchConfidence.UNMATCHED:
                 unmatched_count += 1
-            fund_analyses.append(_analyze_fund(fund, total_corpus, market_data, flat.tax_residency_country))
+            fund_analyses.append(
+                _analyze_fund(fund, total_corpus, market_data, flat.tax_residency_country, self._capital_gains_kb)
+            )
 
         disclaimers = [
             "This is educational, comparative information, not personalized investment advice.",
             "Verdicts are computed from public AMFI/mfapi.in data against a simplified flat "
             "asset-class benchmark, not true category-peer rankings.",
             "Fund categories are guessed from the fund name, since CAS uploads don't include one.",
+            "Switch considerations describe general tax/cost rules to weigh, not your actual gain, "
+            "loss, or tax owed - this app doesn't know your purchase price or purchase date.",
             "Nothing you upload or enter here is stored.",
         ]
 

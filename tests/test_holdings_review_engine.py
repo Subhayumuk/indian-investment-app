@@ -247,6 +247,82 @@ def test_hybrid_fund_gets_the_hybrid_specific_denmark_note():
     assert "classification" in result.fund_analyses[0].residence_tax_note.lower()
 
 
+def test_return_gap_and_benchmark_are_reported_alongside_the_verdict():
+    fund = {"fund_name": "Some Equity Fund", "current_value_inr": 100000, "isin": "INF011"}
+    market_data = {"INF011": FundMarketData(
+        isin="INF011", matched_scheme_name="Some Equity Fund", trailing_return_3yr_pct=8.5,
+        match_confidence=MatchConfidence.ISIN_MATCH, data_source="amfi+mfapi",
+    )}
+    engine = HoldingsReviewEngine(market_data_client=FakeMarketDataClient(market_data))
+    profile = make_profile([fund], gold_value_inr=900000)
+
+    result = asyncio.run(engine.review(profile))
+    fa = result.fund_analyses[0]
+
+    assert fa.benchmark_return_pct == 12.0  # equity benchmark from ASSET_CLASS_RETURN
+    assert fa.return_gap_pct == pytest.approx(-3.5)
+
+
+def test_return_gap_is_none_when_no_return_data_available():
+    fund = {"fund_name": "Unknown Fund", "current_value_inr": 100000, "isin": "INF_UNKNOWN3"}
+    engine = HoldingsReviewEngine(market_data_client=FakeMarketDataClient({}))
+    profile = make_profile([fund], gold_value_inr=900000)
+
+    result = asyncio.run(engine.review(profile))
+    fa = result.fund_analyses[0]
+
+    assert fa.return_gap_pct is None
+    assert fa.benchmark_return_pct is None
+
+
+def test_switch_considerations_quote_real_equity_capital_gains_rates():
+    fund = {"fund_name": "Some Equity Fund", "current_value_inr": 100000, "isin": "INF012"}
+    market_data = {"INF012": FundMarketData(
+        isin="INF012", matched_scheme_name="Some Equity Fund", trailing_return_3yr_pct=12.0,
+        match_confidence=MatchConfidence.ISIN_MATCH, data_source="amfi+mfapi",
+    )}
+    engine = HoldingsReviewEngine(market_data_client=FakeMarketDataClient(market_data))
+    profile = make_profile([fund], gold_value_inr=900000)
+
+    result = asyncio.run(engine.review(profile))
+    considerations = " ".join(result.fund_analyses[0].switch_considerations)
+
+    # These must match whatever nri_taxation.yaml actually says, not a
+    # hardcoded copy - reads the real values it's asserting against.
+    from app.utils.kb_loader import load_india_kb
+    cg = load_india_kb("nri_taxation.yaml")["capital_gains"]["equity_mutual_funds"]
+    assert f"{cg['stcg_rate']}%" in considerations
+    assert f"{cg['ltcg_rate']}%" in considerations
+    assert "exit load" in considerations.lower()
+
+
+def test_switch_considerations_for_non_equity_avoid_stating_unverified_numbers():
+    fund = {"fund_name": "Corporate Bond Fund", "current_value_inr": 100000, "isin": "INF013"}
+    market_data = {"INF013": FundMarketData(
+        isin="INF013", matched_scheme_name="Corporate Bond Fund", trailing_return_3yr_pct=7.0,
+        match_confidence=MatchConfidence.ISIN_MATCH, data_source="amfi+mfapi",
+    )}
+    engine = HoldingsReviewEngine(market_data_client=FakeMarketDataClient(market_data))
+    profile = make_profile([fund], gold_value_inr=900000)
+
+    result = asyncio.run(engine.review(profile))
+    considerations = " ".join(result.fund_analyses[0].switch_considerations)
+
+    assert "STCG" not in considerations
+    assert "LTCG" not in considerations
+    assert "confirm" in considerations.lower()
+
+
+def test_verdict_language_stays_comparative_not_imperative():
+    # Regression guard for the 2026-09-02 decision: verdicts describe a
+    # comparison, they never instruct an action.
+    for label in HoldingVerdictLabel:
+        value = label.value
+        assert "sell" not in value
+        assert "buy" not in value
+        assert "switch" not in value
+
+
 def test_review_with_no_mutual_funds_returns_empty_analysis_list():
     engine = HoldingsReviewEngine(market_data_client=FakeMarketDataClient({}))
     profile = make_profile([], gold_value_inr=100000)

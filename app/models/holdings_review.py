@@ -37,7 +37,10 @@ class FundHoldingAnalysis(BaseModel):
     current_value_inr: float = 0.0
     market_data: FundMarketData
     verdict: HoldingVerdictLabel
+    benchmark_return_pct: Optional[float] = None  # the category benchmark this fund was compared against
+    return_gap_pct: Optional[float] = None  # fund's 3yr return minus benchmark_return_pct (negative = trailing)
     residence_tax_note: str = ""  # what keeping/switching this fund means in the user's country
+    switch_considerations: List[str] = []  # exit load + capital gains facts to weigh - not a recommendation
     commentary: str = ""  # filled in by Phase C's LLM layer; empty until then
     warnings: List[str] = []
 
