@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import { formatInr } from '../utils/format'
+import { runHoldingsReview } from '../api/holdingsReview'
 
 function Card({ title, icon, children }) {
   return (
@@ -187,7 +189,194 @@ function PortfolioHealthCard({ health }) {
   )
 }
 
-export default function StepResults({ result, onStartOver }) {
+const VERDICT_STYLES = {
+  aligned: {
+    label: 'Aligned with benchmark',
+    text: 'text-emerald-700 dark:text-emerald-300',
+    bg: 'bg-emerald-50 dark:bg-emerald-500/10',
+    border: 'border-emerald-200 dark:border-emerald-900',
+  },
+  worth_reviewing: {
+    label: 'Worth reviewing',
+    text: 'text-amber-700 dark:text-amber-300',
+    bg: 'bg-amber-50 dark:bg-amber-500/10',
+    border: 'border-amber-200 dark:border-amber-900',
+  },
+  underperforming_category: {
+    label: 'Underperforming category',
+    text: 'text-rose-700 dark:text-rose-300',
+    bg: 'bg-rose-50 dark:bg-rose-500/10',
+    border: 'border-rose-200 dark:border-rose-900',
+  },
+  overconcentrated: {
+    label: 'Large share of your portfolio',
+    text: 'text-orange-700 dark:text-orange-300',
+    bg: 'bg-orange-50 dark:bg-orange-500/10',
+    border: 'border-orange-200 dark:border-orange-900',
+  },
+  data_unavailable: {
+    label: "Couldn't verify",
+    text: 'text-slate-600 dark:text-slate-400',
+    bg: 'bg-slate-100 dark:bg-slate-800',
+    border: 'border-slate-200 dark:border-slate-700',
+  },
+}
+
+function VerdictBadge({ verdict }) {
+  const style = VERDICT_STYLES[verdict] ?? VERDICT_STYLES.data_unavailable
+  return (
+    <span
+      className={`inline-block shrink-0 rounded-full border px-2.5 py-1 text-xs font-medium ${style.text} ${style.bg} ${style.border}`}
+    >
+      {style.label}
+    </span>
+  )
+}
+
+function FundAnalysisCard({ analysis }) {
+  const md = analysis.market_data ?? {}
+  const hasReturnData = analysis.return_gap_pct !== null && analysis.return_gap_pct !== undefined
+
+  return (
+    <div className="rounded-lg bg-slate-50 p-3 text-sm dark:bg-slate-800/60">
+      <div className="flex items-start justify-between gap-2">
+        <div>
+          <p className="font-medium text-slate-800 dark:text-slate-200">{analysis.fund_name}</p>
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            {formatInr(analysis.current_value_inr)} · ISIN: {analysis.isin || 'not matched'}
+          </p>
+        </div>
+        <VerdictBadge verdict={analysis.verdict} />
+      </div>
+
+      {hasReturnData && (
+        <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+          3-yr return: {md.trailing_return_3yr_pct}% · category benchmark: {analysis.benchmark_return_pct}% ·{' '}
+          {analysis.return_gap_pct >= 0 ? '+' : ''}
+          {analysis.return_gap_pct}pp vs. benchmark
+        </p>
+      )}
+
+      {analysis.residence_tax_note && (
+        <div className="mt-2 rounded-lg border border-sky-200 bg-sky-50 px-3 py-2 text-xs text-sky-800 dark:border-sky-900 dark:bg-sky-950/40 dark:text-sky-200">
+          🧾 {analysis.residence_tax_note}
+        </div>
+      )}
+
+      {analysis.switch_considerations?.length > 0 && (
+        <div className="mt-2">
+          <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">If you're weighing a switch:</p>
+          <ul className="mt-1 space-y-1 text-xs text-slate-600 dark:text-slate-300">
+            {analysis.switch_considerations.map((item, index) => (
+              <li key={index} className="flex gap-1.5">
+                <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-slate-400" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {analysis.warnings?.length > 0 && (
+        <ul className="mt-2 space-y-1 text-xs text-slate-500 dark:text-slate-400">
+          {analysis.warnings.map((item, index) => (
+            <li key={index}>⚠ {item}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+}
+
+function HoldingsReviewSection({ payload }) {
+  const [status, setStatus] = useState('idle') // idle | loading | loaded | error
+  const [review, setReview] = useState(null)
+  const [error, setError] = useState(null)
+
+  const hasFunds = (payload?.financial?.mutual_funds ?? []).length > 0
+  if (!hasFunds) return null
+
+  const handleAnalyze = async () => {
+    setStatus('loading')
+    setError(null)
+    try {
+      const data = await runHoldingsReview(payload)
+      setReview(data)
+      setStatus('loaded')
+    } catch (err) {
+      setError(err.message || 'Something went wrong while analyzing your holdings.')
+      setStatus('error')
+    }
+  }
+
+  return (
+    <section className="mt-6 rounded-xl border border-slate-200 p-4 dark:border-slate-800">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h3 className="text-sm font-semibold text-slate-800 dark:text-slate-200">🔍 Analyze My Existing Holdings</h3>
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            Optional, one-time comparison using public AMFI/mfapi.in data. Nothing is stored.
+          </p>
+        </div>
+        {status !== 'loaded' && (
+          <button
+            type="button"
+            onClick={handleAnalyze}
+            disabled={status === 'loading'}
+            className="rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {status === 'loading' ? 'Analyzing…' : 'Analyze My Holdings'}
+          </button>
+        )}
+      </div>
+
+      {status === 'error' && <p className="mt-3 text-sm text-rose-600 dark:text-rose-400">{error}</p>}
+
+      {status === 'loaded' && review && (
+        <div className="mt-4 space-y-4">
+          <div>
+            <p className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
+              Compared against
+            </p>
+            <p className="mt-1 text-sm text-slate-700 dark:text-slate-300">{review.peer_benchmark?.cohort_description}</p>
+            <div className="mt-3">
+              <ComparisonBars
+                current={review.peer_benchmark?.your_allocation}
+                recommended={review.peer_benchmark?.recommended_allocation}
+              />
+            </div>
+          </div>
+
+          {review.unmatched_fund_count > 0 && (
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              {review.unmatched_fund_count} of {review.fund_analyses.length} fund(s) couldn't be matched to AMFI's
+              records and are marked "Couldn't verify" below.
+            </p>
+          )}
+
+          <div className="space-y-3">
+            {review.fund_analyses.map((analysis, index) => (
+              <FundAnalysisCard key={analysis.isin || index} analysis={analysis} />
+            ))}
+          </div>
+
+          {review.disclaimers?.length > 0 && (
+            <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
+              <p className="mb-2 font-semibold">About this analysis</p>
+              <ul className="list-disc space-y-1 pl-4">
+                {review.disclaimers.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
+    </section>
+  )
+}
+
+export default function StepResults({ result, payload, onStartOver }) {
   return (
     <div>
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -239,6 +428,8 @@ export default function StepResults({ result, onStartOver }) {
           <BulletList items={result?.action_steps} />
         </Card>
       </div>
+
+      <HoldingsReviewSection payload={payload} />
 
       {result?.disclaimers?.length > 0 && (
         <div className="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-200">

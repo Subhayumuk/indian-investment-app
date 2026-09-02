@@ -43,7 +43,11 @@ function WizardShell() {
         />
       )}
       {wizard.step === 5 && (
-        <StepResults result={wizard.result} onStartOver={() => wizard.goToStep(1)} />
+        <StepResults
+          result={wizard.result}
+          payload={wizard.payloadPreview}
+          onStartOver={() => wizard.goToStep(1)}
+        />
       )}
     </WizardLayout>
   )
