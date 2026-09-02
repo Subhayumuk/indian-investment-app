@@ -237,11 +237,24 @@ function FundAnalysisCard({ analysis }) {
   const md = analysis.market_data ?? {}
   const hasReturnData = analysis.return_gap_pct !== null && analysis.return_gap_pct !== undefined
 
+  // CAS PDFs wrap a fund's full scheme name across lines the parser
+  // doesn't stitch back together, so analysis.fund_name is often just the
+  // truncated first fragment (e.g. "Aditya Birla Sun" for several
+  // different funds). AMFI's own scheme name, resolved by ISIN, is
+  // complete and unambiguous - prefer it whenever the fund matched.
+  const displayName = md.matched_scheme_name || analysis.fund_name
+  const showRawName = md.matched_scheme_name && md.matched_scheme_name !== analysis.fund_name
+
   return (
     <div className="rounded-lg bg-slate-50 p-3 text-sm dark:bg-slate-800/60">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <p className="font-medium text-slate-800 dark:text-slate-200">{analysis.fund_name}</p>
+          <p className="font-medium text-slate-800 dark:text-slate-200">{displayName}</p>
+          {showRawName && (
+            <p className="mt-0.5 text-xs text-slate-400 dark:text-slate-500">
+              From your statement: "{analysis.fund_name}"
+            </p>
+          )}
           <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
             {formatInr(analysis.current_value_inr)} · ISIN: {analysis.isin || 'not matched'}
           </p>
