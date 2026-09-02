@@ -27,12 +27,29 @@ PLACEHOLDER_DISCLAIMER = (
 # doesn't apply the same way to a plain FD or sovereign bond.
 _FUND_INSTRUMENT_TYPES = {"equity_mf", "debt_mf", "hybrid_mf", "etf"}
 
-# Denmark's notes, unchanged from the original single-country build -
-# grounded in app/knowledge_base/denmark/tax_rules.yaml's india_specific_notes
-# (lagerbeskatning, DTAA credit mechanics).
-_DENMARK_LAGERBESKATNING_NOTE = (
-    "Gains taxed annually under Danish lagerbeskatning rules. "
-    "Report in SKAT Rubrik 38 each year."
+# Denmark's fund note - revised 2026-09-02 after the original version
+# incorrectly implied equity-vs-debt composition changes whether annual
+# mark-to-market tax applies. Researched (not assumed) against skat.dk and
+# corroborating sources: Danish tax law's realisationsprincip/aktieindkomst
+# treatment only applies to funds on Skattestyrelsen's "positive list" of
+# approved equity-based investment companies (>=50% equity, self-notified
+# to SKAT) - Indian AMC funds are not on that list. Absent that listing,
+# lagerbeskatning (annual mark-to-market) as kapitalindkomst is the default
+# for a foreign investeringsselskab REGARDLESS of its own equity/debt mix -
+# so the same note now applies to equity, debt, and hybrid funds alike,
+# rather than treating equity as exempt. This is still secondary research,
+# not a primary legal reading - the note says so and points to a Danish
+# adviser rather than asserting a specific rate/classification.
+_DENMARK_FUND_NOTE = (
+    "Indian mutual funds aren't on Skattestyrelsen's 'positive list' of approved "
+    "equity-based investment companies, so gains are very likely taxed annually "
+    "under lagerbeskatning (mark-to-market, whether or not you sell) as "
+    "kapitalindkomst - this generally applies the same way whether the fund is "
+    "equity, debt, or a mix internally, since the listing (not the fund's own "
+    "composition) is what normally unlocks the more favourable aktieindkomst/"
+    "realisation treatment. Report in SKAT Rubrik 38 each year. Confirm your "
+    "specific fund's classification with a Danish tax adviser - this area of "
+    "Danish tax law has real edge cases."
 )
 _DENMARK_FD_BOND_NOTE = (
     "Interest is taxed as Danish capital income (~37-42%) in the year it "
@@ -42,11 +59,6 @@ _DENMARK_SGB_NOTE = (
     "SGB interest is taxable Danish capital income each year; confirm "
     "treatment of the maturity/redemption gain with a Danish tax adviser."
 )
-_DENMARK_HYBRID_NOTE = (
-    "Likely subject to lagerbeskatning (mark-to-market) as a foreign fund "
-    "not on SKAT's approved list — report unrealised gains in Rubrik 38 "
-    "each year; confirm classification with a Danish tax adviser."
-)
 
 
 def _denmark_note(instrument_type: str) -> str:
@@ -54,9 +66,7 @@ def _denmark_note(instrument_type: str) -> str:
         return _DENMARK_FD_BOND_NOTE
     if instrument_type == "sgb":
         return _DENMARK_SGB_NOTE
-    if instrument_type == "hybrid_mf":
-        return _DENMARK_HYBRID_NOTE
-    return _DENMARK_LAGERBESKATNING_NOTE
+    return _DENMARK_FUND_NOTE
 
 
 def _usa_note(is_fund: bool) -> str:

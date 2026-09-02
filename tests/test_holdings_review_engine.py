@@ -233,17 +233,23 @@ def test_residence_tax_note_is_present_even_when_overconcentrated():
     assert "lagerbeskatning" in result.fund_analyses[0].residence_tax_note.lower()
 
 
-def test_hybrid_fund_gets_the_hybrid_specific_denmark_note():
-    fund = {"fund_name": "HDFC Balanced Advantage Fund", "current_value_inr": 100000, "isin": "INF010"}
-    market_data = {"INF010": FundMarketData(
-        isin="INF010", matched_scheme_name="HDFC Balanced Advantage Fund", trailing_return_3yr_pct=9.0,
-        match_confidence=MatchConfidence.ISIN_MATCH, data_source="amfi+mfapi",
-    )}
+def test_hybrid_fund_gets_the_same_denmark_fund_note_as_equity():
+    # As of 2026-09-02, equity/debt/hybrid Indian funds share one Denmark
+    # note (see instrument_catalog.py) - the fund's own equity/debt mix
+    # doesn't change whether lagerbeskatning applies for an unlisted
+    # foreign fund, so hybrid no longer gets a "different" note.
+    hybrid_fund = {"fund_name": "HDFC Balanced Advantage Fund", "current_value_inr": 100000, "isin": "INF010"}
+    equity_fund = {"fund_name": "Some Equity Fund", "current_value_inr": 100000, "isin": "INF011"}
+    market_data = {
+        "INF010": FundMarketData(isin="INF010", matched_scheme_name="HDFC Balanced Advantage Fund", trailing_return_3yr_pct=9.0, match_confidence=MatchConfidence.ISIN_MATCH, data_source="amfi+mfapi"),
+        "INF011": FundMarketData(isin="INF011", matched_scheme_name="Some Equity Fund", trailing_return_3yr_pct=9.0, match_confidence=MatchConfidence.ISIN_MATCH, data_source="amfi+mfapi"),
+    }
     engine = HoldingsReviewEngine(market_data_client=FakeMarketDataClient(market_data))
-    profile = make_profile([fund], gold_value_inr=900000, country="denmark")
+    profile = make_profile([hybrid_fund, equity_fund], gold_value_inr=800000, country="denmark")
 
     result = asyncio.run(engine.review(profile))
 
+    assert result.fund_analyses[0].residence_tax_note == result.fund_analyses[1].residence_tax_note
     assert "classification" in result.fund_analyses[0].residence_tax_note.lower()
 
 

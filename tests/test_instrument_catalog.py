@@ -67,13 +67,22 @@ def test_residence_tax_note_unknown_country_falls_back_to_generic_pointer():
     assert "tax adviser" in note.lower()
 
 
-def test_residence_tax_note_denmark_matches_original_per_instrument_mapping():
-    # Locks in the exact pre-refactor Denmark behavior (fd/bonds, sgb,
-    # hybrid_mf, and everything else each got their own distinct note).
+def test_residence_tax_note_denmark_distinguishes_funds_from_interest_bearing_instruments():
+    # fd/bonds and sgb are genuinely different income types (interest, not
+    # fund gains) and keep their own notes. Fund types (equity/debt/hybrid)
+    # deliberately share ONE note as of 2026-09-02 - researched correction:
+    # Danish lagerbeskatning applies annually to a foreign, SKAT-unlisted
+    # fund regardless of its own equity/debt composition, so equity being
+    # "exempt" (the pre-fix assumption) was wrong. See instrument_catalog.py
+    # for sources.
     fd = instrument_catalog.residence_tax_note("denmark", "nre_fd")
     sgb = instrument_catalog.residence_tax_note("denmark", "sgb")
-    hybrid = instrument_catalog.residence_tax_note("denmark", "hybrid_mf")
     equity = instrument_catalog.residence_tax_note("denmark", "equity_mf")
-    assert len({fd, sgb, hybrid, equity}) == 4
+    debt = instrument_catalog.residence_tax_note("denmark", "debt_mf")
+    hybrid = instrument_catalog.residence_tax_note("denmark", "hybrid_mf")
+
+    assert len({fd, sgb, equity}) == 3
+    assert equity == debt == hybrid
     assert "lagerbeskatning" in equity.lower()
     assert "rubrik 38" in equity.lower()
+    assert "positive list" in equity.lower()
