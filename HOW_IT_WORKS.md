@@ -156,9 +156,9 @@ A few more pieces that aren't part of the specialist chain but matter:
   statement PDF: mutual funds, stocks, and (added recently) your life
   insurance cover.
 - **AMFI + mfapi.in clients** — look up your specific funds' real
-  identity and real historical returns. This is "Holdings Review, Phase
-  A" from section 9 — built and verified live, but not yet connected to
-  anything you can see on the results page (that's Phase B onward).
+  identity and real historical returns, feeding the "Analyze My
+  Holdings" button described in section 9 — which, as of 2026-09-02, you
+  can actually click on the results page.
 - **Gold price lookup, currency converter, disclaimer generator** —
   small utilities: a live gold price with a hardcoded fallback,
   INR/foreign-currency conversion, and the "this is educational, not
@@ -174,8 +174,10 @@ A few more pieces that aren't part of the specialist chain but matter:
   specialists so far (Residency fully; Eligibility and Tax partly). The
   rest either don't need it (Allocation, Confidence) or haven't been
   migrated yet (parts of Tax Engine).
-- **In progress**: Holdings Review — Phase A (know your real funds) is
-  done; Phase B (judge them against a benchmark) hasn't started.
+- **In progress**: Holdings Review — Phases A through D (know your real
+  funds, judge them against a benchmark, and click a real button to see
+  it) are done and live. Only Phase C (AI narration on top of the
+  already-decided verdicts) hasn't started.
 - **Known, written-down gaps** rather than hidden ones: 3 of the 8
   residence countries' tax pages block automated checking (India found a
   workaround; Australia/Canada/Germany haven't yet); the other 8
@@ -515,10 +517,146 @@ your real data instead of trusting the design on paper:
   verdicts, across all 8 countries this app supports — a US resident now
   gets a note about PFIC tax treatment instead of Danish lagerbeskatning.
 
-Later (**Phase C and D**): the AI narration layer, and an actual button on
-the results page to try it — both still ahead.
+**Update, 2026-09-02 — Phase D landed too, and the feature is fully
+usable now.** Two things happened, in this order:
 
-## 10. A bigger lesson for the journey: how real software actually gets built
+First, a real product decision got made: should a fund's verdict tell
+you what to *do* ("sell this") or just what's *true* ("this is 6
+percentage points behind its benchmark")? We deliberately chose the
+second, on purpose, not because it's less useful, but because "sell
+this specific fund" starts to look like the kind of personalized
+investment advice that requires a licensed adviser in India (SEBI
+regulates that) — the same reasoning already covered in this section's
+"rules decide, AI only explains" principle, just applied to *how direct*
+a rule is allowed to be, not just to whether an AI can override it.
+Instead of an instruction, each fund's verdict now comes with the
+concrete facts a person needs to decide for themselves — how far behind
+benchmark it is, what a fund's exit load typically costs, and the real,
+current capital-gains tax rates that would apply if you sold (with an
+honest "this app doesn't know your actual purchase price or date, so it
+can't tell you the real gain/loss" caveat attached).
+
+Second, the button. Until today, "Analyze My Holdings" only existed as
+an API endpoint — real, tested, working, but with nothing on the
+website to click. `StepResults.jsx` (the results page you already see
+after running the planner) now has a real "🔍 Analyze My Existing
+Holdings" section: click the button, it calls the same endpoint we'd
+been testing by hand, and shows your peer-benchmark comparison plus a
+card per fund with its verdict, the real numbers behind it, and what it
+means for your country's taxes. Verified the way everything in this
+project gets verified — not by reading the code and trusting it, but by
+actually uploading a real CAS statement in a real browser and watching
+16 real funds come back with real data.
+
+That verification caught two more real things, both fixed the same
+day:
+
+- **Every fund from your statement was showing up as just "Aditya Birla
+  Sun,"** four separate times, with no way to tell them apart. The
+  reason was already written down in a code comment from Phase A and
+  had simply never been revisited: your CAS statement's PDF text wraps
+  a fund's full name across several lines in a layout the parser
+  doesn't attempt to stitch back together — so only the first fragment
+  ever got captured. The fix wasn't to fight the messy PDF text harder;
+  it was to notice that Holdings Review *already* resolves each fund's
+  real, complete name via AMFI (that's the whole point of using ISIN
+  instead of name matching) — it just wasn't being *shown*. Now it is,
+  with the original CAS text kept underneath in small print so you can
+  still cross-check.
+- **The Danish tax note was subtly wrong**, and this one came from you
+  pushing back with your own understanding of Danish tax law rather
+  than just accepting what the app said — exactly the kind of "test
+  against the real world" habit this document keeps coming back to. The
+  note implied a 100%-equity Indian fund escapes annual Danish tax while
+  a mixed equity/debt fund doesn't. Real (if genuinely intricate)
+  Danish tax law says something closer to the opposite of what that
+  implies: the favourable treatment only applies to funds on
+  Skattestyrelsen's official "positive list," and an Indian AMC fund
+  essentially never is — so in practice, equity and debt-mixed Indian
+  funds alike get taxed the same way (annually, on paper gains, whether
+  you sell or not). The note now says that, and is explicit that this
+  is secondary research, not a lawyer's opinion — pointing you at a
+  Danish tax adviser rather than asserting a rate with false confidence.
+
+Later (**Phase C**): the AI narration layer on top of these
+already-decided verdicts — the only piece of the original plan still
+ahead.
+
+## 10. A tool Claude used today: what's "MCP"?
+
+If you watched today's session, you may have noticed Claude Code's
+output mention things like `mcp__claude-in-chrome__navigate` or
+`mcp__claude-in-chrome__computer` — and wondered what that actually was.
+
+**The short version:** normally, Claude Code can read files, edit code,
+and run terminal commands — but it has no way to actually *look at* a
+web page or click a button, the way you do. **MCP (Model Context
+Protocol)** is the standard that lets an AI assistant plug in extra
+abilities beyond what it ships with by default — think of it like a USB
+port for an AI: a common, well-defined way to attach a new capability
+without redesigning the assistant itself. Today's specific plug-in was
+a Chrome browser extension, which is why every tool name today started
+with `mcp__claude-in-chrome__`.
+
+**What that actually let Claude do today:** navigate to the live site
+and to a local dev version, click through all four wizard steps, upload
+your real CAS PDF into an actual file-upload field, click the real
+"Analyze My Holdings" button, read back what the page actually rendered
+(not what the code *should* render — what a browser genuinely painted
+on screen), and take screenshots to show you. That's a meaningfully
+different, stronger kind of check than "the code compiles" or "the unit
+tests pass" — it's the same test a human tester would run, just
+performed by Claude instead of you having to do it yourself and report
+back.
+
+**Why this matters for how much to trust today's "it works" claims:**
+every "verified live" statement in this document that happened on or
+after 2026-09-02 means Claude *actually watched it work in a real
+browser*, not just that the code looked correct on paper — the same
+distinction this whole document keeps returning to (see section 12's
+"test against the real world, not just your best guess"). Worth noting,
+too: it's still just a tool. Claude decides when to use it and what to
+check, the same way it decides when to run a test suite or query a
+database — MCP is the plumbing, not a new kind of judgment.
+
+## 11. Fixing the dead-end questions on Step 1
+
+A small, quick one, but a good example of the same "unused shelf"
+pattern from section 8 (the life insurance field nobody was reading) —
+this time on the *input* side instead of the output side.
+
+Step 1 of the wizard ("Tax Residency") asks five yes/no questions: *Tax
+resident of [country]? Has PAN? Has Aadhaar? Files Indian ITR? Declares
+Indian income in [country]?* You asked, reasonably, what these were
+actually used for — and checking the real code turned up an honest
+answer: only **Has PAN** ever did anything. The other four were
+collected on screen, then simply **never sent anywhere** — the function
+that builds the request to the backend never included them, and the
+backend's own data model had no field to receive them even if it had.
+Flipping those toggles felt like giving the app information; it was
+actually talking to a wall.
+
+Rather than wire all four in regardless, each got looked at on its own
+merits:
+
+- **"Tax resident of [country]"** — removed. It's asking you to confirm
+  the exact same thing the country dropdown right above it already
+  says. If that's wrong, the fix is picking the correct country, not a
+  second checkbox.
+- **"Has Aadhaar"** — removed. NRIs are generally exempt from the
+  mandatory Aadhaar-PAN linking rule that applies to residents, so
+  there was no real compliance check this could ever feed. Better to
+  stop asking a question the app was never going to act on than to
+  invent a fake use for it.
+- **"Files Indian ITR"** and **"Declares Indian income in [country]"**
+  — kept, and wired in for real. If you say you *don't* currently do
+  either, the plan's action steps now say so directly: a reminder that
+  NRIs with India-source income often still need to file an Indian
+  return, and a flag that most residence countries (Denmark included)
+  tax worldwide income, so not declaring the Indian side is a real
+  compliance gap, not just paperwork.
+
+## 12. A bigger lesson for the journey: how real software actually gets built
 
 A few habits showed up repeatedly today that are worth naming explicitly,
 since they apply far beyond this one app:
@@ -552,7 +690,7 @@ first try — it's about building in small enough pieces that you can catch
 your own wrong assumptions early, cheaply, and with real evidence instead
 of guesswork.
 
-## 11. Where things stand
+## 13. Where things stand
 
 See `CLAUDE.md` for the always-current technical status (test counts, what's
 built, what's still open). This document explains the *why* and *how* in
