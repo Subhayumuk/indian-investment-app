@@ -15,7 +15,7 @@ and future shortlist-ranking use cases this index exists for) and write it
 out as compact, committable JSON.
 
 Usage:
-    python scripts/refresh_amfi_category_index.py [--out PATH]
+    python -m scripts.refresh_amfi_category_index [--out PATH]
 """
 from __future__ import annotations
 
@@ -26,7 +26,18 @@ import sys
 from pathlib import Path
 from typing import Dict
 
-from app.modules.amfi_nav_client import AmfiNavClient, SchemeRecord
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    # Run as `python -m scripts.refresh_amfi_category_index` (see the
+    # workflow), the repo root is already on sys.path via normal package
+    # resolution. This is a fallback for a bare
+    # `python scripts/refresh_amfi_category_index.py` invocation, which
+    # only puts scripts/ itself on sys.path and would otherwise fail with
+    # "ModuleNotFoundError: No module named 'app'" - reproduced locally
+    # and the actual cause of this workflow's first run failing.
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from app.modules.amfi_nav_client import AmfiNavClient, SchemeRecord  # noqa: E402
 
 DEFAULT_OUT_PATH = (
     Path(__file__).resolve().parent.parent / "app" / "knowledge_base" / "amfi_category_index.json"

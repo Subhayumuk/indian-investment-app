@@ -33,7 +33,13 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run category index refresh
-        run: python scripts/refresh_amfi_category_index.py
+        # Must run as a module (-m), not a bare script path - a bare
+        # `python scripts/refresh_amfi_category_index.py` doesn't put the
+        # repo root on sys.path, so `import app.modules...` fails with
+        # ModuleNotFoundError (reproduced locally, confirmed the cause of
+        # the first run's failure - pytest didn't catch this since
+        # pytest.ini's `pythonpath = .` only applies to pytest itself).
+        run: python -m scripts.refresh_amfi_category_index
 
       - name: Open PR if the index changed
         uses: peter-evans/create-pull-request@v6
