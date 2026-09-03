@@ -15,6 +15,7 @@ class FundMarketData(BaseModel):
     isin: str = ""
     matched_scheme_name: str = ""
     amfi_scheme_code: str = ""
+    category: str = ""  # AMFI's own SEBI category string, e.g. "Debt Scheme - Banking and PSU Fund"; "" if unmatched
     latest_nav: Optional[float] = None
     trailing_return_1yr_pct: Optional[float] = None
     trailing_return_3yr_pct: Optional[float] = None

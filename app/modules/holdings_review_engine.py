@@ -26,6 +26,7 @@ from app.modules import instrument_catalog
 from app.modules.benchmark_engine import BenchmarkEngine
 from app.modules.market_data_client import MarketDataClient
 from app.modules.recommendation_engine import ASSET_CLASS_RETURN, RecommendationEngine
+from app.modules.sebi_category_mapping import classify_sebi_category
 from app.utils.kb_loader import load_india_kb
 
 logger = logging.getLogger(__name__)
@@ -112,8 +113,11 @@ def _analyze_fund(
     # lists), so instrument_catalog's fund-oriented notes apply uniformly;
     # only the equity/debt vs. hybrid distinction (which a few countries'
     # notes, e.g. Denmark's, actually differentiate) comes from the same
-    # name-based category guess used for the benchmark comparison below.
-    asset_class = _infer_asset_class(market_data.matched_scheme_name or fund_name)
+    # category (real when AMFI's own data resolved it, guessed otherwise)
+    # used for the benchmark comparison below.
+    mapped_asset_class = classify_sebi_category(market_data.category)
+    category_is_confirmed = mapped_asset_class is not None
+    asset_class = mapped_asset_class or _infer_asset_class(market_data.matched_scheme_name or fund_name)
     note_instrument_type = "hybrid_mf" if asset_class == "hybrid" else "equity_mf"
     residence_tax_note = instrument_catalog.residence_tax_note(country, note_instrument_type)
     switch_considerations = _switch_considerations(asset_class, capital_gains_kb)
@@ -138,10 +142,16 @@ def _analyze_fund(
         warnings.append("Matched the fund, but not enough price history was available to compute a 3-year return.")
     else:
         verdict = _verdict_for_return_gap(return_gap_pct)
-        warnings.append(
-            f"Category assumed as '{asset_class}' from the fund name - CAS uploads don't "
-            "include a real category field, so this is a best-effort guess, not a fact."
-        )
+        if category_is_confirmed:
+            warnings.append(
+                f"Category matched from AMFI's own scheme data ('{market_data.category}'), mapped to this "
+                f"app's '{asset_class}' benchmark bucket for comparison."
+            )
+        else:
+            warnings.append(
+                f"Category assumed as '{asset_class}' from the fund name - AMFI's category for this "
+                "scheme wasn't available or wasn't recognised, so this is a best-effort guess, not a fact."
+            )
 
     return FundHoldingAnalysis(
         fund_name=fund_name,
@@ -207,7 +217,8 @@ class HoldingsReviewEngine:
             "This is educational, comparative information, not personalized investment advice.",
             "Verdicts are computed from public AMFI/mfapi.in data against a simplified flat "
             "asset-class benchmark, not true category-peer rankings.",
-            "Fund categories are guessed from the fund name, since CAS uploads don't include one.",
+            "Fund categories come from AMFI's own scheme data when recognised; otherwise guessed "
+            "from the fund name, since CAS uploads don't include a category field.",
             "Switch considerations describe general tax/cost rules to weigh, not your actual gain, "
             "loss, or tax owed - this app doesn't know your purchase price or purchase date.",
             "Nothing you upload or enter here is stored.",

@@ -39,6 +39,7 @@ class MarketDataClient:
             isin=isin,
             matched_scheme_name=scheme.scheme_name,
             amfi_scheme_code=scheme.scheme_code,
+            category=scheme.category or "",
             latest_nav=scheme.latest_nav,
             trailing_return_1yr_pct=compute_trailing_return(nav_history, 1),
             trailing_return_3yr_pct=compute_trailing_return(nav_history, 3),

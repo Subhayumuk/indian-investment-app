@@ -40,6 +40,7 @@ def test_lookup_fund_matched_with_returns():
         scheme_code="118989",
         scheme_name="Aditya Birla Sun Life Dividend Yield Fund-Growth",
         latest_nav=26.64,
+        category="Debt Scheme - Banking and PSU Fund",
     )
     nav_history = [
         {"date": datetime(2025, 1, 1), "nav": 20.0},
@@ -54,6 +55,7 @@ def test_lookup_fund_matched_with_returns():
     assert result.amfi_scheme_code == "118989"
     assert result.matched_scheme_name == "Aditya Birla Sun Life Dividend Yield Fund-Growth"
     assert result.latest_nav == 26.64
+    assert result.category == "Debt Scheme - Banking and PSU Fund"
     assert result.trailing_return_1yr_pct is not None
     assert result.data_source == "amfi+mfapi"
 
@@ -68,3 +70,4 @@ def test_lookup_fund_matched_but_no_history_available():
     assert result.match_confidence == MatchConfidence.ISIN_MATCH
     assert result.data_source == "amfi_only"
     assert result.trailing_return_3yr_pct is None
+    assert result.category == ""  # SchemeRecord.category defaults to None -> coerced to "" here

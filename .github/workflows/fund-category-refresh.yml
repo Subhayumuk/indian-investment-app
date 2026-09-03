@@ -1,0 +1,49 @@
+name: Refresh AMFI fund category index
+
+# Phase E, step E1: regenerates app/knowledge_base/amfi_category_index.json
+# from AMFI's live NAVAll.txt (scripts/refresh_amfi_category_index.py).
+# Unlike kb-freshness-check.yml's fingerprint-only auto-commit, this opens
+# a PR for human review instead of pushing straight to main - the content
+# here is a financial-fact claim (fund categories) feeding user-facing
+# output, not just a "this page changed" hash.
+on:
+  schedule:
+    # 07:00 UTC on the 1st of every month - offset an hour from
+    # kb-freshness-check.yml's 06:00 slot so they don't contend for the
+    # same runner minute. Monthly for the same "avoid the 60-day
+    # inactivity auto-disable" reason noted in kb-freshness-check.yml.
+    - cron: "0 7 1 * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run category index refresh
+        run: python scripts/refresh_amfi_category_index.py
+
+      - name: Open PR if the index changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Refresh AMFI fund category index"
+          title: "Refresh AMFI fund category index"
+          body: |
+            Automated monthly refresh of `app/knowledge_base/amfi_category_index.json` from AMFI's live NAVAll.txt (scripts/refresh_amfi_category_index.py).
+
+            This file feeds real fund-category data into the app - review the diff before merging, same reasoning as any other change to committed data that reaches users.
+          branch: auto/amfi-category-refresh
+          delete-branch: true
+          labels: automated-pr

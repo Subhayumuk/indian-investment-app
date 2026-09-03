@@ -5,14 +5,24 @@ import pytest
 from app.modules.amfi_nav_client import AmfiNavClient, _parse_nav_all_text
 
 # Real AMFI NAVAll.txt shape (verified against the live file, not just
-# documentation): AMC-name and category-header lines (no semicolons) and
-# blank-line separators interleaved with data rows in
+# documentation, most recently via a live GitHub Actions run on 2026-09-03):
+# AMC-name and category-header lines (no semicolons) and blank-line
+# separators interleaved with data rows in
 # Scheme Code;ISIN Growth;ISIN Div Reinvestment;Scheme Name;Plan;Option;NAV;Date order.
+# The live file uses both "N.A." and a bare "-" for "no dividend-reinvestment
+# ISIN" - the second data row and the Axis Children's Fund category below
+# exercise both, plus a second category block to confirm headers reset
+# correctly between blocks rather than leaking across them.
 SAMPLE_NAV_ALL_TEXT = """Aditya Birla Sun Life Mutual Fund
 Open Ended Schemes(Debt Scheme - Banking and PSU Fund)
 
 118989;INF209K01397;INF209K01405;Aditya Birla Sun Life Dividend Yield Fund;Direct Plan;Growth;26.6400;19-Dec-2025
 118990;N.A.;INF209K01413;Aditya Birla Sun Life Some Other Fund;Regular Plan;IDCW;15.1200;19-Dec-2025
+
+Axis Mutual Fund
+Open Ended Schemes(Children's Fund - Childrens' Fund)
+
+135762;INF846K01WO1;-;Axis Children's Fund;Direct Plan;Growth Option;30.3032;02-Sep-2026
 """
 
 
@@ -56,7 +66,31 @@ def test_parse_nav_all_text_indexes_both_isin_variants_to_same_scheme():
 def test_parse_nav_all_text_skips_na_isin_and_header_lines():
     index = _parse_nav_all_text(SAMPLE_NAV_ALL_TEXT)
     assert "N.A." not in index
-    assert len(index) == 3  # two ISINs for scheme 118989, one for 118990
+    assert "-" not in index  # regression: a bare "-" used to slip past the old N.A.-only guard
+    assert len(index) == 4  # two ISINs for 118989, one for 118990, one for 135762 ("-" variant skipped)
+
+
+def test_parse_nav_all_text_attaches_category_from_preceding_header():
+    index = _parse_nav_all_text(SAMPLE_NAV_ALL_TEXT)
+    assert index["INF209K01397"].category == "Debt Scheme - Banking and PSU Fund"
+    assert index["INF209K01413"].category == "Debt Scheme - Banking and PSU Fund"
+
+
+def test_parse_nav_all_text_resets_category_between_header_blocks():
+    index = _parse_nav_all_text(SAMPLE_NAV_ALL_TEXT)
+    assert index["INF846K01WO1"].category == "Children's Fund - Childrens' Fund"
+
+
+def test_parse_nav_all_text_attaches_amc_name():
+    index = _parse_nav_all_text(SAMPLE_NAV_ALL_TEXT)
+    assert index["INF209K01397"].amc == "Aditya Birla Sun Life Mutual Fund"
+    assert index["INF846K01WO1"].amc == "Axis Mutual Fund"
+
+
+def test_parse_nav_all_text_leaves_category_none_when_no_header_seen_yet():
+    text = "118989;INF209K01397;N.A.;A Fund With No Header;Direct Plan;Growth;10.0;19-Dec-2025\n"
+    index = _parse_nav_all_text(text)
+    assert index["INF209K01397"].category is None
 
 
 def test_lookup_returns_scheme_for_known_isin():

@@ -329,6 +329,43 @@ def test_verdict_language_stays_comparative_not_imperative():
         assert "switch" not in value
 
 
+def test_real_amfi_category_is_preferred_over_name_guess():
+    # Fund name alone would guess "equity" (no debt/gold/hybrid keyword),
+    # but a real AMFI category of "Debt Scheme - Gilt Fund" should win -
+    # proven by comparing against the debt benchmark (7%), not equity (12%).
+    fund = {"fund_name": "Ambiguous Fund Name", "current_value_inr": 100000, "isin": "INF014"}
+    market_data = {"INF014": FundMarketData(
+        isin="INF014", matched_scheme_name="Ambiguous Fund Name", category="Debt Scheme - Gilt Fund",
+        trailing_return_3yr_pct=7.5, match_confidence=MatchConfidence.ISIN_MATCH, data_source="amfi+mfapi",
+    )}
+    engine = HoldingsReviewEngine(market_data_client=FakeMarketDataClient(market_data))
+    profile = make_profile([fund], gold_value_inr=900000)
+
+    result = asyncio.run(engine.review(profile))
+    fa = result.fund_analyses[0]
+
+    assert fa.benchmark_return_pct == pytest.approx(7.0)  # debt benchmark, not the 12% equity default
+    assert fa.verdict == HoldingVerdictLabel.ALIGNED
+    assert any("AMFI's own scheme data" in w for w in fa.warnings)
+    assert not any("best-effort guess" in w for w in fa.warnings)
+
+
+def test_falls_back_to_name_guess_when_category_unrecognised():
+    fund = {"fund_name": "Corporate Bond Fund", "current_value_inr": 100000, "isin": "INF015"}
+    market_data = {"INF015": FundMarketData(
+        isin="INF015", matched_scheme_name="Corporate Bond Fund", category="Some Brand New Category",
+        trailing_return_3yr_pct=7.5, match_confidence=MatchConfidence.ISIN_MATCH, data_source="amfi+mfapi",
+    )}
+    engine = HoldingsReviewEngine(market_data_client=FakeMarketDataClient(market_data))
+    profile = make_profile([fund], gold_value_inr=900000)
+
+    result = asyncio.run(engine.review(profile))
+    fa = result.fund_analyses[0]
+
+    assert fa.benchmark_return_pct == pytest.approx(7.0)  # falls back to the "Corporate Bond Fund" name-keyword guess
+    assert any("best-effort guess" in w for w in fa.warnings)
+
+
 def test_review_with_no_mutual_funds_returns_empty_analysis_list():
     engine = HoldingsReviewEngine(market_data_client=FakeMarketDataClient({}))
     profile = make_profile([], gold_value_inr=100000)

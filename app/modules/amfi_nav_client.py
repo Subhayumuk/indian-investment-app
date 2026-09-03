@@ -10,6 +10,7 @@ and fund names extracted from CAS PDFs are often truncated/inconsistent
 """
 import asyncio
 import logging
+import re
 import time
 from dataclasses import dataclass
 from typing import Dict, Optional
@@ -23,12 +24,28 @@ logger = logging.getLogger(__name__)
 NAV_ALL_URL = "https://www.amfiindia.com/spages/NAVAll.txt"
 REQUEST_TIMEOUT_SECONDS = 15.0  # the file is ~9-12MB
 
+# Placeholder tokens AMFI uses for "this scheme has no dividend-reinvestment
+# ISIN variant" - confirmed against the live file on 2026-09-03 to include
+# both "N.A." and a bare "-" (the original Phase A fixture only exercised
+# "N.A."), so either would previously have been indexed as if it were a
+# real ISIN.
+_NO_ISIN_TOKENS = {"N.A.", "-"}
+
+# A category-header line groups the data rows beneath it until the next
+# header (e.g. "Open Ended Schemes(Debt Scheme - Banking and PSU Fund)") -
+# confirmed against the live file on 2026-09-03 (98 distinct categories,
+# each a contiguous block of data rows). Captures the text inside the
+# parentheses only, not the "Open/Close/Interval Ended Schemes(...)" wrapper.
+_CATEGORY_HEADER_RE = re.compile(r"^.*Schemes\((.+)\)\s*$")
+
 
 @dataclass
 class SchemeRecord:
     scheme_code: str
     scheme_name: str
     latest_nav: Optional[float]
+    category: Optional[str] = None
+    amc: Optional[str] = None
 
 
 def _parse_nav_all_text(text: str) -> Dict[str, SchemeRecord]:
@@ -44,9 +61,25 @@ def _parse_nav_all_text(text: str) -> Dict[str, SchemeRecord]:
     are indexed to the same record.
     """
     index: Dict[str, SchemeRecord] = {}
+    current_category: Optional[str] = None
+    current_amc: Optional[str] = None
     for line in text.splitlines():
-        parts = line.strip().split(";")
+        stripped = line.strip()
+        parts = stripped.split(";")
         if len(parts) < 8:
+            if not stripped:
+                continue  # blank separator line
+            header_match = _CATEGORY_HEADER_RE.match(stripped)
+            if header_match:
+                current_category = header_match.group(1).strip()
+            else:
+                # Not a category header and not blank -> an AMC-name line
+                # (e.g. "Aditya Birla Sun Life Mutual Fund"), which always
+                # precedes a fresh category header for that AMC's block -
+                # reset current_category so a stray data row can't
+                # accidentally inherit the previous AMC's last category.
+                current_amc = stripped
+                current_category = None
             continue
         scheme_code = parts[0].strip()
         if not scheme_code.isdigit():
@@ -61,9 +94,15 @@ def _parse_nav_all_text(text: str) -> Dict[str, SchemeRecord]:
             latest_nav = float(parts[6].strip())
         except ValueError:
             latest_nav = None
-        record = SchemeRecord(scheme_code=scheme_code, scheme_name=scheme_name, latest_nav=latest_nav)
+        record = SchemeRecord(
+            scheme_code=scheme_code,
+            scheme_name=scheme_name,
+            latest_nav=latest_nav,
+            category=current_category,
+            amc=current_amc,
+        )
         for isin in (isin_growth, isin_div_reinvestment):
-            if isin and isin.upper() != "N.A.":
+            if isin and isin.upper() not in _NO_ISIN_TOKENS:
                 index[isin] = record
     return index
 
