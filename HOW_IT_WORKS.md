@@ -686,6 +686,60 @@ reach the real data sources, can create it), that slot simply keeps
 showing its old, still-clearly-labeled placeholder instead of breaking or
 showing nothing.
 
+**Same-day follow-up — actually running the monthly job for real turned up
+a bigger problem than expected.** Everything above was written, tested,
+and confirmed to degrade gracefully — but "the tests pass" and "the code
+is right" are two different claims, the same lesson this whole document
+keeps circling back to. So the automated monthly job was triggered by
+hand instead of waiting for its scheduled date, specifically to watch it
+run against the real world once.
+
+Two small, ordinary things had to be fixed first — a repository setting
+that was quietly blocking the job from opening its pull request at all,
+and two finished pieces of work that had been saved on this computer but
+never actually sent to GitHub (the difference between writing a letter
+and putting it in the mailbox). Neither is interesting on its own.
+
+What *is* interesting: once those were fixed and the job actually ran
+end-to-end for the first time, its own result looked wrong. Out of 1,814
+real funds, only 2 came back with a real category attached — nowhere near
+the "98 categories, over 14,000 funds" success from six days earlier
+(Phase E1, section 9 above). Something that was supposedly already
+proven working had quietly stopped working, with no error message
+anywhere — a program can fail by producing a *plausible-looking* wrong
+answer just as easily as by crashing, and this was exactly that kind of
+failure.
+
+Finding the actual cause took one more small, honest step: rather than
+guess, a second disposable check-only job (the same kind of "spike," used
+and thrown away, as the one that first confirmed AMFI's categories back
+in Phase E1) was sent out to fetch the real file fresh and simply print
+its true shape. That revealed the real mistake in plain terms: the code
+had assumed the file lists each fund company once, right before the one
+category it belongs to. The real file actually does something subtly
+different — one category is listed once, followed by *several* fund
+companies in a row that all share that same category, before the next
+category begins. The code was treating every new fund company's name as
+a signal to "forget the category we were just told," which — given how
+the real file is actually laid out — meant it forgot the category
+almost immediately every single time, for every fund company after the
+very first one under each heading.
+
+The deeper lesson, worth sitting with: this bug had been there since the
+day Phase E1 was first written, hiding behind a passing test suite the
+entire time. The practice test used to check this code had the file's
+two building blocks in the wrong order — a small, easy-to-make mistake
+when writing a test by hand from a description rather than the real
+thing — so the test kept agreeing with the buggy code instead of
+catching it. Which means Phase E1's "Holdings Review now compares your
+funds to their real category" claim, made confidently six days ago, was
+never actually true for real users — it had been silently falling back
+to the old best-guess-from-the-name method the entire time, exactly the
+kind of "looks fine, is quietly wrong" problem this document keeps
+returning to. It's fixed now, with a new practice test built from the
+real file's actual shape instead of an assumed one, specifically so this
+exact mistake can't quietly pass again.
+
 Later: **Phase C** / a shared future **Phase E3** (the AI narration
 layer, built once and shared by both features) is the one piece of this
 whole "know your funds for real" project still ahead.

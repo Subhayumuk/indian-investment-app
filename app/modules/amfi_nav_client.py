@@ -31,10 +31,11 @@ REQUEST_TIMEOUT_SECONDS = 15.0  # the file is ~9-12MB
 # real ISIN.
 _NO_ISIN_TOKENS = {"N.A.", "-"}
 
-# A category-header line groups the data rows beneath it until the next
-# header (e.g. "Open Ended Schemes(Debt Scheme - Banking and PSU Fund)") -
-# confirmed against the live file on 2026-09-03 (98 distinct categories,
-# each a contiguous block of data rows). Captures the text inside the
+# A category-header line groups every data row beneath it - across
+# SEVERAL AMC-name blocks in a row - until the next header line (e.g.
+# "Open Ended Schemes(Debt Scheme - Banking and PSU Fund)", confirmed
+# against the live file on both 2026-09-03 and 2026-09-09: 103 header
+# lines, all matched by this regex). Captures the text inside the
 # parentheses only, not the "Open/Close/Interval Ended Schemes(...)" wrapper.
 _CATEGORY_HEADER_RE = re.compile(r"^.*Schemes\((.+)\)\s*$")
 
@@ -74,12 +75,26 @@ def _parse_nav_all_text(text: str) -> Dict[str, SchemeRecord]:
                 current_category = header_match.group(1).strip()
             else:
                 # Not a category header and not blank -> an AMC-name line
-                # (e.g. "Aditya Birla Sun Life Mutual Fund"), which always
-                # precedes a fresh category header for that AMC's block -
-                # reset current_category so a stray data row can't
-                # accidentally inherit the previous AMC's last category.
+                # (e.g. "Aditya Birla Sun Life Mutual Fund"). Confirmed
+                # against the live file on 2026-09-09 (a diagnostic run,
+                # since the committed amfi_category_index.json turned up
+                # with a category on only 2 of 1814 schemes): the real
+                # layout is one category header followed by SEVERAL AMC
+                # blocks in a row - e.g. "Open Ended Schemes(Debt Scheme -
+                # Corporate Bond Fund)", then "Aditya Birla Sun Life Mutual
+                # Fund" + its data rows, then "Bandhan Mutual Fund" + its
+                # data rows, then "Baroda BNP Paribas Mutual Fund", and so
+                # on - all still that same category, until the NEXT
+                # category header line appears. An earlier version of this
+                # code reset current_category to None on every AMC-name
+                # line, which (wrongly) wiped the category before any data
+                # row after the first AMC in a block ever saw it - the
+                # original test fixture had AMC-then-category ordering
+                # backwards from what the real file does, which is how
+                # this shipped without a failing test. current_amc still
+                # updates on every AMC-name line; current_category only
+                # changes on an actual new category header.
                 current_amc = stripped
-                current_category = None
             continue
         scheme_code = parts[0].strip()
         if not scheme_code.isdigit():

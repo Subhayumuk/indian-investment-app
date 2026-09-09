@@ -4,24 +4,36 @@ import pytest
 
 from app.modules.amfi_nav_client import AmfiNavClient, _parse_nav_all_text
 
-# Real AMFI NAVAll.txt shape (verified against the live file, not just
-# documentation, most recently via a live GitHub Actions run on 2026-09-03):
-# AMC-name and category-header lines (no semicolons) and blank-line
-# separators interleaved with data rows in
+# Real AMFI NAVAll.txt shape - verified against the live file via GitHub
+# Actions runs on 2026-09-03 and, after a 2026-09-09 diagnostic spike
+# turned up a real bug (see below), again on 2026-09-09. AMC-name and
+# category-header lines (no semicolons) and blank-line separators
+# interleave with data rows in
 # Scheme Code;ISIN Growth;ISIN Div Reinvestment;Scheme Name;Plan;Option;NAV;Date order.
-# The live file uses both "N.A." and a bare "-" for "no dividend-reinvestment
-# ISIN" - the second data row and the Axis Children's Fund category below
-# exercise both, plus a second category block to confirm headers reset
-# correctly between blocks rather than leaking across them.
-SAMPLE_NAV_ALL_TEXT = """Aditya Birla Sun Life Mutual Fund
-Open Ended Schemes(Debt Scheme - Banking and PSU Fund)
+# Crucially, a category header is followed by SEVERAL AMC blocks in a row
+# (Aditya Birla, then Franklin Templeton below, both still "Debt Scheme -
+# Banking and PSU Fund") before the next category header appears - not one
+# AMC-then-category pairing per block. An earlier version of this fixture
+# had that backwards (AMC line preceding its own category header, never
+# repeating), which is exactly why the earlier _parse_nav_all_text bug -
+# resetting current_category to None on every AMC-name line - passed every
+# test here while still failing on 1812 of 1814 real schemes in
+# production. The live file uses both "N.A." and a bare "-" for "no
+# dividend-reinvestment ISIN" - exercised below, plus a second category
+# block to confirm headers actually change at a genuine new header rather
+# than never changing at all.
+SAMPLE_NAV_ALL_TEXT = """Open Ended Schemes(Debt Scheme - Banking and PSU Fund)
 
+Aditya Birla Sun Life Mutual Fund
 118989;INF209K01397;INF209K01405;Aditya Birla Sun Life Dividend Yield Fund;Direct Plan;Growth;26.6400;19-Dec-2025
 118990;N.A.;INF209K01413;Aditya Birla Sun Life Some Other Fund;Regular Plan;IDCW;15.1200;19-Dec-2025
 
-Axis Mutual Fund
+Franklin Templeton Mutual Fund
+118995;INF090K01AAA;-;Franklin Templeton Corporate Bond Fund;Direct Plan;Growth;20.0000;19-Dec-2025
+
 Open Ended Schemes(Children's Fund - Childrens' Fund)
 
+Axis Mutual Fund
 135762;INF846K01WO1;-;Axis Children's Fund;Direct Plan;Growth Option;30.3032;02-Sep-2026
 """
 
@@ -67,13 +79,28 @@ def test_parse_nav_all_text_skips_na_isin_and_header_lines():
     index = _parse_nav_all_text(SAMPLE_NAV_ALL_TEXT)
     assert "N.A." not in index
     assert "-" not in index  # regression: a bare "-" used to slip past the old N.A.-only guard
-    assert len(index) == 4  # two ISINs for 118989, one for 118990, one for 135762 ("-" variant skipped)
+    # Two ISINs for 118989, one for 118990, one for 118995, one for 135762
+    # ("-" variants skipped on 118995/135762).
+    assert len(index) == 5
 
 
 def test_parse_nav_all_text_attaches_category_from_preceding_header():
     index = _parse_nav_all_text(SAMPLE_NAV_ALL_TEXT)
     assert index["INF209K01397"].category == "Debt Scheme - Banking and PSU Fund"
     assert index["INF209K01413"].category == "Debt Scheme - Banking and PSU Fund"
+
+
+def test_parse_nav_all_text_category_persists_across_multiple_amc_blocks():
+    # Regression test for the 2026-09-09 bug: a category header is followed
+    # by SEVERAL AMC blocks in the real file (Aditya Birla, then Franklin
+    # Templeton, both still "Debt Scheme - Banking and PSU Fund") before
+    # the next category header. An earlier version wiped current_category
+    # to None on every AMC-name line, so only the first AMC after a header
+    # ever kept its category - this fixture's second AMC (Franklin
+    # Templeton) is exactly the case that caught it.
+    index = _parse_nav_all_text(SAMPLE_NAV_ALL_TEXT)
+    assert index["INF090K01AAA"].category == "Debt Scheme - Banking and PSU Fund"
+    assert index["INF090K01AAA"].amc == "Franklin Templeton Mutual Fund"
 
 
 def test_parse_nav_all_text_resets_category_between_header_blocks():
