@@ -179,10 +179,13 @@ A few more pieces that aren't part of the specialist chain but matter:
   it) are done and live. A follow-on project, Phase E, is replacing the
   fixed, mostly-illustrative fund list still used for *new*-money
   suggestions with real data too — E1 (real fund categories, replacing a
-  name-keyword guess) shipped 2026-09-03; E2 (an actual shortlist of real
-  named funds per category) hasn't started yet. AI narration (Phase C,
-  and a shared future Phase E3) stays deferred until both threads are
-  ready for it.
+  name-keyword guess, 2026-09-03) and E2 (a real, named-fund shortlist per
+  category, 2026-09-09) have both shipped, though E2's actual shortlist
+  file only gets created by a monthly automated job with real internet
+  access, not by working on this locally — so today, it's shipped code
+  waiting on its first live run, not yet a change you'd see on the site.
+  AI narration (Phase C, and a shared future Phase E3) stays deferred
+  until both threads are ready for it.
 - **Known, written-down gaps** rather than hidden ones: 3 of the 8
   residence countries' tax pages block automated checking (India found a
   workaround; Australia/Canada/Germany haven't yet); the other 8
@@ -629,10 +632,63 @@ the Danish tax-note correction above: "it works when I run it myself" and
 "it works from a clean, automated environment" are genuinely two
 different tests.
 
-Later: **Phase E2** (real named funds, not just real categories, for
-new-money suggestions), and **Phase C** / a shared future **Phase E3**
-(the AI narration layer, built once and shared by both features) — both
-still ahead.
+**Update, 2026-09-09 — Phase E2: real named funds, not just real
+categories.** Phase E1 taught the app the real *category* of a fund
+("Mid Cap Fund," "Corporate Bond Fund," ...). It didn't change what
+*specific* funds get suggested when you're deciding where to put new
+money — that suggestion list was still the same fixed dozen-ish funds
+from before this whole project started, and all but one of them were
+always disclosed as illustrative placeholders, not real, verified picks.
+Phase E2 is what actually replaces those placeholders with real funds.
+
+**The honest limit that shaped the whole design:** to genuinely rank
+funds ("this one's better than that one"), you'd want to know things like
+how much money is actually invested in a fund (its size) and how much it
+costs to hold (its expense ratio) — neither AMFI nor mfapi.in, the two
+free sources this app uses, publishes either number. Rather than fake a
+ranking the data can't actually support, the honest thing was to build a
+**shortlist, not a leaderboard**: for each real fund category, pick a
+small, capped set of real funds (at most one per fund company, so one
+large AMC can't quietly fill an entire category), list them in plain
+alphabetical order — not "best to worst" — and say so plainly in the
+output itself, not just in a code comment. A real number does get
+attached to each one: its actual trailing 3- and 5-year return, fetched
+the same way Holdings Review already fetches them for funds you already
+own. A fund without enough price history for a real return figure is
+left out entirely rather than shown with a blank one.
+
+**One more constraint worth naming, since it shaped the code too:**
+mfapi.in is a free, unofficial community service with no documented limit
+on how many requests it's comfortable receiving — Holdings Review was
+already capable of asking it several questions at once for someone with
+many funds, and this new monthly batch job now asks it dozens of
+questions in a row. Before writing any of the new fetching logic, the
+existing code gained a simple politeness rule: never send it more than
+roughly three requests per second, no matter how many separate parts of
+the app are asking at once. A small thing, but a genuinely considerate
+one — free services stay free and available partly because the people
+using them don't hammer them.
+
+**How a placeholder actually gets replaced:** each existing "new money"
+suggestion already carries a category label a human wrote (e.g. "Equity
+Mutual Fund (Mid Cap)"). That label is matched against the real AMFI
+category the new shortlist is organized by, and if a real, return-bearing
+fund is available there, its real name/ID/returns quietly take the place
+of the old placeholder's made-up ones — everything else about that
+suggestion (why it suits an NRI, how much of your money it suggests,
+how liquid it is) stays exactly as a human wrote it. The one fund that
+was already real and hand-verified (Parag Parikh Flexi Cap) is never
+touched by this — substitution only ever replaces a disclosed guess,
+never something already confirmed. And if the new shortlist has nothing
+usable for a given slot (including right now, today — this file doesn't
+exist yet locally; only the monthly automated job, which can actually
+reach the real data sources, can create it), that slot simply keeps
+showing its old, still-clearly-labeled placeholder instead of breaking or
+showing nothing.
+
+Later: **Phase C** / a shared future **Phase E3** (the AI narration
+layer, built once and shared by both features) is the one piece of this
+whole "know your funds for real" project still ahead.
 
 ## 10. A tool Claude used today: what's "MCP"?
 

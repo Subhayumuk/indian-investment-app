@@ -7,7 +7,9 @@ NAV history, keyed by the same AMFI scheme code). Used only after
 amfi_nav_client.py has resolved an ISIN to a scheme code — mfapi.in itself
 has no ISIN-indexed lookup, only name-search or an already-known scheme code.
 """
+import asyncio
 import logging
+import time
 from datetime import datetime
 from typing import List, Optional, TypedDict
 
@@ -17,6 +19,17 @@ logger = logging.getLogger(__name__)
 
 MFAPI_URL_TEMPLATE = "https://api.mfapi.in/mf/{scheme_code}"
 REQUEST_TIMEOUT_SECONDS = 8.0
+
+# mfapi.in publishes no documented rate limit, but it's a free, unofficial
+# community service (see this module's docstring) - Holdings Review already
+# looks up several funds concurrently via asyncio.gather, and Phase E's
+# shortlist batch job (scripts/refresh_amfi_category_index.py) will make
+# many more calls in a row than any single Holdings Review request does.
+# A considerate ~3 requests/second cap costs a real user under a second of
+# extra wait for a typical portfolio, and turns a batch job's request burst
+# into a steady trickle instead - added after both use cases existed,
+# rather than before either needed it.
+DEFAULT_MIN_REQUEST_INTERVAL_SECONDS = 0.34
 
 
 class NavPoint(TypedDict):
@@ -57,14 +70,38 @@ def compute_trailing_return(nav_history: List[NavPoint], years: int) -> Optional
 
 
 class MfApiClient:
-    """`http_client` is injectable, same convention as AmfiNavClient."""
+    """`http_client` is injectable, same convention as AmfiNavClient.
+    `min_request_interval_seconds` is injectable too, mainly so tests don't
+    have to wait out the real default."""
 
-    def __init__(self, http_client: Optional[httpx.AsyncClient] = None):
+    def __init__(
+        self,
+        http_client: Optional[httpx.AsyncClient] = None,
+        min_request_interval_seconds: float = DEFAULT_MIN_REQUEST_INTERVAL_SECONDS,
+    ):
         self._http_client = http_client
+        self._min_request_interval_seconds = min_request_interval_seconds
+        self._throttle_lock = asyncio.Lock()
+        self._last_request_at: Optional[float] = None
+
+    async def _throttle(self) -> None:
+        """Serializes requests through this client instance to at most one
+        every `min_request_interval_seconds` - a global cap on outbound
+        request *starts*, not per-call backoff, so concurrent callers (e.g.
+        holdings_review_engine.py's asyncio.gather) end up queued rather
+        than all firing at once."""
+        async with self._throttle_lock:
+            now = time.monotonic()
+            if self._last_request_at is not None:
+                wait = self._min_request_interval_seconds - (now - self._last_request_at)
+                if wait > 0:
+                    await asyncio.sleep(wait)
+            self._last_request_at = time.monotonic()
 
     async def get_nav_history(self, scheme_code: str) -> List[NavPoint]:
         if not scheme_code:
             return []
+        await self._throttle()
         url = MFAPI_URL_TEMPLATE.format(scheme_code=scheme_code)
         try:
             if self._http_client is not None:

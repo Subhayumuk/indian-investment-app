@@ -11,8 +11,23 @@ Intentionally a plain Python module, not YAML: it isn't country-scoped like
 the rest of app/knowledge_base/, so it doesn't fit app/utils/kb_loader.py's
 loading contract, and adding a new YAML file would break
 tests/test_kb_loader.py's hardcoded knowledge-base file count.
+
+Phase E2 (see ~/.claude/plans, "E2 - Generic named-fund category
+shortlists"): every fund-type slot below whose ISIN is still flagged
+"-PLACEHOLDER" is a candidate for substitution with a real, named fund
+from app/knowledge_base/fund_category_shortlists.json (generated monthly
+by scripts/refresh_fund_category_shortlists.py) - see
+_substitute_with_real_fund below. The slot's own curated metadata
+(why it suits an NRI, allocation %, liquidity, min investment) is kept
+either way; only the specific fund's name/ISIN/returns become real when a
+matching, return-bearing shortlist entry exists. The already-real,
+hand-verified entries (Parag Parikh Flexi Cap Fund) are never touched by
+this - substitution only ever replaces a disclosed placeholder, never an
+already-verified one.
 """
-from typing import Dict, List
+from typing import Dict, List, Optional
+
+from app.modules.fund_shortlist_loader import load_fund_category_shortlists
 
 PLACEHOLDER_DISCLAIMER = (
     "ILLUSTRATIVE DATA — ISIN, historical returns and platform details for "
@@ -326,14 +341,75 @@ CATALOG: Dict[str, List[dict]] = {
 }
 
 
+# Maps each hardcoded slot's own `category` label (above) to the real AMFI
+# SEBI category string(s) (from amfi_category_index.json's `category`
+# field, i.e. NAVAll.txt's own header text) that could substitute for it,
+# checked in order. Deliberately keyed by the *specific* curated category
+# label, not the coarser 4-bucket asset class sebi_category_mapping.py
+# uses elsewhere - "Equity Mutual Fund (Mid Cap)" and "Equity Mutual Fund"
+# both being "equity" would otherwise risk substituting a large-cap fund
+# into a mid-cap slot or vice versa. ETF and Gold/SGB slots are
+# deliberately absent - see the module docstring on why ETFs aren't
+# substituted yet and why SGB/FD/bonds never are (not mutual fund
+# schemes at all).
+_SLOT_CATEGORY_TO_AMFI_CATEGORIES: Dict[str, List[str]] = {
+    "Liquid Fund": ["Liquid Fund"],
+    "Debt Mutual Fund": ["Short Duration Fund", "Corporate Bond Fund", "Banking and PSU Fund"],
+    "Hybrid Mutual Fund": ["Balanced Advantage Fund"],
+    "Equity Mutual Fund": ["Flexi Cap Fund", "Large Cap Fund"],
+    "Equity Mutual Fund (Mid Cap)": ["Mid Cap Fund"],
+}
+
+
+def _substitute_with_real_fund(slot_category: str, used_isins: set) -> Optional[dict]:
+    """Looks up a real, return-bearing fund from the generated shortlist
+    (see fund_shortlist_loader.py) for the given slot's category, skipping
+    any ISIN already used elsewhere in this same tier's list so two slots
+    mapped to the same AMFI category don't end up with identical funds.
+    Returns None (caller keeps its existing hardcoded placeholder) if the
+    shortlist hasn't been generated yet, or has nothing usable for this
+    slot - never invents a substitute."""
+    document = load_fund_category_shortlists()
+    categories = document.get("categories", {})
+    for amfi_category in _SLOT_CATEGORY_TO_AMFI_CATEGORIES.get(slot_category, []):
+        for fund in categories.get(amfi_category, []):
+            if fund["isin"] in used_isins:
+                continue
+            return fund
+    return None
+
+
 def get_named_instruments(risk_tolerance: str, total_corpus_inr: float) -> List[dict]:
     """Returns the risk-tier catalog with suggested_amount_inr computed from
-    total_corpus_inr. Falls back to 'moderate' for unrecognised risk tiers."""
+    total_corpus_inr. Falls back to 'moderate' for unrecognised risk tiers.
+
+    Each fund-type slot still flagged as a placeholder ISIN is substituted
+    with a real named fund + real trailing returns from the generated
+    shortlist when one is available (Phase E2) - see
+    _substitute_with_real_fund. Non-fund slots (FD, RBI bond, SGB) and
+    already-verified fund entries are never touched."""
     tier = (risk_tolerance or "moderate").lower()
     entries = CATALOG.get(tier, CATALOG["moderate"])
     result = []
+    used_isins = {e["isin"] for e in entries if "PLACEHOLDER" not in e["isin"]}
     for entry in entries:
         item = dict(entry)
+        if item["instrument_type"] in _FUND_INSTRUMENT_TYPES and "PLACEHOLDER" in item["isin"]:
+            substitute = _substitute_with_real_fund(item["category"], used_isins)
+            if substitute is not None:
+                item["name"] = f"{substitute['name']} ({substitute['amc']})" if substitute.get("amc") else substitute["name"]
+                item["isin"] = substitute["isin"]
+                item["historical_return_3yr"] = f"{substitute['trailing_return_3yr_pct']}%"
+                if substitute.get("trailing_return_5yr_pct") is not None:
+                    item["historical_return_5yr"] = f"{substitute['trailing_return_5yr_pct']}%"
+                item["why_nri_suitable"] = (
+                    item["why_nri_suitable"]
+                    + " Real, AMFI-listed scheme checked in this category "
+                    "(not a personalized pick, and not ranked against other "
+                    "funds checked in the same category - see this app's "
+                    "fund shortlist methodology)."
+                )
+                used_isins.add(substitute["isin"])
         item["suggested_amount_inr"] = round(total_corpus_inr * item["suggested_allocation_pct"] / 100, 2)
         result.append(item)
     return result

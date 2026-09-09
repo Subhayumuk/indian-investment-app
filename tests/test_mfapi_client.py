@@ -81,3 +81,55 @@ def test_get_nav_history_parses_real_shaped_payload():
     points = asyncio.run(client.get_nav_history("118989"))
     assert len(points) == 1
     assert points[0]["nav"] == 42.5
+
+
+def test_get_nav_history_throttles_successive_calls():
+    # A tiny interval keeps the test fast while still proving calls are
+    # spaced out, not fired all at once - the real default
+    # (DEFAULT_MIN_REQUEST_INTERVAL_SECONDS) is only used in production.
+    client = MfApiClient(
+        http_client=FakeHttpClient(FakeResponse()),
+        min_request_interval_seconds=0.05,
+    )
+
+    async def run_three_sequentially():
+        start = asyncio.get_event_loop().time()
+        for _ in range(3):
+            await client.get_nav_history("118989")
+        return asyncio.get_event_loop().time() - start
+
+    elapsed = asyncio.run(run_three_sequentially())
+    assert elapsed >= 0.1  # 2 gaps of >=0.05s between 3 calls
+
+
+def test_get_nav_history_throttles_concurrent_calls_too():
+    # Same guarantee, but exercising the actual concurrency pattern
+    # holdings_review_engine.py uses (asyncio.gather over several funds at
+    # once) rather than sequential awaits.
+    client = MfApiClient(
+        http_client=FakeHttpClient(FakeResponse()),
+        min_request_interval_seconds=0.05,
+    )
+
+    async def run_three_concurrently():
+        start = asyncio.get_event_loop().time()
+        await asyncio.gather(*(client.get_nav_history("118989") for _ in range(3)))
+        return asyncio.get_event_loop().time() - start
+
+    elapsed = asyncio.run(run_three_concurrently())
+    assert elapsed >= 0.1
+
+
+def test_blank_scheme_code_is_not_throttled():
+    # No request is actually made for a blank scheme code, so it shouldn't
+    # consume a throttle slot or delay the next real call.
+    client = MfApiClient(
+        http_client=FakeHttpClient(FakeResponse()),
+        min_request_interval_seconds=10.0,
+    )
+
+    async def run():
+        await client.get_nav_history("")
+        await client.get_nav_history("")
+
+    asyncio.run(run())  # would hang/timeout if blank calls consumed the throttle

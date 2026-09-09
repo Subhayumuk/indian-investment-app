@@ -86,3 +86,95 @@ def test_residence_tax_note_denmark_distinguishes_funds_from_interest_bearing_in
     assert "lagerbeskatning" in equity.lower()
     assert "rubrik 38" in equity.lower()
     assert "positive list" in equity.lower()
+
+
+# --- Phase E2: real-fund substitution from the generated shortlist ---
+
+FAKE_SHORTLIST_DOCUMENT = {
+    "as_of_date": "2026-09-09",
+    "methodology_note": "test methodology note",
+    "categories": {
+        "Liquid Fund": [
+            {"name": "Real Liquid Fund", "isin": "INF000L01AAA", "amc": "Real AMC",
+             "trailing_return_3yr_pct": 6.3, "trailing_return_5yr_pct": 6.0},
+        ],
+        "Mid Cap Fund": [
+            {"name": "Real Mid Cap Fund One", "isin": "INF000M01AAA", "amc": "AMC One",
+             "trailing_return_3yr_pct": 22.1, "trailing_return_5yr_pct": 24.9},
+            {"name": "Real Mid Cap Fund Two", "isin": "INF000M01BBB", "amc": "AMC Two",
+             "trailing_return_3yr_pct": 19.4, "trailing_return_5yr_pct": None},
+        ],
+        # No usable "trailing_return_3yr_pct"-bearing entry for this
+        # category on purpose, to exercise the "no substitution available"
+        # path further below.
+        "Corporate Bond Fund": [],
+    },
+}
+
+
+def test_get_named_instruments_substitutes_placeholder_funds_with_real_shortlist_data(monkeypatch):
+    monkeypatch.setattr(instrument_catalog, "load_fund_category_shortlists", lambda: FAKE_SHORTLIST_DOCUMENT)
+
+    entries = instrument_catalog.get_named_instruments("conservative", total_corpus_inr=1_000_000)
+    liquid_entry = next(e for e in entries if e["category"] == "Liquid Fund")
+
+    assert liquid_entry["isin"] == "INF000L01AAA"
+    assert "PLACEHOLDER" not in liquid_entry["isin"]
+    assert liquid_entry["historical_return_3yr"] == "6.3%"
+    assert liquid_entry["historical_return_5yr"] == "6.0%"
+    assert "Real AMC" in liquid_entry["name"]
+
+
+def test_get_named_instruments_falls_back_to_placeholder_when_no_shortlist_exists(monkeypatch):
+    monkeypatch.setattr(instrument_catalog, "load_fund_category_shortlists", lambda: {})
+
+    entries = instrument_catalog.get_named_instruments("conservative", total_corpus_inr=1_000_000)
+    liquid_entry = next(e for e in entries if e["category"] == "Liquid Fund")
+
+    assert "PLACEHOLDER" in liquid_entry["isin"]
+
+
+def test_get_named_instruments_falls_back_when_category_has_no_usable_entries(monkeypatch):
+    monkeypatch.setattr(instrument_catalog, "load_fund_category_shortlists", lambda: FAKE_SHORTLIST_DOCUMENT)
+
+    entries = instrument_catalog.get_named_instruments("moderate", total_corpus_inr=1_000_000)
+    bond_entry = next(e for e in entries if e["category"] == "Debt Mutual Fund")
+
+    # "Corporate Bond Fund" is present in the fake shortlist but empty, and
+    # none of _SLOT_CATEGORY_TO_AMFI_CATEGORIES's other candidates for
+    # "Debt Mutual Fund" exist in the fake document either - should fall
+    # back to the hardcoded placeholder rather than crash or substitute
+    # nothing usable.
+    assert "PLACEHOLDER" in bond_entry["isin"]
+
+
+def test_get_named_instruments_never_reuses_the_same_isin_for_two_slots(monkeypatch):
+    monkeypatch.setattr(instrument_catalog, "load_fund_category_shortlists", lambda: FAKE_SHORTLIST_DOCUMENT)
+
+    entries = instrument_catalog.get_named_instruments("aggressive", total_corpus_inr=1_000_000)
+    mid_cap_entries = [e for e in entries if e["category"] == "Equity Mutual Fund (Mid Cap)"]
+
+    assert len(mid_cap_entries) == 2
+    assert mid_cap_entries[0]["isin"] != mid_cap_entries[1]["isin"]
+    assert {e["isin"] for e in mid_cap_entries} == {"INF000M01AAA", "INF000M01BBB"}
+
+
+def test_get_named_instruments_never_touches_already_real_entries(monkeypatch):
+    # Parag Parikh Flexi Cap Fund already has a real, hand-verified ISIN
+    # (no "-PLACEHOLDER" suffix) - substitution must never overwrite it,
+    # even though "Flexi Cap Fund" is one of the mapped AMFI categories for
+    # its slot's "Equity Mutual Fund" label.
+    fake_flexi_cap_document = {
+        "categories": {
+            "Flexi Cap Fund": [
+                {"name": "Some Other Flexi Cap Fund", "isin": "INF999F01ZZZ", "amc": "Other AMC",
+                 "trailing_return_3yr_pct": 30.0, "trailing_return_5yr_pct": 35.0},
+            ],
+        },
+    }
+    monkeypatch.setattr(instrument_catalog, "load_fund_category_shortlists", lambda: fake_flexi_cap_document)
+
+    entries = instrument_catalog.get_named_instruments("moderate", total_corpus_inr=1_000_000)
+    parag_parikh = next(e for e in entries if e["isin"] == "INF879O01019")
+
+    assert parag_parikh["name"] == "Parag Parikh Flexi Cap Fund (NRI eligible)"
