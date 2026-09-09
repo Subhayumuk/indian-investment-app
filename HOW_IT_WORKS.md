@@ -176,8 +176,13 @@ A few more pieces that aren't part of the specialist chain but matter:
   migrated yet (parts of Tax Engine).
 - **In progress**: Holdings Review — Phases A through D (know your real
   funds, judge them against a benchmark, and click a real button to see
-  it) are done and live. Only Phase C (AI narration on top of the
-  already-decided verdicts) hasn't started.
+  it) are done and live. A follow-on project, Phase E, is replacing the
+  fixed, mostly-illustrative fund list still used for *new*-money
+  suggestions with real data too — E1 (real fund categories, replacing a
+  name-keyword guess) shipped 2026-09-03; E2 (an actual shortlist of real
+  named funds per category) hasn't started yet. AI narration (Phase C,
+  and a shared future Phase E3) stays deferred until both threads are
+  ready for it.
 - **Known, written-down gaps** rather than hidden ones: 3 of the 8
   residence countries' tax pages block automated checking (India found a
   workaround; Australia/Canada/Germany haven't yet); the other 8
@@ -578,9 +583,56 @@ day:
   is secondary research, not a lawyer's opinion — pointing you at a
   Danish tax adviser rather than asserting a rate with false confidence.
 
-Later (**Phase C**): the AI narration layer on top of these
-already-decided verdicts — the only piece of the original plan still
-ahead.
+**Update, 2026-09-03 — Phase E1: real fund categories, not name-guessing.**
+Holdings Review's verdicts need to know what *kind* of fund something is
+(equity? debt? gold?) to pick the right benchmark to compare it against.
+Until now, that was a guess based on words in the fund's name — "Flexi
+Cap" sounds like equity, "Banking and PSU" sounds like debt. It worked
+well enough to ship, but it was always disclosed as a guess, not a fact.
+
+It turns out AMFI's own daily price file already carries each fund's
+real, official category — the file is organized into sections with
+headers like "Open Ended Schemes(Debt Scheme - Banking and PSU Fund),"
+and the code reading that file was silently throwing those header lines
+away because they didn't look like the rest of the data. Before writing
+any real code, we ran a small throwaway check first — confirmed live,
+from the actual robot (a GitHub Actions workflow) that will run this
+check every month, not just from a laptop — that those headers really
+are still there and readable: 14,332 real fund rows, cleanly grouped
+into 98 real categories. Only after that came back positive did the real
+fix go in: the parser now keeps track of "what category are we currently
+under" as it reads through the file, so every fund carries its real,
+official category. Since AMFI's roughly 36 official categories are more
+granular than the four buckets ("equity/debt/gold/hybrid") this app's
+benchmarks use, a small, explicit, visible table maps one to the other —
+rather than burying that judgment call inside other logic. A fund's
+verdict now falls back to the old name-guess only when its real category
+genuinely can't be found.
+
+While testing this against the live file, one more small bug turned up:
+a handful of rows use a plain dash ("-") instead of "N.A." to mean "this
+fund has no ISIN," and the code had been treating that dash as if it
+were a real ISIN — now fixed to recognize both.
+
+This also quietly laid groundwork for the next piece, still ahead: an
+actual shortlist of real, named funds per category (not just
+categories) to replace the illustrative, mostly-placeholder list still
+used for *new*-money suggestions today (Phase E2).
+
+One more small thing worth naming: the very first scheduled run of the
+new monthly check failed — not because the idea was wrong, but because
+running a script directly (`python scripts/refresh_amfi_category_index.py`)
+doesn't set up the project the same way running it through the test
+suite does, so it couldn't find the rest of the app's own code. Fixed
+the same day. It's the same lesson as the AMFI column-order surprise and
+the Danish tax-note correction above: "it works when I run it myself" and
+"it works from a clean, automated environment" are genuinely two
+different tests.
+
+Later: **Phase E2** (real named funds, not just real categories, for
+new-money suggestions), and **Phase C** / a shared future **Phase E3**
+(the AI narration layer, built once and shared by both features) — both
+still ahead.
 
 ## 10. A tool Claude used today: what's "MCP"?
 
