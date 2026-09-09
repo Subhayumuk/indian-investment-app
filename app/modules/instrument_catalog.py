@@ -341,24 +341,50 @@ CATALOG: Dict[str, List[dict]] = {
 }
 
 
-# Maps each hardcoded slot's own `category` label (above) to the real AMFI
-# SEBI category string(s) (from amfi_category_index.json's `category`
-# field, i.e. NAVAll.txt's own header text) that could substitute for it,
-# checked in order. Deliberately keyed by the *specific* curated category
-# label, not the coarser 4-bucket asset class sebi_category_mapping.py
+# Maps each hardcoded slot's own `category` label (above) to keyword(s)
+# that identify a matching real AMFI category string (from
+# amfi_category_index.json's `category` field, i.e. NAVAll.txt's own
+# header text) - matched by case-insensitive substring, not exact
+# equality. That's deliberate: confirmed against the real generated
+# shortlist on 2026-09-09 that AMFI's own live category strings are
+# messier than one canonical name per category - legacy "Income/Debt
+# Oriented Schemes - Corporate Bond Fund" naming coexists with the newer
+# "Debt Scheme - Corporate Bond Fund", and "Scheme"/"Schemes"
+# pluralization is inconsistent even within the newer naming
+# ("Equity Scheme - Flexi Cap Fund" vs "Equity Schemes - Flexi Cap Fund").
+# A keyword match survives all of these variants; an exact-string list
+# would have needed every variant enumerated by hand and re-broken on the
+# next one AMFI introduces. Deliberately keyed by the *specific* curated
+# slot label, not the coarser 4-bucket asset class sebi_category_mapping.py
 # uses elsewhere - "Equity Mutual Fund (Mid Cap)" and "Equity Mutual Fund"
 # both being "equity" would otherwise risk substituting a large-cap fund
 # into a mid-cap slot or vice versa. ETF and Gold/SGB slots are
 # deliberately absent - see the module docstring on why ETFs aren't
 # substituted yet and why SGB/FD/bonds never are (not mutual fund
 # schemes at all).
-_SLOT_CATEGORY_TO_AMFI_CATEGORIES: Dict[str, List[str]] = {
-    "Liquid Fund": ["Liquid Fund"],
-    "Debt Mutual Fund": ["Short Duration Fund", "Corporate Bond Fund", "Banking and PSU Fund"],
-    "Hybrid Mutual Fund": ["Balanced Advantage Fund"],
-    "Equity Mutual Fund": ["Flexi Cap Fund", "Large Cap Fund"],
-    "Equity Mutual Fund (Mid Cap)": ["Mid Cap Fund"],
+_SLOT_CATEGORY_KEYWORDS: Dict[str, List[str]] = {
+    "Liquid Fund": ["liquid fund"],
+    "Debt Mutual Fund": ["short duration fund", "corporate bond fund", "banking and psu"],
+    "Hybrid Mutual Fund": ["balanced advantage"],
+    "Equity Mutual Fund": ["flexi cap fund", "large cap fund"],
+    "Equity Mutual Fund (Mid Cap)": ["mid cap fund"],
 }
+
+# A category string containing one of these is excluded even if it also
+# contains one of the keywords above for that same slot - e.g. "Large &
+# Mid Cap Fund" is a genuinely different, broader category than a pure
+# "Mid Cap Fund" slot wants, but its name contains "mid cap fund" as a
+# substring.
+_SLOT_CATEGORY_EXCLUDE_KEYWORDS: Dict[str, List[str]] = {
+    "Equity Mutual Fund (Mid Cap)": ["large"],
+}
+
+
+def _amfi_category_matches_slot(slot_category: str, amfi_category: str) -> bool:
+    lowered = amfi_category.lower()
+    if not any(keyword in lowered for keyword in _SLOT_CATEGORY_KEYWORDS.get(slot_category, [])):
+        return False
+    return not any(keyword in lowered for keyword in _SLOT_CATEGORY_EXCLUDE_KEYWORDS.get(slot_category, []))
 
 
 def _substitute_with_real_fund(slot_category: str, used_isins: set) -> Optional[dict]:
@@ -371,8 +397,10 @@ def _substitute_with_real_fund(slot_category: str, used_isins: set) -> Optional[
     slot - never invents a substitute."""
     document = load_fund_category_shortlists()
     categories = document.get("categories", {})
-    for amfi_category in _SLOT_CATEGORY_TO_AMFI_CATEGORIES.get(slot_category, []):
-        for fund in categories.get(amfi_category, []):
+    for amfi_category, funds in categories.items():
+        if not _amfi_category_matches_slot(slot_category, amfi_category):
+            continue
+        for fund in funds:
             if fund["isin"] in used_isins:
                 continue
             return fund

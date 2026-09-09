@@ -740,6 +740,21 @@ returning to. It's fixed now, with a new practice test built from the
 real file's actual shape instead of an assumed one, specifically so this
 exact mistake can't quietly pass again.
 
+Running the job again afterward proved the fix: every single one of the
+1,814 real funds now came back with a real category (up from 2), and the
+"where should new money go" shortlist grew from one lonely fund to 442
+real, named funds spread across 83 categories. That, in turn, surfaced
+one more small thing to fix: the code matching "this app's fund slot"
+to "AMFI's real category" had assumed AMFI spells each category exactly
+one way. It doesn't — the real data has old and new names for the same
+category living side by side, and inconsistent grammar even within the
+newer names. Matching by whether a key phrase *appears* in the name,
+instead of requiring an exact match, fixed it — the more resilient
+choice, since the alternative would need updating by hand every time
+AMFI's own naming shifts again. Checked locally against the real
+generated data afterward: every "new money" suggestion that's allowed to
+be a real fund now genuinely is one.
+
 Later: **Phase C** / a shared future **Phase E3** (the AI narration
 layer, built once and shared by both features) is the one piece of this
 whole "know your funds for real" project still ahead.

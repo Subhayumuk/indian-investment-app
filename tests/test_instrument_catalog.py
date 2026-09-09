@@ -178,3 +178,72 @@ def test_get_named_instruments_never_touches_already_real_entries(monkeypatch):
     parag_parikh = next(e for e in entries if e["isin"] == "INF879O01019")
 
     assert parag_parikh["name"] == "Parag Parikh Flexi Cap Fund (NRI eligible)"
+
+
+# --- Regression: real AMFI category strings are messier than one exact
+# name per category (found 2026-09-09 running the actual refresh workflow
+# against live data) - legacy "Income/Debt Oriented Schemes - ..." naming
+# coexists with newer "Debt Scheme - ...", and "Scheme"/"Schemes" is
+# inconsistent even within the newer naming. Matching is keyword-based,
+# not exact-string, specifically to survive this.
+
+REAL_WORLD_MESSY_SHORTLIST_DOCUMENT = {
+    "categories": {
+        # Legacy naming for the same real-world category as "Debt Scheme -
+        # Corporate Bond Fund" - both must resolve to the "Debt Mutual
+        # Fund" slot.
+        "Income/Debt Oriented Schemes - Corporate Bond Fund": [
+            {"name": "Legacy-Named Corporate Bond Fund", "isin": "INF000L01LEG", "amc": "Legacy AMC",
+             "trailing_return_3yr_pct": 7.5, "trailing_return_5yr_pct": 7.8},
+        ],
+        # Plural "Schemes" variant of "Equity Scheme - Flexi Cap Fund".
+        "Equity Schemes - Flexi Cap Fund": [
+            {"name": "Plural-Named Flexi Cap Fund", "isin": "INF000P01URAL", "amc": "Plural AMC",
+             "trailing_return_3yr_pct": 19.0, "trailing_return_5yr_pct": 21.0},
+        ],
+        # A genuinely different, broader category than pure "Mid Cap Fund"
+        # - contains "mid cap fund" as a substring but must NOT satisfy the
+        # "Equity Mutual Fund (Mid Cap)" slot.
+        "Equity Scheme - Large & Mid Cap Fund": [
+            {"name": "Large and Mid Cap Combo Fund", "isin": "INF000C01OMBO", "amc": "Combo AMC",
+             "trailing_return_3yr_pct": 17.0, "trailing_return_5yr_pct": 19.0},
+        ],
+    },
+}
+
+
+def test_get_named_instruments_matches_legacy_amfi_category_naming(monkeypatch):
+    monkeypatch.setattr(
+        instrument_catalog, "load_fund_category_shortlists", lambda: REAL_WORLD_MESSY_SHORTLIST_DOCUMENT
+    )
+
+    entries = instrument_catalog.get_named_instruments("moderate", total_corpus_inr=1_000_000)
+    bond_entry = next(e for e in entries if e["category"] == "Debt Mutual Fund")
+
+    assert bond_entry["isin"] == "INF000L01LEG"
+
+
+def test_get_named_instruments_matches_plural_schemes_amfi_naming(monkeypatch):
+    monkeypatch.setattr(
+        instrument_catalog, "load_fund_category_shortlists", lambda: REAL_WORLD_MESSY_SHORTLIST_DOCUMENT
+    )
+
+    entries = instrument_catalog.get_named_instruments("aggressive", total_corpus_inr=1_000_000)
+    flexi_cap_entries = [e for e in entries if e["category"] == "Equity Mutual Fund" and e["isin"] == "INF000P01URAL"]
+
+    assert len(flexi_cap_entries) == 1
+
+
+def test_get_named_instruments_excludes_large_and_mid_cap_from_pure_mid_cap_slot(monkeypatch):
+    monkeypatch.setattr(
+        instrument_catalog, "load_fund_category_shortlists", lambda: REAL_WORLD_MESSY_SHORTLIST_DOCUMENT
+    )
+
+    entries = instrument_catalog.get_named_instruments("aggressive", total_corpus_inr=1_000_000)
+    mid_cap_entries = [e for e in entries if e["category"] == "Equity Mutual Fund (Mid Cap)"]
+
+    # "Large & Mid Cap Fund" contains "mid cap fund" as a substring but is
+    # a different category - none of the fake document's funds should
+    # have been substituted into these slots, so they stay on their
+    # existing hardcoded placeholders.
+    assert all("PLACEHOLDER" in e["isin"] for e in mid_cap_entries)
