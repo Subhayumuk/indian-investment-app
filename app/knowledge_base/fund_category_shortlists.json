@@ -1,50 +1,43 @@
 {
-  "as_of_date": "2026-09-09",
+  "as_of_date": "2026-10-01",
   "categories": {
     "Children’s Fund - Childrens' Fund": [
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01WO1",
         "name": "Axis Children's Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 8.81,
-        "trailing_return_5yr_pct": 6.71
+        "trailing_return_3yr_pct": 7.89,
+        "trailing_return_5yr_pct": 5.74
       }
     ],
     "Debt Scheme - Banking and PSU Fund": [
       {
-        "amc": "Aditya Birla Sun Life Mutual Fund",
-        "isin": "INF209K01YN0",
-        "name": "Aditya Birla Sun Life Banking & PSU Debt Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 7.16,
-        "trailing_return_5yr_pct": 6.28
-      },
-      {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01KR8",
         "name": "Franklin India Banking & PSU Debt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.59,
-        "trailing_return_5yr_pct": 6.45
+        "trailing_return_3yr_pct": 7.45,
+        "trailing_return_5yr_pct": 6.44
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179KA1IZ7",
         "name": "HDFC Banking and PSU Debt Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.22,
-        "trailing_return_5yr_pct": 6.31
+        "trailing_return_3yr_pct": 6.99,
+        "trailing_return_5yr_pct": 6.22
       },
       {
         "amc": "ITI Mutual Fund",
         "isin": "INF00XX01861",
         "name": "ITI Banking & PSU Debt Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.1,
-        "trailing_return_5yr_pct": 6.37
+        "trailing_return_3yr_pct": 6.98,
+        "trailing_return_5yr_pct": 6.33
       },
       {
         "amc": "Kotak Mahindra Mutual Fund",
         "isin": "INF174K01KH7",
         "name": "Kotak Banking and PSU Debt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.46,
-        "trailing_return_5yr_pct": 6.51
+        "trailing_return_3yr_pct": 7.26,
+        "trailing_return_5yr_pct": 6.41
       }
     ],
     "Debt Scheme - Corporate Bond Fund": [
@@ -52,57 +45,57 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01S38",
         "name": "Aditya Birla Sun Life Corporate Bond Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 7.23,
-        "trailing_return_5yr_pct": 6.41
+        "trailing_return_3yr_pct": 6.97,
+        "trailing_return_5yr_pct": 6.31
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194KA1M23",
         "name": "BANDHAN Corporate Bond Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.38,
+        "trailing_return_3yr_pct": 7.22,
         "trailing_return_5yr_pct": 6.13
-      },
-      {
-        "amc": "Baroda BNP Paribas Mutual Fund",
-        "isin": "INF251K01GP4",
-        "name": "BARODA BNP PARIBAS CORPORATE BOND FUND - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.85,
-        "trailing_return_5yr_pct": null
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740KA1KE8",
         "name": "DSP Corporate Bond Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.43,
-        "trailing_return_5yr_pct": 6.05
+        "trailing_return_3yr_pct": 7.39,
+        "trailing_return_5yr_pct": 6.07
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179K01XD8",
         "name": "HDFC Corporate Bond Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.2,
-        "trailing_return_5yr_pct": 6.32
+        "trailing_return_3yr_pct": 6.9,
+        "trailing_return_5yr_pct": 6.18
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109K016B1",
         "name": "ICICI Prudential Corporate Bond Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.57,
-        "trailing_return_5yr_pct": 6.83
+        "trailing_return_3yr_pct": 7.31,
+        "trailing_return_5yr_pct": 6.71
       },
       {
         "amc": "Nippon India Mutual Fund",
         "isin": "INF204K01C15",
         "name": "Nippon India Corporate Bond Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.65,
-        "trailing_return_5yr_pct": 6.83
+        "trailing_return_3yr_pct": 7.46,
+        "trailing_return_5yr_pct": 6.76
       },
       {
         "amc": "PGIM India Mutual Fund",
         "isin": "INF223J01OO2",
         "name": "PGIM India Corporate Bond Fund - Direct Plan - Direct Growth",
-        "trailing_return_3yr_pct": 7.29,
-        "trailing_return_5yr_pct": 6.34
+        "trailing_return_3yr_pct": 7.08,
+        "trailing_return_5yr_pct": 6.25
+      },
+      {
+        "amc": "SBI Mutual Fund",
+        "isin": "INF200KA1YR4",
+        "name": "SBI Corporate Bond Fund - Direct Plan - Growth",
+        "trailing_return_3yr_pct": 7.18,
+        "trailing_return_5yr_pct": 6.27
       }
     ],
     "Debt Scheme - Credit Risk Fund": [
@@ -110,50 +103,50 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209KA1K88",
         "name": "Aditya Birla Sun Life Credit Risk Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 13.22,
-        "trailing_return_5yr_pct": 10.93
+        "trailing_return_3yr_pct": 13.07,
+        "trailing_return_5yr_pct": 10.87
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194KA1X61",
         "name": "BANDHAN CREDIT RISK FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.42,
-        "trailing_return_5yr_pct": 6.39
+        "trailing_return_3yr_pct": 7.25,
+        "trailing_return_5yr_pct": 6.32
       },
       {
         "amc": "Bank of India Mutual Fund",
         "isin": "INF761K01DG8",
         "name": "BANK OF INDIA CREDIT RISK FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 10.12,
-        "trailing_return_5yr_pct": 27.83
+        "trailing_return_3yr_pct": 10.05,
+        "trailing_return_5yr_pct": 27.81
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01OS4",
         "name": "DSP Credit Risk Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 16.85,
-        "trailing_return_5yr_pct": 13.38
+        "trailing_return_3yr_pct": 16.7,
+        "trailing_return_5yr_pct": 13.36
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109K01V00",
         "name": "ICICI Prudential Credit Risk Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.18,
-        "trailing_return_5yr_pct": 8.04
+        "trailing_return_3yr_pct": 9.06,
+        "trailing_return_5yr_pct": 7.98
       },
       {
         "amc": "Kotak Mahindra Mutual Fund",
         "isin": "INF174K01LZ7",
         "name": "Kotak Credit Risk Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.66,
-        "trailing_return_5yr_pct": 6.78
+        "trailing_return_3yr_pct": 8.56,
+        "trailing_return_5yr_pct": 6.7
       },
       {
         "amc": "Nippon India Mutual Fund",
         "isin": "INF204K01A74",
         "name": "Nippon India Credit Risk Fund (Existing Number of Segregated Portfolios - 1) - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 9.0,
-        "trailing_return_5yr_pct": 7.92
+        "trailing_return_3yr_pct": 8.84,
+        "trailing_return_5yr_pct": 7.86
       }
     ],
     "Debt Scheme - Dynamic Bond": [
@@ -161,8 +154,8 @@
         "amc": "Quantum Mutual Fund",
         "isin": "INF082J01176",
         "name": "Quantum Dynamic Term Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 6.94,
-        "trailing_return_5yr_pct": 6.28
+        "trailing_return_3yr_pct": 6.76,
+        "trailing_return_5yr_pct": 6.13
       },
       {
         "amc": "Tata Mutual Fund",
@@ -174,103 +167,103 @@
     ],
     "Debt Scheme - Gilt Fund": [
       {
-        "amc": "Baroda BNP Paribas Mutual Fund",
-        "isin": "INF955L01AD7",
-        "name": "BARODA BNP PARIBAS GILT FUND - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 6.62,
-        "trailing_return_5yr_pct": 5.69
-      },
-      {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K01Q29",
         "name": "Bandhan Gilt   Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.01,
-        "trailing_return_5yr_pct": 6.39
+        "trailing_return_3yr_pct": 8.05,
+        "trailing_return_5yr_pct": 6.43
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01NF3",
         "name": "DSP Gilt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.79,
-        "trailing_return_5yr_pct": 6.05
+        "trailing_return_3yr_pct": 6.7,
+        "trailing_return_5yr_pct": 5.91
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179K01VS0",
         "name": "HDFC Gilt Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 6.52,
-        "trailing_return_5yr_pct": 5.53
+        "trailing_return_3yr_pct": 6.24,
+        "trailing_return_5yr_pct": 5.38
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109K018C5",
         "name": "ICICI Prudential Gilt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.31,
-        "trailing_return_5yr_pct": 6.66
+        "trailing_return_3yr_pct": 6.78,
+        "trailing_return_5yr_pct": 6.35
       },
       {
         "amc": "Kotak Mahindra Mutual Fund",
         "isin": "INF174K01KE4",
         "name": "Kotak Gilt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 5.9,
-        "trailing_return_5yr_pct": 5.53
+        "trailing_return_3yr_pct": 5.63,
+        "trailing_return_5yr_pct": 5.3
       },
       {
         "amc": "Nippon India Mutual Fund",
         "isin": "INF204K01XP8",
         "name": "Nippon India Gilt Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 6.49,
-        "trailing_return_5yr_pct": 5.68
+        "trailing_return_3yr_pct": 6.31,
+        "trailing_return_5yr_pct": 5.58
+      },
+      {
+        "amc": "PGIM India Mutual Fund",
+        "isin": "INF223J01ND7",
+        "name": "PGIM India Gilt Fund - Direct Plan - Direct Growth",
+        "trailing_return_3yr_pct": 6.05,
+        "trailing_return_5yr_pct": 5.45
       }
     ],
     "Debt Scheme - Liquid Fund": [
       {
-        "amc": "Aditya Birla Sun Life Mutual Fund",
-        "isin": "INF209K01VA3",
-        "name": "Aditya Birla Sun Life Liquid Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 7.03,
-        "trailing_return_5yr_pct": 6.4
-      },
-      {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K01I60",
         "name": "BANDHAN LIQUID Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.96,
-        "trailing_return_5yr_pct": 6.34
+        "trailing_return_3yr_pct": 6.92,
+        "trailing_return_5yr_pct": 6.37
       },
       {
         "amc": "Bank of India Mutual Fund",
         "isin": "INF761K01785",
         "name": "BANK OF INDIA LIQUID FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.99,
-        "trailing_return_5yr_pct": 6.38
-      },
-      {
-        "amc": "Baroda BNP Paribas Mutual Fund",
-        "isin": "INF955L01AL0",
-        "name": "BARODA BNP PARIBAS LIQUID FUND - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 6.94,
-        "trailing_return_5yr_pct": 6.35
+        "trailing_return_3yr_pct": 6.96,
+        "trailing_return_5yr_pct": 6.41
       },
       {
         "amc": "Bajaj Finserv Mutual Fund",
         "isin": "INF0QA701011",
         "name": "Bajaj Finserv Liquid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.99,
+        "trailing_return_3yr_pct": 6.96,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF754K01GM4",
         "name": "Edelweiss Liquid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.03,
-        "trailing_return_5yr_pct": 6.38
+        "trailing_return_3yr_pct": 6.99,
+        "trailing_return_5yr_pct": 6.41
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01JV2",
         "name": "Franklin India Liquid Fund - Direct Plan - Super Institutional Growth",
-        "trailing_return_3yr_pct": 7.01,
+        "trailing_return_3yr_pct": 6.98,
+        "trailing_return_5yr_pct": 6.39
+      },
+      {
+        "amc": "HDFC Mutual Fund",
+        "isin": "INF179KB1HP9",
+        "name": "HDFC Liquid Fund - Direct Plan - Growth Option",
+        "trailing_return_3yr_pct": 6.91,
+        "trailing_return_5yr_pct": 6.35
+      },
+      {
+        "amc": "ICICI Prudential Mutual Fund",
+        "isin": "INF109K01Q49",
+        "name": "ICICI Prudential Liquid Fund - - Direct Plan - Growth",
+        "trailing_return_3yr_pct": 6.93,
         "trailing_return_5yr_pct": 6.36
       }
     ],
@@ -279,18 +272,11 @@
         "amc": "Kotak Mahindra Mutual Fund",
         "isin": "INF174K01VQ5",
         "name": "Kotak Medium Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.08,
-        "trailing_return_5yr_pct": 7.46
+        "trailing_return_3yr_pct": 8.9,
+        "trailing_return_5yr_pct": 7.35
       }
     ],
     "Debt Scheme - Medium to Long Duration Fund": [
-      {
-        "amc": "Bank of India Mutual Fund",
-        "isin": "INF761K01819",
-        "name": "BANK OF INDIA CONSERVATIVE HYBRID FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.75,
-        "trailing_return_5yr_pct": 9.83
-      },
       {
         "amc": "Tata Mutual Fund",
         "isin": "INF277K01OY5",
@@ -304,50 +290,50 @@
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K01M80",
         "name": "Bandhan Money  Market Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.46,
-        "trailing_return_5yr_pct": 6.68
-      },
-      {
-        "amc": "Baroda BNP Paribas Mutual Fund",
-        "isin": "INF955L01ID0",
-        "name": "Baroda BNP Paribas Money Market Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.3,
-        "trailing_return_5yr_pct": 6.47
+        "trailing_return_3yr_pct": 7.41,
+        "trailing_return_5yr_pct": 6.7
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF843K01CE1",
         "name": "Edelweiss Money Market Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.36,
-        "trailing_return_5yr_pct": 6.48
+        "trailing_return_3yr_pct": 7.31,
+        "trailing_return_5yr_pct": 6.5
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01GV8",
         "name": "Franklin India Money Market Fund - Direct Plan - Retail Plan Growth",
-        "trailing_return_3yr_pct": 7.44,
-        "trailing_return_5yr_pct": 6.64
+        "trailing_return_3yr_pct": 7.39,
+        "trailing_return_5yr_pct": 6.66
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179KB1HU9",
         "name": "HDFC Money Market Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.44,
-        "trailing_return_5yr_pct": 6.73
+        "trailing_return_3yr_pct": 7.38,
+        "trailing_return_5yr_pct": 6.74
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109K01R14",
         "name": "ICICI Prudential Money Market Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.42,
-        "trailing_return_5yr_pct": 6.69
+        "trailing_return_3yr_pct": 7.36,
+        "trailing_return_5yr_pct": 6.71
       },
       {
         "amc": "LIC Mutual Fund",
         "isin": "INF767K01RE0",
         "name": "LIC MF Money Market Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.85,
+        "trailing_return_3yr_pct": 6.8,
         "trailing_return_5yr_pct": null
+      },
+      {
+        "amc": "Nippon India Mutual Fund",
+        "isin": "INF204K01ZP3",
+        "name": "Nippon India Money Market Fund - Direct Plan - Growth Option",
+        "trailing_return_3yr_pct": 7.41,
+        "trailing_return_5yr_pct": 6.79
       }
     ],
     "Debt Scheme - Overnight Fund": [
@@ -355,56 +341,56 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209KB1ZH2",
         "name": "ADITYA BIRLA SUN LIFE OVERNIGHT FUND - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 6.09,
-        "trailing_return_5yr_pct": 5.71
+        "trailing_return_3yr_pct": 6.05,
+        "trailing_return_5yr_pct": 5.73
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194KB1447",
         "name": "BANDHAN Overnight Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.09,
-        "trailing_return_5yr_pct": 5.71
+        "trailing_return_3yr_pct": 6.06,
+        "trailing_return_5yr_pct": 5.73
       },
       {
         "amc": "Bank of India Mutual Fund",
         "isin": "INF761K01EU7",
         "name": "BANK OF INDIA OVERNIGHT FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.23,
-        "trailing_return_5yr_pct": 5.83
+        "trailing_return_3yr_pct": 6.19,
+        "trailing_return_5yr_pct": 5.85
       },
       {
         "amc": "Bajaj Finserv Mutual Fund",
         "isin": "INF0QA701177",
         "name": "Bajaj Finserv Overnight Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.11,
+        "trailing_return_3yr_pct": 6.08,
         "trailing_return_5yr_pct": null
-      },
-      {
-        "amc": "Baroda BNP Paribas Mutual Fund",
-        "isin": "INF955L01HV4",
-        "name": "Baroda BNP Paribas Overnight Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 6.1,
-        "trailing_return_5yr_pct": 5.71
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740KA1MC8",
         "name": "DSP Overnight Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.09,
-        "trailing_return_5yr_pct": 5.72
+        "trailing_return_3yr_pct": 6.06,
+        "trailing_return_5yr_pct": 5.74
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF754K01JV9",
         "name": "Edelweiss Overnight Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.04,
-        "trailing_return_5yr_pct": 5.65
+        "trailing_return_3yr_pct": 6.01,
+        "trailing_return_5yr_pct": 5.68
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01SS9",
         "name": "Franklin India Overnight Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.09,
+        "trailing_return_3yr_pct": 6.05,
+        "trailing_return_5yr_pct": 5.7
+      },
+      {
+        "amc": "HDFC Mutual Fund",
+        "isin": "INF179KB1HT1",
+        "name": "HDFC Overnight Fund - Direct Plan - Growth Option",
+        "trailing_return_3yr_pct": 6.0,
         "trailing_return_5yr_pct": 5.68
       }
     ],
@@ -413,22 +399,22 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01XK8",
         "name": "Aditya Birla Sun Life Short Term Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 7.76,
-        "trailing_return_5yr_pct": 6.9
+        "trailing_return_3yr_pct": 7.57,
+        "trailing_return_5yr_pct": 6.82
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01NJ5",
         "name": "DSP Short Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.34,
-        "trailing_return_5yr_pct": 6.28
+        "trailing_return_3yr_pct": 7.16,
+        "trailing_return_5yr_pct": 6.25
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109K013N3",
         "name": "ICICI Prudential Short Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.94,
-        "trailing_return_5yr_pct": 7.2
+        "trailing_return_3yr_pct": 7.71,
+        "trailing_return_5yr_pct": 7.11
       }
     ],
     "Debt Scheme - Ultra Short Duration Fund": [
@@ -436,29 +422,29 @@
         "amc": "HDFC Mutual Fund",
         "isin": "INF179KB15Q6",
         "name": "HDFC Ultra Short Term Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.28,
-        "trailing_return_5yr_pct": 6.56
+        "trailing_return_3yr_pct": 7.22,
+        "trailing_return_5yr_pct": 6.58
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109K01T04",
         "name": "ICICI Prudential Ultra Short term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.46,
-        "trailing_return_5yr_pct": 6.77
+        "trailing_return_3yr_pct": 7.4,
+        "trailing_return_5yr_pct": 6.78
       },
       {
         "amc": "Motilal Oswal Mutual Fund",
         "isin": "INF247L01247",
         "name": "Motilal Oswal Ultra Short Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.47,
-        "trailing_return_5yr_pct": 5.78
+        "trailing_return_3yr_pct": 6.43,
+        "trailing_return_5yr_pct": 5.81
       },
       {
         "amc": "Tata Mutual Fund",
         "isin": "INF277K011T0",
         "name": "Tata Ultra Short Term Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.56,
-        "trailing_return_5yr_pct": 6.78
+        "trailing_return_3yr_pct": 7.5,
+        "trailing_return_5yr_pct": 6.79
       }
     ],
     "ELSS": [
@@ -466,15 +452,15 @@
         "amc": "Bank of India Mutual Fund",
         "isin": "INF761K01DS3",
         "name": "BANK OF INDIA MID CAP TAX FUND SERIES 1 - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 14.97,
-        "trailing_return_5yr_pct": 12.37
+        "trailing_return_3yr_pct": 14.13,
+        "trailing_return_5yr_pct": 11.5
       },
       {
         "amc": "SBI Mutual Fund",
         "isin": "INF200KA1LS9",
         "name": "SBI Long Term Advantage Fund - Series IV - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.82,
-        "trailing_return_5yr_pct": 10.63
+        "trailing_return_3yr_pct": 6.83,
+        "trailing_return_5yr_pct": 8.67
       }
     ],
     "Equity Scheme - Contra Fund": [
@@ -482,15 +468,15 @@
         "amc": "Kotak Mahindra Mutual Fund",
         "isin": "INF174K01KZ9",
         "name": "Kotak Contra Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 15.11,
-        "trailing_return_5yr_pct": 14.58
+        "trailing_return_3yr_pct": 13.78,
+        "trailing_return_5yr_pct": 13.44
       },
       {
         "amc": "SBI Mutual Fund",
         "isin": "INF200K01RA0",
         "name": "SBI CONTRA FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 10.9,
-        "trailing_return_5yr_pct": 15.46
+        "trailing_return_3yr_pct": 9.79,
+        "trailing_return_5yr_pct": 14.08
       }
     ],
     "Equity Scheme - Dividend Yield Fund": [
@@ -498,42 +484,42 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01WA1",
         "name": "Aditya Birla Sun Life Dividend Yield Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 12.58,
-        "trailing_return_5yr_pct": 13.77
+        "trailing_return_3yr_pct": 10.9,
+        "trailing_return_5yr_pct": 12.51
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01IT8",
         "name": "Franklin India Dividend Yield Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 11.3,
-        "trailing_return_5yr_pct": 12.83
+        "trailing_return_3yr_pct": 10.59,
+        "trailing_return_5yr_pct": 11.48
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179KC1AO6",
         "name": "HDFC DIVIDEND YIELD FUND - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 11.08,
-        "trailing_return_5yr_pct": 14.17
+        "trailing_return_3yr_pct": 9.89,
+        "trailing_return_5yr_pct": 12.69
       },
       {
         "amc": "LIC Mutual Fund",
         "isin": "INF397L01LC1",
         "name": "LIC MF Dividend Yield Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 18.91,
+        "trailing_return_3yr_pct": 18.01,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "SBI Mutual Fund",
         "isin": "INF200KA14W3",
         "name": "SBI Dividend Yield Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 11.37,
+        "trailing_return_3yr_pct": 10.18,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Sundaram Mutual Fund",
         "isin": "INF173K01EV3",
         "name": "Sundaram Dividend Yield Fund (Formerly Known as Principal Dividend Yield Fund) - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 9.66,
+        "trailing_return_3yr_pct": 8.61,
         "trailing_return_5yr_pct": null
       }
     ],
@@ -542,57 +528,57 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01UN8",
         "name": "Aditya Birla Sun Life ELSS Tax Saver Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 11.26,
-        "trailing_return_5yr_pct": 8.41
+        "trailing_return_3yr_pct": 9.71,
+        "trailing_return_5yr_pct": 7.35
       },
       {
         "amc": "Baroda BNP Paribas Mutual Fund",
         "isin": "INF251K01HF3",
         "name": "Baroda BNP Paribas ELSS Tax Saver Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 15.36,
+        "trailing_return_3yr_pct": 14.02,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01JS8",
         "name": "Franklin India ELSS Tax Saver Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 10.69,
-        "trailing_return_5yr_pct": 12.2
+        "trailing_return_3yr_pct": 9.39,
+        "trailing_return_5yr_pct": 10.58
       },
       {
         "amc": "ITI Mutual Fund",
         "isin": "INF00XX01390",
         "name": "ITI ELSS Tax Saver Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 17.26,
-        "trailing_return_5yr_pct": 13.48
+        "trailing_return_3yr_pct": 16.01,
+        "trailing_return_5yr_pct": 12.51
       },
       {
         "amc": "Kotak Mahindra Mutual Fund",
         "isin": "INF174K01LI3",
         "name": "Kotak ELSS Tax Saver Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 11.39,
-        "trailing_return_5yr_pct": 12.11
+        "trailing_return_3yr_pct": 10.3,
+        "trailing_return_5yr_pct": 11.41
       },
       {
         "amc": "Motilal Oswal Mutual Fund",
         "isin": "INF247L01569",
         "name": "Motilal Oswal ELSS Tax Saver Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 22.66,
-        "trailing_return_5yr_pct": 17.78
+        "trailing_return_3yr_pct": 20.54,
+        "trailing_return_5yr_pct": 16.95
       },
       {
         "amc": "Navi Mutual Fund",
         "isin": "INF959L01GR6",
         "name": "NAVI ELSS TAX SAVER NIFTY50 INDEX FUND - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 7.0,
+        "trailing_return_3yr_pct": 5.78,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "PGIM India Mutual Fund",
         "isin": "INF663L01FN5",
         "name": "PGIM India ELSS Tax Saver Fund - Direct Plan - Direct Growth",
-        "trailing_return_3yr_pct": 9.28,
-        "trailing_return_5yr_pct": 10.65
+        "trailing_return_3yr_pct": 8.52,
+        "trailing_return_5yr_pct": 9.37
       }
     ],
     "Equity Scheme - Flexi Cap Fund": [
@@ -600,43 +586,43 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01XX1",
         "name": "Aditya Birla Sun Life Flexi Cap Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 14.98,
-        "trailing_return_5yr_pct": 11.99
+        "trailing_return_3yr_pct": 13.92,
+        "trailing_return_5yr_pct": 10.99
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K01W62",
         "name": "BANDHAN Flexi Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 10.71,
-        "trailing_return_5yr_pct": 9.98
+        "trailing_return_3yr_pct": 9.68,
+        "trailing_return_5yr_pct": 9.21
       },
       {
         "amc": "Bank of India Mutual Fund",
         "isin": "INF761K01FF5",
         "name": "BANK OF INDIA FLEXI CAP FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 19.53,
-        "trailing_return_5yr_pct": 16.96
+        "trailing_return_3yr_pct": 18.38,
+        "trailing_return_5yr_pct": 16.43
       },
       {
         "amc": "Bajaj Finserv Mutual Fund",
         "isin": "INF0QA701342",
         "name": "Bajaj Finserv Flexi Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 17.44,
+        "trailing_return_3yr_pct": 15.87,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Baroda BNP Paribas Mutual Fund",
         "isin": "INF251K01QZ2",
         "name": "Baroda BNP Paribas Flexi Cap Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 12.34,
+        "trailing_return_3yr_pct": 11.31,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01PI2",
         "name": "DSP Flexi Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 10.87,
-        "trailing_return_5yr_pct": 9.8
+        "trailing_return_3yr_pct": 9.76,
+        "trailing_return_5yr_pct": 9.05
       }
     ],
     "Equity Scheme - Focused Fund": [
@@ -644,56 +630,56 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01WE3",
         "name": "Aditya Birla Sun Life Focused Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 12.8,
-        "trailing_return_5yr_pct": 10.79
+        "trailing_return_3yr_pct": 11.64,
+        "trailing_return_5yr_pct": 9.7
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K01W21",
         "name": "Bandhan Focused Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 16.04,
-        "trailing_return_5yr_pct": 13.01
+        "trailing_return_3yr_pct": 15.45,
+        "trailing_return_5yr_pct": 12.34
       },
       {
         "amc": "Baroda BNP Paribas Mutual Fund",
         "isin": "INF251K01PN0",
         "name": "Baroda BNP Paribas Focused Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 8.73,
+        "trailing_return_3yr_pct": 7.3,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01OB0",
         "name": "DSP Focused Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 12.8,
-        "trailing_return_5yr_pct": 10.51
+        "trailing_return_3yr_pct": 11.88,
+        "trailing_return_5yr_pct": 10.1
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF754K01OP1",
         "name": "Edelweiss Focused Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 12.94,
+        "trailing_return_3yr_pct": 11.39,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01IW2",
         "name": "Franklin India Focused Equity Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.05,
-        "trailing_return_5yr_pct": 10.29
+        "trailing_return_3yr_pct": 6.32,
+        "trailing_return_5yr_pct": 8.62
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179K01VK7",
         "name": "HDFC Focused Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 15.45,
-        "trailing_return_5yr_pct": 18.57
+        "trailing_return_3yr_pct": 14.41,
+        "trailing_return_5yr_pct": 16.84
       },
       {
         "amc": "ITI Mutual Fund",
         "isin": "INF00XX01CS8",
         "name": "ITI Focused Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 19.01,
+        "trailing_return_3yr_pct": 16.62,
         "trailing_return_5yr_pct": null
       }
     ],
@@ -702,50 +688,50 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01VH8",
         "name": "Aditya Birla Sun Life Large & Mid Cap Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 11.34,
-        "trailing_return_5yr_pct": 8.18
+        "trailing_return_3yr_pct": 10.43,
+        "trailing_return_5yr_pct": 7.08
       },
       {
         "amc": "Bank of India Mutual Fund",
         "isin": "INF761K01652",
         "name": "BANK OF INDIA LARGE & MID CAP FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 13.75,
-        "trailing_return_5yr_pct": 12.27
+        "trailing_return_3yr_pct": 12.29,
+        "trailing_return_5yr_pct": 11.35
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K01V89",
         "name": "Bandhan Large & Mid Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 17.85,
-        "trailing_return_5yr_pct": 17.06
+        "trailing_return_3yr_pct": 16.63,
+        "trailing_return_5yr_pct": 16.15
       },
       {
         "amc": "Baroda BNP Paribas Mutual Fund",
         "isin": "INF955L01JU2",
         "name": "Baroda BNP Paribas Large and Mid Cap fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 13.59,
-        "trailing_return_5yr_pct": 12.92
+        "trailing_return_3yr_pct": 12.76,
+        "trailing_return_5yr_pct": 11.7
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01PL6",
         "name": "DSP Large & Mid Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 13.29,
-        "trailing_return_5yr_pct": 12.05
+        "trailing_return_3yr_pct": 11.89,
+        "trailing_return_5yr_pct": 11.02
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF843K01AL0",
         "name": "Edelweiss Large & Mid Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 14.38,
-        "trailing_return_5yr_pct": 13.63
+        "trailing_return_3yr_pct": 13.05,
+        "trailing_return_5yr_pct": 12.2
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01IN1",
         "name": "Franklin India Large & Mid Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 11.75,
-        "trailing_return_5yr_pct": 10.62
+        "trailing_return_3yr_pct": 10.19,
+        "trailing_return_5yr_pct": 8.93
       }
     ],
     "Equity Scheme - Large Cap Fund": [
@@ -753,50 +739,50 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01YY7",
         "name": "Aditya Birla Sun Life Large Cap Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 9.53,
-        "trailing_return_5yr_pct": 9.41
+        "trailing_return_3yr_pct": 8.45,
+        "trailing_return_5yr_pct": 8.34
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K01Z44",
         "name": "BANDHAN LARGE CAP FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 13.02,
-        "trailing_return_5yr_pct": 10.85
+        "trailing_return_3yr_pct": 11.77,
+        "trailing_return_5yr_pct": 9.91
       },
       {
         "amc": "Bank of India Mutual Fund",
         "isin": "INF761K01FL3",
         "name": "BANK OF INDIA LARGE CAP FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 13.03,
-        "trailing_return_5yr_pct": 9.98
+        "trailing_return_3yr_pct": 11.93,
+        "trailing_return_5yr_pct": 9.27
       },
       {
         "amc": "Baroda BNP Paribas Mutual Fund",
         "isin": "INF251K01HN7",
         "name": "BARODA BNP PARIBAS LARGE CAP FUND - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 11.81,
+        "trailing_return_3yr_pct": 10.34,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01PR3",
         "name": "DSP Large Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 10.67,
-        "trailing_return_5yr_pct": 9.13
+        "trailing_return_3yr_pct": 9.58,
+        "trailing_return_5yr_pct": 8.56
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF754K01BW4",
         "name": "Edelweiss Large Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 10.54,
-        "trailing_return_5yr_pct": 10.32
+        "trailing_return_3yr_pct": 9.19,
+        "trailing_return_5yr_pct": 9.44
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01FN7",
         "name": "Franklin India Large Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.91,
-        "trailing_return_5yr_pct": 8.5
+        "trailing_return_3yr_pct": 8.5,
+        "trailing_return_5yr_pct": 6.98
       }
     ],
     "Equity Scheme - Mid Cap Fund": [
@@ -804,57 +790,57 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01Q30",
         "name": "Aditya Birla Sun Life Midcap Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 15.22,
-        "trailing_return_5yr_pct": 14.56
+        "trailing_return_3yr_pct": 13.54,
+        "trailing_return_5yr_pct": 13.07
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01EH3",
         "name": "Axis Midcap Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 16.32,
-        "trailing_return_5yr_pct": 13.63
+        "trailing_return_3yr_pct": 15.35,
+        "trailing_return_5yr_pct": 12.51
       },
       {
         "amc": "Baroda BNP Paribas Mutual Fund",
         "isin": "INF251K01HQ0",
         "name": "Baroda BNP Paribas Mid Cap Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 17.09,
+        "trailing_return_3yr_pct": 15.27,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01PX1",
         "name": "DSP Midcap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 14.06,
-        "trailing_return_5yr_pct": 12.09
+        "trailing_return_3yr_pct": 12.68,
+        "trailing_return_5yr_pct": 10.72
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF843K01AO4",
         "name": "Edelweiss Mid Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 20.96,
-        "trailing_return_5yr_pct": 19.07
+        "trailing_return_3yr_pct": 19.33,
+        "trailing_return_5yr_pct": 17.49
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01FH9",
         "name": "Franklin India Mid Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 15.5,
-        "trailing_return_5yr_pct": 14.14
+        "trailing_return_3yr_pct": 14.14,
+        "trailing_return_5yr_pct": 12.6
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179K01XQ0",
         "name": "HDFC Mid Cap Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 17.31,
-        "trailing_return_5yr_pct": 19.42
+        "trailing_return_3yr_pct": 15.33,
+        "trailing_return_5yr_pct": 17.65
       },
       {
         "amc": "ITI Mutual Fund",
         "isin": "INF00XX01929",
         "name": "ITI Mid Cap Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 20.26,
-        "trailing_return_5yr_pct": 17.04
+        "trailing_return_3yr_pct": 18.52,
+        "trailing_return_5yr_pct": 15.38
       }
     ],
     "Equity Scheme - Multi Cap Fund": [
@@ -862,35 +848,35 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209KB1Y49",
         "name": "Aditya Birla Sun Life Multi-Cap Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 14.66,
-        "trailing_return_5yr_pct": 13.58
+        "trailing_return_3yr_pct": 13.74,
+        "trailing_return_5yr_pct": 12.54
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194KB1CL0",
         "name": "BANDHAN MULTI CAP FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 12.51,
+        "trailing_return_3yr_pct": 11.59,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Bank of India Mutual Fund",
         "isin": "INF761K01FR0",
         "name": "BANK OF INDIA MULTI CAP FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 17.72,
+        "trailing_return_3yr_pct": 16.61,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Baroda BNP Paribas Mutual Fund",
         "isin": "INF955L01AG0",
         "name": "Baroda BNP Paribas Multi Cap Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 14.63,
-        "trailing_return_5yr_pct": 13.47
+        "trailing_return_3yr_pct": 13.58,
+        "trailing_return_5yr_pct": 11.99
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179KC1BS5",
         "name": "HDFC Multi Cap Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 11.59,
+        "trailing_return_3yr_pct": 10.52,
         "trailing_return_5yr_pct": null
       }
     ],
@@ -899,43 +885,43 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K014W1",
         "name": "Aditya Birla Sun Life Banking and Financial Services Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 10.57,
-        "trailing_return_5yr_pct": 10.99
+        "trailing_return_3yr_pct": 8.4,
+        "trailing_return_5yr_pct": 9.85
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01W23",
         "name": "Axis ESG Integration Strategy Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 9.22,
-        "trailing_return_5yr_pct": 5.93
+        "trailing_return_3yr_pct": 8.0,
+        "trailing_return_5yr_pct": 5.12
       },
       {
         "amc": "Bank of India Mutual Fund",
         "isin": "INF761K01702",
         "name": "BANK OF INDIA MANUFACTURING & INFRASTRUCTURE FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 21.78,
-        "trailing_return_5yr_pct": 21.14
+        "trailing_return_3yr_pct": 21.62,
+        "trailing_return_5yr_pct": 20.79
       },
       {
         "amc": "Baroda BNP Paribas Mutual Fund",
         "isin": "INF955L01971",
         "name": "Baroda BNP Paribas Banking and Financial Services Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 14.78,
-        "trailing_return_5yr_pct": 12.48
+        "trailing_return_3yr_pct": 13.19,
+        "trailing_return_5yr_pct": 11.21
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01IZ5",
         "name": "Franklin Asian Equity Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 23.76,
-        "trailing_return_5yr_pct": 9.64
+        "trailing_return_3yr_pct": 23.84,
+        "trailing_return_5yr_pct": 9.39
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179KC1BG0",
         "name": "HDFC Banking & Financial Services Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 12.31,
-        "trailing_return_5yr_pct": 12.31
+        "trailing_return_3yr_pct": 11.22,
+        "trailing_return_5yr_pct": 11.42
       }
     ],
     "Equity Scheme - Small Cap Fund": [
@@ -943,36 +929,36 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01WN4",
         "name": "Aditya Birla Sun Life Small Cap Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 15.82,
-        "trailing_return_5yr_pct": 14.83
+        "trailing_return_3yr_pct": 15.03,
+        "trailing_return_5yr_pct": 13.46
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194KB1AL4",
         "name": "BANDHAN Small Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 24.87,
-        "trailing_return_5yr_pct": 20.34
+        "trailing_return_3yr_pct": 23.62,
+        "trailing_return_5yr_pct": 19.56
       },
       {
         "amc": "Bank of India Mutual Fund",
         "isin": "INF761K01EP7",
         "name": "BANK OF INDIA SMALL CAP FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 22.12,
-        "trailing_return_5yr_pct": 20.68
+        "trailing_return_3yr_pct": 21.75,
+        "trailing_return_5yr_pct": 20.13
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01QD1",
         "name": "DSP Small Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 17.45,
-        "trailing_return_5yr_pct": 19.01
+        "trailing_return_3yr_pct": 17.58,
+        "trailing_return_5yr_pct": 17.69
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF754K01JN6",
         "name": "Edelweiss Small Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 15.66,
-        "trailing_return_5yr_pct": 17.76
+        "trailing_return_3yr_pct": 14.73,
+        "trailing_return_5yr_pct": 16.33
       }
     ],
     "Equity Scheme - Value Fund": [
@@ -980,57 +966,57 @@
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K01Z85",
         "name": "Bandhan Value Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 10.08,
-        "trailing_return_5yr_pct": 13.16
+        "trailing_return_3yr_pct": 9.27,
+        "trailing_return_5yr_pct": 12.25
       },
       {
         "amc": "Baroda BNP Paribas Mutual Fund",
         "isin": "INF251K01SD5",
         "name": "Baroda BNP Paribas Value Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 9.29,
+        "trailing_return_3yr_pct": 8.1,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740KA1PP3",
         "name": "DSP Value Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 15.98,
-        "trailing_return_5yr_pct": 12.72
+        "trailing_return_3yr_pct": 15.6,
+        "trailing_return_5yr_pct": 12.32
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179K01VC4",
         "name": "HDFC Value Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 15.81,
-        "trailing_return_5yr_pct": 14.31
+        "trailing_return_3yr_pct": 15.0,
+        "trailing_return_5yr_pct": 13.29
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109K012K1",
         "name": "ICICI Prudential Value Fund (erstwhile Value Discovery Fund) - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 11.84,
-        "trailing_return_5yr_pct": 14.8
+        "trailing_return_3yr_pct": 10.41,
+        "trailing_return_5yr_pct": 12.81
       },
       {
         "amc": "ITI Mutual Fund",
         "isin": "INF00XX01AQ6",
         "name": "ITI Value Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 13.53,
-        "trailing_return_5yr_pct": 13.19
+        "trailing_return_3yr_pct": 11.58,
+        "trailing_return_5yr_pct": 11.28
       },
       {
         "amc": "LIC Mutual Fund",
         "isin": "INF397L01KU5",
         "name": "LIC MF Value Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 17.35,
+        "trailing_return_3yr_pct": 17.15,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Nippon India Mutual Fund",
         "isin": "INF204K01K49",
         "name": "Nippon India Value Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 13.77,
-        "trailing_return_5yr_pct": 13.99
+        "trailing_return_3yr_pct": 12.36,
+        "trailing_return_5yr_pct": 12.43
       }
     ],
     "Equity Schemes - Contra Fund": [
@@ -1038,8 +1024,8 @@
         "amc": "Invesco Mutual Fund",
         "isin": "INF205K01LE4",
         "name": "Invesco India Contra Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 14.9,
-        "trailing_return_5yr_pct": 13.73
+        "trailing_return_3yr_pct": 13.1,
+        "trailing_return_5yr_pct": 12.27
       }
     ],
     "Equity Schemes - Dividend Yield Fund": [
@@ -1047,15 +1033,15 @@
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109KA1UA0",
         "name": "ICICI Prudential Dividend Yield Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 15.1,
-        "trailing_return_5yr_pct": 17.35
+        "trailing_return_3yr_pct": 13.5,
+        "trailing_return_5yr_pct": 15.28
       },
       {
         "amc": "UTI Mutual Fund",
         "isin": "INF789F01SW4",
         "name": "UTI - Dividend Yield Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 12.6,
-        "trailing_return_5yr_pct": 10.89
+        "trailing_return_3yr_pct": 11.54,
+        "trailing_return_5yr_pct": 9.91
       }
     ],
     "Equity Schemes - ELSS- Tax Saver Fund": [
@@ -1063,50 +1049,50 @@
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01EW2",
         "name": "Axis ELSS- Tax Saver Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 11.29,
-        "trailing_return_5yr_pct": 6.21
+        "trailing_return_3yr_pct": 9.55,
+        "trailing_return_5yr_pct": 5.09
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K01Y29",
         "name": "BANDHAN ELSS - Tax Saver Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.43,
-        "trailing_return_5yr_pct": 11.97
+        "trailing_return_3yr_pct": 8.63,
+        "trailing_return_5yr_pct": 10.71
       },
       {
         "amc": "Bank of India Mutual Fund",
         "isin": "INF761K01884",
         "name": "BANK OF INDIA ELSS TAX SAVER FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 12.56,
-        "trailing_return_5yr_pct": 11.56
+        "trailing_return_3yr_pct": 11.45,
+        "trailing_return_5yr_pct": 11.11
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01EL8",
         "name": "Canara Robeco ELSS - Tax Saver Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 11.62,
-        "trailing_return_5yr_pct": 10.32
+        "trailing_return_3yr_pct": 10.45,
+        "trailing_return_5yr_pct": 9.5
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01OK1",
         "name": "DSP ELSS Tax Saver Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 12.95,
-        "trailing_return_5yr_pct": 12.02
+        "trailing_return_3yr_pct": 11.67,
+        "trailing_return_5yr_pct": 11.03
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF754K01CA8",
         "name": "Edelweiss ELSS Tax Saver Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 13.85,
-        "trailing_return_5yr_pct": 12.43
+        "trailing_return_3yr_pct": 12.31,
+        "trailing_return_5yr_pct": 11.18
       },
       {
         "amc": "Groww Mutual Fund",
         "isin": "INF666M01DK7",
         "name": "Groww ELSS Tax Saver Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.64,
-        "trailing_return_5yr_pct": 9.03
+        "trailing_return_3yr_pct": 8.09,
+        "trailing_return_5yr_pct": 7.83
       }
     ],
     "Equity Schemes - Flexi Cap Fund": [
@@ -1114,42 +1100,42 @@
         "amc": "360 ONE Mutual Fund",
         "isin": "INF579M01AS1",
         "name": "360 ONE Flexicap Fund - Direct Plan - GROWTH Option",
-        "trailing_return_3yr_pct": 17.43,
+        "trailing_return_3yr_pct": 16.67,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01B28",
         "name": "Axis Flexi Cap Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 14.37,
-        "trailing_return_5yr_pct": 9.44
+        "trailing_return_3yr_pct": 13.19,
+        "trailing_return_5yr_pct": 8.5
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01EF0",
         "name": "Canara Robeco Flexi Cap Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 11.8,
-        "trailing_return_5yr_pct": 9.84
+        "trailing_return_3yr_pct": 10.58,
+        "trailing_return_5yr_pct": 8.96
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF336L01DH5",
         "name": "HSBC Flexi Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 16.24,
-        "trailing_return_5yr_pct": 13.69
+        "trailing_return_3yr_pct": 14.9,
+        "trailing_return_5yr_pct": 12.76
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109KC1R14",
         "name": "ICICI Prudential Flexi Cap fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 16.25,
-        "trailing_return_5yr_pct": 15.46
+        "trailing_return_3yr_pct": 15.14,
+        "trailing_return_5yr_pct": 14.44
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205KA1494",
         "name": "Invesco India Flexi Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 18.17,
+        "trailing_return_3yr_pct": 16.4,
         "trailing_return_5yr_pct": null
       }
     ],
@@ -1158,57 +1144,57 @@
         "amc": "360 ONE Mutual Fund",
         "isin": "INF579M01902",
         "name": "360 ONE Focused Fund - Direct Plan - GROWTH Option",
-        "trailing_return_3yr_pct": 11.63,
-        "trailing_return_5yr_pct": 11.66
+        "trailing_return_3yr_pct": 10.42,
+        "trailing_return_5yr_pct": 10.75
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01CQ8",
         "name": "Axis Focused Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 10.89,
-        "trailing_return_5yr_pct": 4.9
+        "trailing_return_3yr_pct": 8.99,
+        "trailing_return_5yr_pct": 3.44
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01JQ6",
         "name": "Canara Robeco Focused Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 12.89,
-        "trailing_return_5yr_pct": 12.19
+        "trailing_return_3yr_pct": 11.54,
+        "trailing_return_5yr_pct": 11.32
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF336L01PB2",
         "name": "HSBC Focused Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 15.05,
-        "trailing_return_5yr_pct": 12.93
+        "trailing_return_3yr_pct": 13.91,
+        "trailing_return_5yr_pct": 11.89
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109K018N2",
         "name": "ICICI Prudential Focused Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 16.62,
-        "trailing_return_5yr_pct": 15.75
+        "trailing_return_3yr_pct": 15.75,
+        "trailing_return_5yr_pct": 14.28
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205KA1213",
         "name": "Invesco India Focused Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 21.63,
-        "trailing_return_5yr_pct": 15.85
+        "trailing_return_3yr_pct": 19.94,
+        "trailing_return_5yr_pct": 14.68
       },
       {
         "amc": "JM Financial Mutual Fund",
         "isin": "INF192K01BW7",
         "name": "JM Focused Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 12.18,
-        "trailing_return_5yr_pct": 13.53
+        "trailing_return_3yr_pct": 11.19,
+        "trailing_return_5yr_pct": 12.11
       },
       {
         "amc": "Mahindra Manulife Mutual Fund",
         "isin": "INF174V01AG7",
         "name": "Mahindra Manulife Focused Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 13.59,
-        "trailing_return_5yr_pct": 14.02
+        "trailing_return_3yr_pct": 11.63,
+        "trailing_return_5yr_pct": 12.56
       }
     ],
     "Equity Schemes - Large & Mid Cap Fund": [
@@ -1216,36 +1202,36 @@
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01J46",
         "name": "Axis Large & Mid Cap Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 15.4,
-        "trailing_return_5yr_pct": 12.8
+        "trailing_return_3yr_pct": 14.31,
+        "trailing_return_5yr_pct": 11.59
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01EI4",
         "name": "Canara Robeco Large and Mid Cap Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 12.67,
-        "trailing_return_5yr_pct": 10.97
+        "trailing_return_3yr_pct": 11.49,
+        "trailing_return_5yr_pct": 9.81
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179KA1RQ7",
         "name": "HDFC Large & Mid Cap Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 12.9,
-        "trailing_return_5yr_pct": 15.07
+        "trailing_return_3yr_pct": 11.55,
+        "trailing_return_5yr_pct": 13.31
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF336L01NV5",
         "name": "HSBC Large & Mid Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 17.89,
-        "trailing_return_5yr_pct": 15.16
+        "trailing_return_3yr_pct": 16.42,
+        "trailing_return_5yr_pct": 13.85
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205K01MA0",
         "name": "Invesco India Large & Mid Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 22.77,
-        "trailing_return_5yr_pct": 17.58
+        "trailing_return_3yr_pct": 21.47,
+        "trailing_return_5yr_pct": 16.48
       }
     ],
     "Equity Schemes - Large Cap Fund": [
@@ -1253,50 +1239,50 @@
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01DP8",
         "name": "Axis Large Cap Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 9.31,
-        "trailing_return_5yr_pct": 6.02
+        "trailing_return_3yr_pct": 7.97,
+        "trailing_return_5yr_pct": 5.16
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01FR2",
         "name": "Canara Robeco Large Cap Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 10.4,
-        "trailing_return_5yr_pct": 9.2
+        "trailing_return_3yr_pct": 9.14,
+        "trailing_return_5yr_pct": 8.32
       },
       {
         "amc": "Groww Mutual Fund",
         "isin": "INF666M01600",
         "name": "Groww Large Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 10.8,
-        "trailing_return_5yr_pct": 9.63
+        "trailing_return_3yr_pct": 9.44,
+        "trailing_return_5yr_pct": 8.48
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF336L01CM7",
         "name": "HSBC Large Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 10.15,
-        "trailing_return_5yr_pct": 9.31
+        "trailing_return_3yr_pct": 9.27,
+        "trailing_return_5yr_pct": 8.62
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205K01LB0",
         "name": "Invesco India Large Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 14.1,
-        "trailing_return_5yr_pct": 11.98
+        "trailing_return_3yr_pct": 12.92,
+        "trailing_return_5yr_pct": 10.7
       },
       {
         "amc": "JM Financial Mutual Fund",
         "isin": "INF192K01BZ0",
         "name": "JM Large Cap Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 10.9,
-        "trailing_return_5yr_pct": 11.03
+        "trailing_return_3yr_pct": 9.55,
+        "trailing_return_5yr_pct": 9.78
       },
       {
         "amc": "Mahindra Manulife Mutual Fund",
         "isin": "INF174V01721",
         "name": "Mahindra Manulife Large Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.77,
-        "trailing_return_5yr_pct": 8.93
+        "trailing_return_3yr_pct": 7.37,
+        "trailing_return_5yr_pct": 7.81
       }
     ],
     "Equity Schemes - Mid Cap Fund": [
@@ -1304,42 +1290,42 @@
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194KB1DJ2",
         "name": "BANDHAN MID CAP FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 18.36,
+        "trailing_return_3yr_pct": 17.05,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01KI1",
         "name": "Canara Robeco Mid Cap Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 17.07,
+        "trailing_return_3yr_pct": 16.18,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF917K01FZ1",
         "name": "HSBC Midcap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 24.61,
+        "trailing_return_3yr_pct": 22.16,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109K011N7",
         "name": "ICICI Prudential Mid Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 21.58,
-        "trailing_return_5yr_pct": 18.17
+        "trailing_return_3yr_pct": 20.01,
+        "trailing_return_5yr_pct": 16.25
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205K01MV6",
         "name": "Invesco India Mid Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 23.38,
-        "trailing_return_5yr_pct": 20.2
+        "trailing_return_3yr_pct": 22.2,
+        "trailing_return_5yr_pct": 18.71
       },
       {
         "amc": "JM Financial Mutual Fund",
         "isin": "INF192K01MV6",
         "name": "JM Mid Cap Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 18.79,
+        "trailing_return_3yr_pct": 17.98,
         "trailing_return_5yr_pct": null
       }
     ],
@@ -1348,42 +1334,42 @@
         "amc": "Axis Mutual Fund",
         "isin": "INF846K013E0",
         "name": "Axis Multicap Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 19.8,
+        "trailing_return_3yr_pct": 18.72,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01KO9",
         "name": "Canara Robeco Multi Cap Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 14.58,
+        "trailing_return_3yr_pct": 13.15,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF336L01QN5",
         "name": "HSBC Multi Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 18.63,
+        "trailing_return_3yr_pct": 17.16,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109K014O9",
         "name": "ICICI Prudential Multi Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 16.04,
-        "trailing_return_5yr_pct": 15.46
+        "trailing_return_3yr_pct": 14.65,
+        "trailing_return_5yr_pct": 14.12
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205K01MS2",
         "name": "Invesco India Multi Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 13.89,
-        "trailing_return_5yr_pct": 12.55
+        "trailing_return_3yr_pct": 12.05,
+        "trailing_return_5yr_pct": 11.29
       },
       {
         "amc": "Kotak Mahindra Mutual Fund",
         "isin": "INF174KA1HV3",
         "name": "Kotak Multi Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 16.45,
+        "trailing_return_3yr_pct": 15.91,
         "trailing_return_5yr_pct": null
       }
     ],
@@ -1392,22 +1378,22 @@
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194KB1GB2",
         "name": "BANDHAN FINANCIAL SERVICES FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 15.37,
+        "trailing_return_3yr_pct": 13.67,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF917K01FW8",
         "name": "HSBC Infrastructure Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 16.0,
+        "trailing_return_3yr_pct": 14.99,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205K01KY4",
         "name": "Invesco India Financial Services Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 18.32,
-        "trailing_return_5yr_pct": 14.49
+        "trailing_return_3yr_pct": 15.86,
+        "trailing_return_5yr_pct": 13.16
       }
     ],
     "Equity Schemes - Small Cap Fund": [
@@ -1415,35 +1401,35 @@
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01K35",
         "name": "Axis Small Cap Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 15.76,
-        "trailing_return_5yr_pct": 16.69
+        "trailing_return_3yr_pct": 15.12,
+        "trailing_return_5yr_pct": 15.68
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01JC6",
         "name": "Canara Robeco Small Cap Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 12.9,
-        "trailing_return_5yr_pct": 15.5
+        "trailing_return_3yr_pct": 11.69,
+        "trailing_return_5yr_pct": 14.18
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109K015M0",
         "name": "ICICI Prudential Small Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 10.92,
-        "trailing_return_5yr_pct": 14.98
+        "trailing_return_3yr_pct": 11.47,
+        "trailing_return_5yr_pct": 13.93
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205K013T3",
         "name": "Invesco India Small Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 22.81,
-        "trailing_return_5yr_pct": 20.65
+        "trailing_return_3yr_pct": 21.92,
+        "trailing_return_5yr_pct": 19.46
       },
       {
         "amc": "Mahindra Manulife Mutual Fund",
         "isin": "INF174V01BK7",
         "name": "Mahindra Manulife Small Cap Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 20.98,
+        "trailing_return_3yr_pct": 19.78,
         "trailing_return_5yr_pct": null
       }
     ],
@@ -1452,35 +1438,35 @@
         "amc": "360 ONE Mutual Fund",
         "isin": "INF579M01AI2",
         "name": "360 ONE QUANT FUND - Direct Plan - GROWTH Option",
-        "trailing_return_3yr_pct": 15.16,
+        "trailing_return_3yr_pct": 13.65,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K016N4",
         "name": "Axis Business Cycles Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 13.71,
+        "trailing_return_3yr_pct": 12.66,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01DU1",
         "name": "Canara Robeco Consumption Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 10.71,
-        "trailing_return_5yr_pct": 11.37
+        "trailing_return_3yr_pct": 9.63,
+        "trailing_return_5yr_pct": 10.67
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179KC1GI5",
         "name": "HDFC Defence Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 37.56,
+        "trailing_return_3yr_pct": 36.86,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF917K01RI2",
         "name": "HSBC Business Cycles Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 16.37,
+        "trailing_return_3yr_pct": 15.57,
         "trailing_return_5yr_pct": null
       }
     ],
@@ -1489,36 +1475,36 @@
         "amc": "Axis Mutual Fund",
         "isin": "INF846K010C0",
         "name": "Axis Value Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 18.33,
-        "trailing_return_5yr_pct": null
+        "trailing_return_3yr_pct": 16.95,
+        "trailing_return_5yr_pct": 15.6
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01JW4",
         "name": "Canara Robeco Value Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 11.21,
-        "trailing_return_5yr_pct": 14.09
+        "trailing_return_3yr_pct": 9.93,
+        "trailing_return_5yr_pct": 12.86
       },
       {
         "amc": "Groww Mutual Fund",
         "isin": "INF666M01BE4",
         "name": "Groww Value Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 12.77,
-        "trailing_return_5yr_pct": 11.55
+        "trailing_return_3yr_pct": 11.76,
+        "trailing_return_5yr_pct": 11.02
+      },
+      {
+        "amc": "HSBC Mutual Fund",
+        "isin": "INF917K01HD4",
+        "name": "HSBC Value Fund - Direct Plan - Growth",
+        "trailing_return_3yr_pct": 14.44,
+        "trailing_return_5yr_pct": null
       },
       {
         "amc": "JM Financial Mutual Fund",
         "isin": "INF192K01BT3",
         "name": "JM Value Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 12.19,
-        "trailing_return_5yr_pct": 15.31
-      },
-      {
-        "amc": "UTI Mutual Fund",
-        "isin": "INF789F01VB2",
-        "name": "UTI Value Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 12.07,
-        "trailing_return_5yr_pct": 11.29
+        "trailing_return_3yr_pct": 11.7,
+        "trailing_return_5yr_pct": 14.42
       }
     ],
     "Exchange Traded Funds (ETFs) - Equity ETF": [
@@ -1526,8 +1512,8 @@
         "amc": "UTI Mutual Fund",
         "isin": "INF789F1AUU3",
         "name": "UTI - BSE Sensex Next 50 Exchange Traded Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 15.67,
-        "trailing_return_5yr_pct": 14.32
+        "trailing_return_3yr_pct": 14.63,
+        "trailing_return_5yr_pct": 12.86
       }
     ],
     "Exchange Traded Funds (ETFs) - Gold ETF": [
@@ -1535,8 +1521,8 @@
         "amc": "UTI Mutual Fund",
         "isin": "INF789F1AUX7",
         "name": "UTI - Gold Exchange Traded Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 36.1,
-        "trailing_return_5yr_pct": 25.54
+        "trailing_return_3yr_pct": 35.9,
+        "trailing_return_5yr_pct": 25.14
       }
     ],
     "Exchange Traded Funds (ETFs) - Silver ETF": [
@@ -1544,7 +1530,7 @@
         "amc": "UTI Mutual Fund",
         "isin": "INF789F1AYK6",
         "name": "UTI Silver Exchange Traded Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 46.03,
+        "trailing_return_3yr_pct": 43.41,
         "trailing_return_5yr_pct": null
       }
     ],
@@ -1553,87 +1539,87 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209KB16F2",
         "name": "Aditya Birla Sun Life Silver ETF FOF - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 45.95,
+        "trailing_return_3yr_pct": 43.06,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01DS2",
         "name": "Axis Gold Fund - Direct Plan - Growth option",
-        "trailing_return_3yr_pct": 35.54,
-        "trailing_return_5yr_pct": 25.2
+        "trailing_return_3yr_pct": 34.72,
+        "trailing_return_5yr_pct": 24.71
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF336L01ID3",
         "name": "HSBC Aggressive Hybrid Active FOF (erstwhile HSBC Managed Solutions India - Growth fund) - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 12.75,
-        "trailing_return_5yr_pct": 11.13
+        "trailing_return_3yr_pct": 11.83,
+        "trailing_return_5yr_pct": 10.31
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205K01NJ9",
         "name": "Invesco India Gold ETF Fund of Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 35.45,
-        "trailing_return_5yr_pct": 25.22
+        "trailing_return_3yr_pct": 34.89,
+        "trailing_return_5yr_pct": 24.73
       }
     ],
     "Hybrid Scheme - Aggressive Hybrid Fund": [
       {
-        "amc": "Baroda BNP Paribas Mutual Fund",
-        "isin": "INF251K01OZ7",
-        "name": "BARODA BNP PARIBAS AGGRESSIVE HYBRID FUND - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 11.27,
-        "trailing_return_5yr_pct": null
-      },
-      {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194KA1U56",
         "name": "Bandhan Aggressive Hybrid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 14.44,
-        "trailing_return_5yr_pct": 11.93
+        "trailing_return_3yr_pct": 13.65,
+        "trailing_return_5yr_pct": 11.28
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01NY4",
         "name": "DSP Aggressive Hybrid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.57,
-        "trailing_return_5yr_pct": 8.72
+        "trailing_return_3yr_pct": 9.0,
+        "trailing_return_5yr_pct": 8.34
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF754K01CE0",
         "name": "Edelweiss Aggressive Hybrid Fund - Direct Plan - growth",
-        "trailing_return_3yr_pct": 13.5,
-        "trailing_return_5yr_pct": 13.72
+        "trailing_return_3yr_pct": 12.21,
+        "trailing_return_5yr_pct": 12.86
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01FZ1",
         "name": "Franklin India Aggressive Hybrid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.78,
-        "trailing_return_5yr_pct": 9.84
+        "trailing_return_3yr_pct": 8.89,
+        "trailing_return_5yr_pct": 8.99
       },
       {
         "amc": "Kotak Mahindra Mutual Fund",
         "isin": "INF174K01LL7",
         "name": "Kotak Aggressive Hybrid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 12.88,
-        "trailing_return_5yr_pct": 12.56
+        "trailing_return_3yr_pct": 11.9,
+        "trailing_return_5yr_pct": 11.44
       },
       {
         "amc": "LIC Mutual Fund",
         "isin": "INF767K01ED0",
         "name": "LIC MF Aggressive Hybrid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 11.49,
-        "trailing_return_5yr_pct": 9.18
+        "trailing_return_3yr_pct": 11.54,
+        "trailing_return_5yr_pct": 9.15
       },
       {
         "amc": "Navi Mutual Fund",
         "isin": "INF959L01CX3",
         "name": "Navi Aggressive Hybrid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 12.18,
-        "trailing_return_5yr_pct": 11.63
+        "trailing_return_3yr_pct": 12.1,
+        "trailing_return_5yr_pct": 11.16
+      },
+      {
+        "amc": "PGIM India Mutual Fund",
+        "isin": "INF663L01GX2",
+        "name": "PGIM India Aggressive Hybrid Equity Fund - Direct Plan - Direct Growth",
+        "trailing_return_3yr_pct": 8.58,
+        "trailing_return_5yr_pct": 6.51
       }
     ],
     "Hybrid Scheme - Arbitrage Fund": [
@@ -1641,43 +1627,50 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01VP1",
         "name": "ADITYA BIRLA SUN LIFE ARBITRAGE FUND - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 7.46,
-        "trailing_return_5yr_pct": 6.77
+        "trailing_return_3yr_pct": 7.43,
+        "trailing_return_5yr_pct": 6.82
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K01Y60",
         "name": "BANDHAN Arbitrage Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.34,
-        "trailing_return_5yr_pct": 6.71
+        "trailing_return_3yr_pct": 7.29,
+        "trailing_return_5yr_pct": 6.75
       },
       {
         "amc": "Bank of India Mutual Fund",
         "isin": "INF761K01ED3",
         "name": "BANK OF INDIA ARBITRAGE FUND - Direct Plan - Growth",
         "trailing_return_3yr_pct": 6.79,
-        "trailing_return_5yr_pct": 5.84
+        "trailing_return_5yr_pct": 5.9
       },
       {
         "amc": "Baroda BNP Paribas Mutual Fund",
         "isin": "INF251K01OT0",
         "name": "BARODA BNP PARIBAS ARBITRAGE FUND - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.25,
+        "trailing_return_3yr_pct": 7.21,
+        "trailing_return_5yr_pct": null
+      },
+      {
+        "amc": "Bajaj Finserv Mutual Fund",
+        "isin": "INF0QA701524",
+        "name": "Bajaj Finserv Arbitrage Fund - Direct Plan - Growth",
+        "trailing_return_3yr_pct": 7.01,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740KA1DN4",
         "name": "DSP Arbitrage fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.25,
-        "trailing_return_5yr_pct": 6.61
+        "trailing_return_3yr_pct": 7.21,
+        "trailing_return_5yr_pct": 6.65
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF754K01EA4",
         "name": "Edelweiss Arbitrage Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.44,
-        "trailing_return_5yr_pct": 6.87
+        "trailing_return_3yr_pct": 7.39,
+        "trailing_return_5yr_pct": 6.9
       }
     ],
     "Hybrid Scheme - Conservative Hybrid Fund": [
@@ -1685,57 +1678,50 @@
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K015B9",
         "name": "BANDHAN CONSERVATIVE HYBRID FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.34,
-        "trailing_return_5yr_pct": 5.88
-      },
-      {
-        "amc": "Baroda BNP Paribas Mutual Fund",
-        "isin": "INF251K01HR8",
-        "name": "BARODA BNP PARIBAS CONSERVATIVE HYBRID FUND - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 8.61,
-        "trailing_return_5yr_pct": null
+        "trailing_return_3yr_pct": 7.02,
+        "trailing_return_5yr_pct": 5.7
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01GF1",
         "name": "Franklin India Conservative Hybrid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.85,
-        "trailing_return_5yr_pct": 7.31
+        "trailing_return_3yr_pct": 7.5,
+        "trailing_return_5yr_pct": 7.11
       },
       {
         "amc": "LIC Mutual Fund",
         "isin": "INF767K01EO7",
         "name": "LIC MF Conservative Hybrid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.9,
-        "trailing_return_5yr_pct": 5.8
+        "trailing_return_3yr_pct": 6.48,
+        "trailing_return_5yr_pct": 5.54
       },
       {
         "amc": "Nippon India Mutual Fund",
         "isin": "INF204K01YV4",
         "name": "Nippon India Conservative Hybrid Fund (Existing number of Segregated Portfolios - 1) - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 8.78,
-        "trailing_return_5yr_pct": 8.34
+        "trailing_return_3yr_pct": 8.5,
+        "trailing_return_5yr_pct": 8.15
       },
       {
         "amc": "PPFAS Mutual Fund",
         "isin": "INF879O01175",
         "name": "Parag Parikh Conservative Hybrid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.53,
-        "trailing_return_5yr_pct": 9.52
+        "trailing_return_3yr_pct": 9.13,
+        "trailing_return_5yr_pct": 9.03
       },
       {
         "amc": "SBI Mutual Fund",
         "isin": "INF200K01TS8",
         "name": "SBI CONSERVATIVE HYBRID FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.49,
-        "trailing_return_5yr_pct": 8.76
+        "trailing_return_3yr_pct": 8.11,
+        "trailing_return_5yr_pct": 8.48
       },
       {
         "amc": "Sundaram Mutual Fund",
         "isin": "INF903J01OP6",
         "name": "Sundaram Conservative Hybrid Fund (Formerly Known as Sundaram Debt Oriented Hybrid Fund) - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 5.49,
-        "trailing_return_5yr_pct": 6.8
+        "trailing_return_3yr_pct": 5.09,
+        "trailing_return_5yr_pct": 5.15
       }
     ],
     "Hybrid Scheme - Dynamic Asset Allocation or Balanced Advantage": [
@@ -1743,50 +1729,50 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF084M01DJ5",
         "name": "Aditya Birla Sun Life Balanced Advantage Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 11.93,
-        "trailing_return_5yr_pct": 10.57
+        "trailing_return_3yr_pct": 11.14,
+        "trailing_return_5yr_pct": 9.85
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194KA1UH1",
         "name": "BANDHAN Balanced Advantage Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 10.1,
-        "trailing_return_5yr_pct": 8.34
+        "trailing_return_3yr_pct": 9.4,
+        "trailing_return_5yr_pct": 7.95
       },
       {
         "amc": "Bank of India Mutual Fund",
         "isin": "INF761K01BO6",
         "name": "BANK OF INDIA BALANCED ADVANTAGE FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.13,
-        "trailing_return_5yr_pct": 10.6
+        "trailing_return_3yr_pct": 8.53,
+        "trailing_return_5yr_pct": 10.1
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01K81",
         "name": "DSP Dynamic Asset Allocation Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 10.55,
-        "trailing_return_5yr_pct": 8.84
+        "trailing_return_3yr_pct": 9.82,
+        "trailing_return_5yr_pct": 8.4
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF754K01BS2",
         "name": "Edelweiss Balanced Advantage Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 10.81,
-        "trailing_return_5yr_pct": 9.69
+        "trailing_return_3yr_pct": 10.02,
+        "trailing_return_5yr_pct": 9.02
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01WQ5",
         "name": "Franklin India Balanced Advantage Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.9,
+        "trailing_return_3yr_pct": 9.01,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179K01WA6",
         "name": "HDFC Balanced Advantage Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 11.34,
-        "trailing_return_5yr_pct": 14.88
+        "trailing_return_3yr_pct": 10.21,
+        "trailing_return_5yr_pct": 13.34
       }
     ],
     "Hybrid Scheme - Equity Savings": [
@@ -1794,50 +1780,50 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209KA1TP9",
         "name": "Aditya Birla Sun Life Equity Savings Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 8.11,
-        "trailing_return_5yr_pct": 6.66
+        "trailing_return_3yr_pct": 7.7,
+        "trailing_return_5yr_pct": 6.53
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K01Z02",
         "name": "BANDHAN EQUITY SAVINGS FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.15,
-        "trailing_return_5yr_pct": 6.74
-      },
-      {
-        "amc": "Baroda BNP Paribas Mutual Fund",
-        "isin": "INF955L01IL3",
-        "name": "Baroda BNP Paribas Equity Savings Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 9.44,
-        "trailing_return_5yr_pct": 8.45
+        "trailing_return_3yr_pct": 6.86,
+        "trailing_return_5yr_pct": 6.61
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740KA1504",
         "name": "DSP Equity Savings Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.28,
-        "trailing_return_5yr_pct": 7.51
+        "trailing_return_3yr_pct": 8.12,
+        "trailing_return_5yr_pct": 7.29
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF843K01KC8",
         "name": "Edelweiss Equity Savings Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 11.44,
-        "trailing_return_5yr_pct": 9.76
+        "trailing_return_3yr_pct": 11.13,
+        "trailing_return_5yr_pct": 9.57
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01PD7",
         "name": "Franklin India Equity Savings Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.29,
-        "trailing_return_5yr_pct": 7.32
+        "trailing_return_3yr_pct": 7.01,
+        "trailing_return_5yr_pct": 6.89
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179K01XT4",
         "name": "HDFC Equity Savings Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 8.35,
-        "trailing_return_5yr_pct": 8.49
+        "trailing_return_3yr_pct": 7.87,
+        "trailing_return_5yr_pct": 7.95
+      },
+      {
+        "amc": "Kotak Mahindra Mutual Fund",
+        "isin": "INF174K01D28",
+        "name": "Kotak Equity Savings Fund - Direct Plan - Growth",
+        "trailing_return_3yr_pct": 9.77,
+        "trailing_return_5yr_pct": 9.89
       }
     ],
     "Hybrid Scheme - Multi Asset Allocation": [
@@ -1845,21 +1831,21 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209KB15R9",
         "name": "Aditya Birla Sun Life Multi Asset Allocation Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 16.08,
+        "trailing_return_3yr_pct": 15.41,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Baroda BNP Paribas Mutual Fund",
         "isin": "INF251K01RF2",
         "name": "Baroda BNP Paribas Multi Asset Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 14.66,
+        "trailing_return_3yr_pct": 13.65,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF754K01RS8",
         "name": "Edelweiss Multi Asset Allocation Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.56,
+        "trailing_return_3yr_pct": 7.5,
         "trailing_return_5yr_pct": null
       }
     ],
@@ -1868,57 +1854,57 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01ZC0",
         "name": "Aditya Birla Sun Life Aggressive Hybrid Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 10.05,
-        "trailing_return_5yr_pct": 8.31
+        "trailing_return_3yr_pct": 9.04,
+        "trailing_return_5yr_pct": 7.56
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01E25",
         "name": "Axis Aggressive Hybrid Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 9.75,
-        "trailing_return_5yr_pct": 7.27
+        "trailing_return_3yr_pct": 8.82,
+        "trailing_return_5yr_pct": 6.43
       },
       {
         "amc": "Bank of India Mutual Fund",
         "isin": "INF761K01DM6",
         "name": "BANK OF INDIA AGGRESSIVE HYBRID FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 17.33,
-        "trailing_return_5yr_pct": 15.09
+        "trailing_return_3yr_pct": 16.26,
+        "trailing_return_5yr_pct": 14.7
+      },
+      {
+        "amc": "Baroda BNP Paribas Mutual Fund",
+        "isin": "INF251K01OZ7",
+        "name": "BARODA BNP PARIBAS AGGRESSIVE HYBRID FUND - Direct Plan - Growth Option",
+        "trailing_return_3yr_pct": 10.24,
+        "trailing_return_5yr_pct": null
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01EZ8",
         "name": "Canara Robeco Aggressive Hybrid Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 10.84,
-        "trailing_return_5yr_pct": 9.55
+        "trailing_return_3yr_pct": 10.02,
+        "trailing_return_5yr_pct": 8.86
       },
       {
         "amc": "Groww Mutual Fund",
         "isin": "INF666M01FA3",
         "name": "Groww Aggressive Hybrid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.26,
-        "trailing_return_5yr_pct": 8.82
+        "trailing_return_3yr_pct": 8.2,
+        "trailing_return_5yr_pct": 7.62
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179K01XZ1",
         "name": "HDFC Aggressive Hybrid Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 6.53,
-        "trailing_return_5yr_pct": 8.55
+        "trailing_return_3yr_pct": 5.63,
+        "trailing_return_5yr_pct": 7.71
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF917K01LE4",
         "name": "HSBC Aggressive Hybrid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 13.44,
+        "trailing_return_3yr_pct": 12.57,
         "trailing_return_5yr_pct": null
-      },
-      {
-        "amc": "ICICI Prudential Mutual Fund",
-        "isin": "INF109K01Y07",
-        "name": "ICICI Prudential Aggressive Hybrid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 13.34,
-        "trailing_return_5yr_pct": 15.2
       }
     ],
     "Hybrid Schemes - Arbitrage Fund": [
@@ -1926,36 +1912,36 @@
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01PZ1",
         "name": "Axis Arbitrage Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.39,
-        "trailing_return_5yr_pct": 6.79
+        "trailing_return_3yr_pct": 7.35,
+        "trailing_return_5yr_pct": 6.82
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF917K01QR5",
         "name": "HSBC Arbitrage Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.24,
+        "trailing_return_3yr_pct": 7.22,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109K016O4",
         "name": "ICICI Prudential Arbitrage Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.35,
-        "trailing_return_5yr_pct": 6.71
+        "trailing_return_3yr_pct": 7.3,
+        "trailing_return_5yr_pct": 6.75
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205K01KR8",
         "name": "Invesco India Arbitrage Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.5,
-        "trailing_return_5yr_pct": 7.02
+        "trailing_return_3yr_pct": 7.44,
+        "trailing_return_5yr_pct": 7.07
       },
       {
         "amc": "JM Financial Mutual Fund",
         "isin": "INF192K01BN6",
         "name": "JM Arbitrage Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 6.99,
-        "trailing_return_5yr_pct": 6.35
+        "trailing_return_3yr_pct": 6.98,
+        "trailing_return_5yr_pct": 6.42
       }
     ],
     "Hybrid Schemes - Balanced Advantage Fund/ Dynamic Asset Allocation": [
@@ -1963,42 +1949,42 @@
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01A29",
         "name": "Axis Balanced Advantage Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 11.72,
-        "trailing_return_5yr_pct": 9.73
+        "trailing_return_3yr_pct": 10.92,
+        "trailing_return_5yr_pct": 9.22
       },
       {
         "amc": "Baroda BNP Paribas Mutual Fund",
         "isin": "INF955L01HF7",
         "name": "Baroda BNP Paribas Balanced Advantage Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 12.2,
-        "trailing_return_5yr_pct": 11.35
+        "trailing_return_3yr_pct": 11.06,
+        "trailing_return_5yr_pct": 10.47
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF917K01IN1",
         "name": "HSBC Balanced Advantage Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.65,
+        "trailing_return_3yr_pct": 9.03,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205K01LN5",
         "name": "Invesco India Balanced Advantage Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.97,
-        "trailing_return_5yr_pct": 8.54
+        "trailing_return_3yr_pct": 8.32,
+        "trailing_return_5yr_pct": 8.17
       },
       {
         "amc": "Mahindra Manulife Mutual Fund",
         "isin": "INF174V01BE0",
         "name": "Mahindra Manulife Balanced Advantage Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 11.16,
+        "trailing_return_3yr_pct": 10.26,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Mirae Asset Mutual Fund",
         "isin": "INF769K01IN6",
         "name": "Mirae Asset Balanced Advantage Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 10.26,
+        "trailing_return_3yr_pct": 9.81,
         "trailing_return_5yr_pct": null
       }
     ],
@@ -2007,57 +1993,57 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01XH4",
         "name": "Aditya Birla Sun Life Conservative Hybrid Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 8.81,
-        "trailing_return_5yr_pct": 8.19
+        "trailing_return_3yr_pct": 8.38,
+        "trailing_return_5yr_pct": 7.89
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01EA8",
         "name": "Axis Conservative Hybrid Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 6.83,
-        "trailing_return_5yr_pct": 6.14
+        "trailing_return_3yr_pct": 6.33,
+        "trailing_return_5yr_pct": 5.76
+      },
+      {
+        "amc": "Bank of India Mutual Fund",
+        "isin": "INF761K01819",
+        "name": "BANK OF INDIA CONSERVATIVE HYBRID FUND - Direct Plan - Growth",
+        "trailing_return_3yr_pct": 6.39,
+        "trailing_return_5yr_pct": 9.6
+      },
+      {
+        "amc": "Baroda BNP Paribas Mutual Fund",
+        "isin": "INF251K01HR8",
+        "name": "BARODA BNP PARIBAS CONSERVATIVE HYBRID FUND - Direct Plan - Growth Option",
+        "trailing_return_3yr_pct": 8.35,
+        "trailing_return_5yr_pct": null
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01GB4",
         "name": "Canara Robeco Conservative Hybrid Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 7.93,
-        "trailing_return_5yr_pct": 7.14
+        "trailing_return_3yr_pct": 7.45,
+        "trailing_return_5yr_pct": 6.89
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01NO5",
         "name": "DSP Conservative Hybrid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.74,
-        "trailing_return_5yr_pct": 7.49
+        "trailing_return_3yr_pct": 8.44,
+        "trailing_return_5yr_pct": 7.29
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179K01XE6",
         "name": "HDFC Conservative Hybrid Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.42,
-        "trailing_return_5yr_pct": 8.03
+        "trailing_return_3yr_pct": 6.96,
+        "trailing_return_5yr_pct": 7.5
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF336L01DW4",
         "name": "HSBC Conservative Hybrid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.16,
-        "trailing_return_5yr_pct": 7.86
-      },
-      {
-        "amc": "ICICI Prudential Mutual Fund",
-        "isin": "INF109K01S39",
-        "name": "ICICI Prudential Conservative Hybrid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.93,
-        "trailing_return_5yr_pct": 8.59
-      },
-      {
-        "amc": "Kotak Mahindra Mutual Fund",
-        "isin": "INF174K01JZ1",
-        "name": "Kotak Conservative Hybrid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.71,
-        "trailing_return_5yr_pct": 8.72
+        "trailing_return_3yr_pct": 8.57,
+        "trailing_return_5yr_pct": 7.36
       }
     ],
     "Hybrid Schemes - Equity Savings Fund": [
@@ -2065,43 +2051,50 @@
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01VJ3",
         "name": "Axis Equity Savings Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 9.62,
-        "trailing_return_5yr_pct": 7.93
+        "trailing_return_3yr_pct": 9.0,
+        "trailing_return_5yr_pct": 7.62
+      },
+      {
+        "amc": "Baroda BNP Paribas Mutual Fund",
+        "isin": "INF955L01IL3",
+        "name": "Baroda BNP Paribas Equity Savings Fund - Direct Plan - Growth Option",
+        "trailing_return_3yr_pct": 9.02,
+        "trailing_return_5yr_pct": 8.1
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF917K01GE4",
         "name": "HSBC Equity Savings Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 12.92,
+        "trailing_return_3yr_pct": 12.38,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205KA1049",
         "name": "Invesco India Equity Savings Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.62,
-        "trailing_return_5yr_pct": 7.71
+        "trailing_return_3yr_pct": 8.37,
+        "trailing_return_5yr_pct": 7.36
       },
       {
         "amc": "Mahindra Manulife Mutual Fund",
         "isin": "INF174V01184",
         "name": "Mahindra Manulife Equity Savings Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.46,
-        "trailing_return_5yr_pct": 8.98
+        "trailing_return_3yr_pct": 9.03,
+        "trailing_return_5yr_pct": 8.49
       },
       {
         "amc": "Mirae Asset Mutual Fund",
         "isin": "INF769K01EK1",
         "name": "Mirae Asset Equity Savings Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.92,
-        "trailing_return_5yr_pct": 9.14
+        "trailing_return_3yr_pct": 9.69,
+        "trailing_return_5yr_pct": 8.86
       },
       {
         "amc": "UTI Mutual Fund",
         "isin": "INF789F1A777",
         "name": "UTI - Equity Savings Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.38,
-        "trailing_return_5yr_pct": 8.88
+        "trailing_return_3yr_pct": 7.85,
+        "trailing_return_5yr_pct": 8.34
       }
     ],
     "Hybrid Schemes - Multi Asset Allocation Fund": [
@@ -2109,22 +2102,22 @@
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01EV4",
         "name": "Axis Multi Asset Allocation Fund - Direct Plan - Growth Option Option",
-        "trailing_return_3yr_pct": 14.0,
-        "trailing_return_5yr_pct": 9.59
+        "trailing_return_3yr_pct": 13.2,
+        "trailing_return_5yr_pct": 8.79
+      },
+      {
+        "amc": "DSP Mutual Fund",
+        "isin": "INF740KA1TE9",
+        "name": "DSP Multi Asset Allocation Fund - Direct Plan - Growth",
+        "trailing_return_3yr_pct": 17.63,
+        "trailing_return_5yr_pct": null
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179K01XW8",
         "name": "HDFC Multi Asset Allocation Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 12.04,
-        "trailing_return_5yr_pct": 11.16
-      },
-      {
-        "amc": "ICICI Prudential Mutual Fund",
-        "isin": "INF109K015K4",
-        "name": "ICICI Prudential Multi Asset Allocation Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 14.61,
-        "trailing_return_5yr_pct": 16.54
+        "trailing_return_3yr_pct": 11.26,
+        "trailing_return_5yr_pct": 10.56
       }
     ],
     "Income": [
@@ -2139,21 +2132,21 @@
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194KB1777",
         "name": "BANDHAN FIXED TERM PLAN SERIES - 179 (3652 DAYS) - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.79,
-        "trailing_return_5yr_pct": 6.66
+        "trailing_return_3yr_pct": 7.62,
+        "trailing_return_5yr_pct": 6.62
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179KC1CC7",
         "name": "HDFC FMP 1861D March 2022 - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.59,
+        "trailing_return_3yr_pct": 7.57,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Kotak Mahindra Mutual Fund",
         "isin": "INF174KA1LP7",
         "name": "Kotak FMP Series 304 - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 8.09,
+        "trailing_return_3yr_pct": 7.52,
         "trailing_return_5yr_pct": null
       },
       {
@@ -2167,8 +2160,8 @@
         "amc": "SBI Mutual Fund",
         "isin": "INF200KA1D03",
         "name": "SBI Fixed Maturity Plan (FMP) - Series 1 (3668 Days) - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.75,
-        "trailing_return_5yr_pct": 6.65
+        "trailing_return_3yr_pct": 7.56,
+        "trailing_return_5yr_pct": 6.59
       }
     ],
     "Income/Debt Oriented Schemes - 10-year Constant Maturity Gilt Fund": [
@@ -2176,87 +2169,87 @@
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K01P38",
         "name": "Bandhan 10 year Constant Maturity Gilt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.88,
-        "trailing_return_5yr_pct": 5.93
+        "trailing_return_3yr_pct": 7.42,
+        "trailing_return_5yr_pct": 5.69
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K019I5",
         "name": "DSP 10 year Constant Maturity Gilt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.52,
-        "trailing_return_5yr_pct": 5.07
+        "trailing_return_3yr_pct": 6.07,
+        "trailing_return_5yr_pct": 4.85
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109KA1O37",
         "name": "ICICI Prudential 10 year Constant Maturity Gilt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.53,
-        "trailing_return_5yr_pct": 5.96
+        "trailing_return_3yr_pct": 7.07,
+        "trailing_return_5yr_pct": 5.68
       },
       {
         "amc": "SBI Mutual Fund",
         "isin": "INF200K01SK7",
         "name": "SBI 10 YEAR CONSTANT MATURITY GILT FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.17,
-        "trailing_return_5yr_pct": 5.86
+        "trailing_return_3yr_pct": 6.72,
+        "trailing_return_5yr_pct": 5.58
       },
       {
         "amc": "UTI Mutual Fund",
         "isin": "INF789F1AVR7",
         "name": "UTI 10 year Constant Maturity Gilt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.18,
+        "trailing_return_3yr_pct": 6.69,
         "trailing_return_5yr_pct": null
       }
     ],
     "Income/Debt Oriented Schemes - Banking and PSU Debt Fund": [
       {
+        "amc": "Aditya Birla Sun Life Mutual Fund",
+        "isin": "INF209K01YN0",
+        "name": "Aditya Birla Sun Life Banking & PSU Debt Fund - Direct Plan - GROWTH",
+        "trailing_return_3yr_pct": 6.96,
+        "trailing_return_5yr_pct": 6.21
+      },
+      {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01CR6",
         "name": "Axis Banking and PSU Debt Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.09,
-        "trailing_return_5yr_pct": 6.19
+        "trailing_return_3yr_pct": 6.91,
+        "trailing_return_5yr_pct": 6.15
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K015G8",
         "name": "Bandhan Banking and PSU Debt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.23,
-        "trailing_return_5yr_pct": 6.27
+        "trailing_return_3yr_pct": 7.12,
+        "trailing_return_5yr_pct": 6.28
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01KC4",
         "name": "Canara Robeco Banking and PSU Debt Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 6.75,
+        "trailing_return_3yr_pct": 6.52,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01ZW2",
         "name": "DSP Banking and PSU Debt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.03,
-        "trailing_return_5yr_pct": 6.05
+        "trailing_return_3yr_pct": 6.8,
+        "trailing_return_5yr_pct": 5.97
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF843K01FC8",
         "name": "Edelweiss Banking and PSU Debt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.14,
-        "trailing_return_5yr_pct": 6.12
+        "trailing_return_3yr_pct": 7.05,
+        "trailing_return_5yr_pct": 6.01
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF917K01HH5",
         "name": "HSBC Banking and PSU Debt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.09,
+        "trailing_return_3yr_pct": 6.89,
         "trailing_return_5yr_pct": null
-      },
-      {
-        "amc": "ICICI Prudential Mutual Fund",
-        "isin": "INF109K010A6",
-        "name": "ICICI Prudential Banking and PSU Debt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.4,
-        "trailing_return_5yr_pct": 6.72
       }
     ],
     "Income/Debt Oriented Schemes - Corporate Bond Fund": [
@@ -2264,57 +2257,57 @@
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01ZM8",
         "name": "AXIS Corporate Bond Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.78,
-        "trailing_return_5yr_pct": 6.81
+        "trailing_return_3yr_pct": 7.6,
+        "trailing_return_5yr_pct": 6.74
+      },
+      {
+        "amc": "Baroda BNP Paribas Mutual Fund",
+        "isin": "INF251K01GP4",
+        "name": "BARODA BNP PARIBAS CORPORATE BOND FUND - Direct Plan - Growth Option",
+        "trailing_return_3yr_pct": 7.7,
+        "trailing_return_5yr_pct": null
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01HB2",
         "name": "Canara Robeco Corporate Bond Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 6.86,
-        "trailing_return_5yr_pct": 5.9
+        "trailing_return_3yr_pct": 6.66,
+        "trailing_return_5yr_pct": 5.85
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01FW8",
         "name": "Franklin India Corporate Bond Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.09,
-        "trailing_return_5yr_pct": 6.77
+        "trailing_return_3yr_pct": 7.96,
+        "trailing_return_5yr_pct": 6.75
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF917K01HN3",
         "name": "HSBC Corporate Bond Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.47,
+        "trailing_return_3yr_pct": 7.31,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205K01RF8",
         "name": "Invesco India Corporate Bond Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.33,
-        "trailing_return_5yr_pct": 6.17
+        "trailing_return_3yr_pct": 7.1,
+        "trailing_return_5yr_pct": 6.11
       },
       {
         "amc": "Kotak Mahindra Mutual Fund",
         "isin": "INF178L01BY0",
         "name": "Kotak Corporate Bond Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.49,
-        "trailing_return_5yr_pct": 6.5
+        "trailing_return_3yr_pct": 7.31,
+        "trailing_return_5yr_pct": 6.42
       },
       {
         "amc": "Mirae Asset Mutual Fund",
         "isin": "INF769K01HD9",
         "name": "Mirae Asset Corporate Bond Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.21,
-        "trailing_return_5yr_pct": 6.09
-      },
-      {
-        "amc": "UTI Mutual Fund",
-        "isin": "INF789F1A538",
-        "name": "UTI - Corporate Bond Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.38,
-        "trailing_return_5yr_pct": 6.34
+        "trailing_return_3yr_pct": 7.06,
+        "trailing_return_5yr_pct": 6.05
       }
     ],
     "Income/Debt Oriented Schemes - Credit Risk Fund": [
@@ -2322,36 +2315,36 @@
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01PJ5",
         "name": "Axis Credit Risk Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 8.88,
-        "trailing_return_5yr_pct": 7.71
+        "trailing_return_3yr_pct": 8.75,
+        "trailing_return_5yr_pct": 7.65
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179KA1FZ3",
         "name": "HDFC Credit Risk Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 8.3,
-        "trailing_return_5yr_pct": 7.17
+        "trailing_return_3yr_pct": 8.17,
+        "trailing_return_5yr_pct": 7.1
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF917K01UH8",
         "name": "HSBC Credit Risk Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 11.83,
+        "trailing_return_3yr_pct": 11.7,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205K01I83",
         "name": "Invesco India Credit Risk Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.71,
-        "trailing_return_5yr_pct": 8.47
+        "trailing_return_3yr_pct": 9.45,
+        "trailing_return_5yr_pct": 8.38
       },
       {
         "amc": "UTI Mutual Fund",
         "isin": "INF789F01YB6",
         "name": "UTI - Credit Risk Fund. - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.88,
-        "trailing_return_5yr_pct": 10.23
+        "trailing_return_3yr_pct": 7.7,
+        "trailing_return_5yr_pct": 7.07
       }
     ],
     "Income/Debt Oriented Schemes - Dynamic Term Fund": [
@@ -2359,57 +2352,57 @@
         "amc": "360 ONE Mutual Fund",
         "isin": "INF579M01266",
         "name": "360 ONE Dynamic Term Fund - Direct Plan - GROWTH Option",
-        "trailing_return_3yr_pct": 8.2,
-        "trailing_return_5yr_pct": 6.91
+        "trailing_return_3yr_pct": 7.96,
+        "trailing_return_5yr_pct": 6.78
       },
       {
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01N82",
         "name": "Aditya Birla Sun Life Dynamic Term Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 7.77,
-        "trailing_return_5yr_pct": 7.27
+        "trailing_return_3yr_pct": 7.64,
+        "trailing_return_5yr_pct": 7.21
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01DI3",
         "name": "Axis Dynamic Term Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.53,
-        "trailing_return_5yr_pct": 6.29
+        "trailing_return_3yr_pct": 7.38,
+        "trailing_return_5yr_pct": 6.17
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K01N63",
         "name": "BANDHAN Dynamic Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.66,
-        "trailing_return_5yr_pct": 6.15
+        "trailing_return_3yr_pct": 7.71,
+        "trailing_return_5yr_pct": 6.19
       },
       {
         "amc": "Baroda BNP Paribas Mutual Fund",
         "isin": "INF251K01GW0",
         "name": "Baroda BNP Paribas Dynamic Term Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 6.4,
+        "trailing_return_3yr_pct": 6.15,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01EC7",
         "name": "Canara Robeco Dynamic Term Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 5.79,
-        "trailing_return_5yr_pct": 5.35
+        "trailing_return_3yr_pct": 5.56,
+        "trailing_return_5yr_pct": 5.16
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01QG4",
         "name": "DSP Dynamic Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.41,
-        "trailing_return_5yr_pct": 5.87
+        "trailing_return_3yr_pct": 6.11,
+        "trailing_return_5yr_pct": 5.61
       },
       {
         "amc": "Groww Mutual Fund",
         "isin": "INF666M01EK5",
         "name": "Groww Dynamic Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 5.92,
-        "trailing_return_5yr_pct": 5.12
+        "trailing_return_3yr_pct": 5.81,
+        "trailing_return_5yr_pct": 5.11
       }
     ],
     "Income/Debt Oriented Schemes - Fixed Term Plan": [
@@ -2417,7 +2410,7 @@
         "amc": "UTI Mutual Fund",
         "isin": "INF789F1AXP7",
         "name": "UTI Fixed Term Income Fund Series XXXVI - I (1574 Days) - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.69,
+        "trailing_return_3yr_pct": 7.59,
         "trailing_return_5yr_pct": null
       }
     ],
@@ -2425,58 +2418,58 @@
       {
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01UX7",
-        "name": "Aditya Birla Sun Life Floating Interest Rate Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 7.52,
-        "trailing_return_5yr_pct": 6.77
+        "name": "Aditya Birla Sun Life Floating Interest Rates Fund - Direct Plan - GROWTH",
+        "trailing_return_3yr_pct": 7.39,
+        "trailing_return_5yr_pct": 6.78
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K014A6",
         "name": "Axis Floating Interest Rates Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 8.42,
-        "trailing_return_5yr_pct": 7.24
+        "trailing_return_3yr_pct": 8.27,
+        "trailing_return_5yr_pct": 7.16
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194KB1BA5",
         "name": "BANDHAN FLOATING INTEREST RATES FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.94,
-        "trailing_return_5yr_pct": 6.82
+        "trailing_return_3yr_pct": 7.79,
+        "trailing_return_5yr_pct": 6.79
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740KA1PV1",
         "name": "DSP Floating Interest Rates Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.87,
-        "trailing_return_5yr_pct": 6.71
+        "trailing_return_3yr_pct": 7.66,
+        "trailing_return_5yr_pct": 6.65
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01LK1",
         "name": "Franklin India Floating Interest Rates Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.2,
-        "trailing_return_5yr_pct": 7.2
+        "trailing_return_3yr_pct": 7.98,
+        "trailing_return_5yr_pct": 7.15
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179K01VQ4",
         "name": "HDFC Floating Interest Rates Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.7,
-        "trailing_return_5yr_pct": 6.89
+        "trailing_return_3yr_pct": 7.48,
+        "trailing_return_5yr_pct": 6.83
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109K01P57",
         "name": "ICICI Prudential Floating Interest Rates Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.98,
-        "trailing_return_5yr_pct": 7.11
+        "trailing_return_3yr_pct": 7.72,
+        "trailing_return_5yr_pct": 7.03
       },
       {
         "amc": "Kotak Mahindra Mutual Fund",
         "isin": "INF174KA1EC0",
         "name": "Kotak Floating Interest Rates Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 7.85,
-        "trailing_return_5yr_pct": 6.74
+        "trailing_return_3yr_pct": 7.66,
+        "trailing_return_5yr_pct": 6.69
       }
     ],
     "Income/Debt Oriented Schemes - Gilt Fund": [
@@ -2484,50 +2477,50 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01XP7",
         "name": "Aditya Birla Sun Life Gilt Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 5.72,
-        "trailing_return_5yr_pct": 5.18
+        "trailing_return_3yr_pct": 5.58,
+        "trailing_return_5yr_pct": 5.06
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01DD4",
         "name": "Axis Gilt Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.29,
-        "trailing_return_5yr_pct": 6.06
+        "trailing_return_3yr_pct": 7.06,
+        "trailing_return_5yr_pct": 5.92
+      },
+      {
+        "amc": "Baroda BNP Paribas Mutual Fund",
+        "isin": "INF955L01AD7",
+        "name": "BARODA BNP PARIBAS GILT FUND - Direct Plan - Growth Option",
+        "trailing_return_3yr_pct": 6.45,
+        "trailing_return_5yr_pct": 5.59
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01FC4",
         "name": "Canara Robeco Gilt Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 6.14,
-        "trailing_return_5yr_pct": 5.5
+        "trailing_return_3yr_pct": 5.94,
+        "trailing_return_5yr_pct": 5.32
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF843K01GS2",
         "name": "Edelweiss Gilt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.2,
-        "trailing_return_5yr_pct": 5.42
+        "trailing_return_3yr_pct": 5.84,
+        "trailing_return_5yr_pct": 5.2
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01HS2",
         "name": "Franklin India Gilt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.64,
-        "trailing_return_5yr_pct": 5.48
+        "trailing_return_3yr_pct": 6.41,
+        "trailing_return_5yr_pct": 5.39
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF917K01FI7",
         "name": "HSBC Gilt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.07,
+        "trailing_return_3yr_pct": 5.88,
         "trailing_return_5yr_pct": null
-      },
-      {
-        "amc": "Invesco Mutual Fund",
-        "isin": "INF205K01SN0",
-        "name": "Invesco India Gilt Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.74,
-        "trailing_return_5yr_pct": 5.76
       }
     ],
     "Income/Debt Oriented Schemes - Liquid Fund": [
@@ -2535,43 +2528,43 @@
         "amc": "360 ONE Mutual Fund",
         "isin": "INF579M01621",
         "name": "360 ONE Liquid Fund - Direct Plan - GROWTH Option",
-        "trailing_return_3yr_pct": 6.78,
-        "trailing_return_5yr_pct": 6.17
+        "trailing_return_3yr_pct": 6.74,
+        "trailing_return_5yr_pct": 6.2
+      },
+      {
+        "amc": "Aditya Birla Sun Life Mutual Fund",
+        "isin": "INF209K01VA3",
+        "name": "Aditya Birla Sun Life Liquid Fund - Direct Plan - GROWTH",
+        "trailing_return_3yr_pct": 6.99,
+        "trailing_return_5yr_pct": 6.44
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01CX4",
         "name": "Axis Liquid Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.03,
-        "trailing_return_5yr_pct": 6.39
+        "trailing_return_3yr_pct": 6.99,
+        "trailing_return_5yr_pct": 6.42
+      },
+      {
+        "amc": "Baroda BNP Paribas Mutual Fund",
+        "isin": "INF955L01AL0",
+        "name": "BARODA BNP PARIBAS LIQUID FUND - Direct Plan - Growth Option",
+        "trailing_return_3yr_pct": 6.91,
+        "trailing_return_5yr_pct": 6.38
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01FU6",
         "name": "Canara Robeco Liquid Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 6.98,
-        "trailing_return_5yr_pct": 6.35
+        "trailing_return_3yr_pct": 6.94,
+        "trailing_return_5yr_pct": 6.37
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01QL4",
         "name": "DSP Liquid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.01,
-        "trailing_return_5yr_pct": 6.36
-      },
-      {
-        "amc": "Groww Mutual Fund",
-        "isin": "INF666M01451",
-        "name": "Groww Liquid Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.0,
-        "trailing_return_5yr_pct": 6.25
-      },
-      {
-        "amc": "Invesco Mutual Fund",
-        "isin": "INF205K01MF9",
-        "name": "Invesco India Liquid Fund - Direct Plan - Growth",
         "trailing_return_3yr_pct": 6.97,
-        "trailing_return_5yr_pct": 6.33
+        "trailing_return_5yr_pct": 6.39
       }
     ],
     "Income/Debt Oriented Schemes - Long Term Fund": [
@@ -2579,29 +2572,29 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209KB17J2",
         "name": "Aditya Birla Sun Life Long Term Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 6.73,
+        "trailing_return_3yr_pct": 6.5,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K014L3",
         "name": "Axis Long Term Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 5.91,
+        "trailing_return_3yr_pct": 5.83,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179KC1ET7",
         "name": "HDFC Long Term Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 5.98,
+        "trailing_return_3yr_pct": 5.94,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109K017L8",
         "name": "ICICI Prudential Long Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.67,
-        "trailing_return_5yr_pct": 5.51
+        "trailing_return_3yr_pct": 6.42,
+        "trailing_return_5yr_pct": 5.33
       }
     ],
     "Income/Debt Oriented Schemes - Medium Term Fund": [
@@ -2609,57 +2602,57 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01XA9",
         "name": "Aditya Birla Sun Life Medium Term Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 10.69,
-        "trailing_return_5yr_pct": 12.76
+        "trailing_return_3yr_pct": 10.53,
+        "trailing_return_5yr_pct": 12.65
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01DT0",
         "name": "Axis Medium Term Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 8.48,
-        "trailing_return_5yr_pct": 7.39
+        "trailing_return_3yr_pct": 8.3,
+        "trailing_return_5yr_pct": 7.29
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K01S50",
         "name": "Bandhan Medium Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.56,
-        "trailing_return_5yr_pct": 6.02
+        "trailing_return_3yr_pct": 7.5,
+        "trailing_return_5yr_pct": 6.03
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01MZ3",
         "name": "DSP Medium Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.4,
-        "trailing_return_5yr_pct": 6.3
+        "trailing_return_3yr_pct": 7.06,
+        "trailing_return_5yr_pct": 6.12
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179K01WI9",
         "name": "HDFC Medium Term Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.98,
-        "trailing_return_5yr_pct": 6.82
+        "trailing_return_3yr_pct": 7.82,
+        "trailing_return_5yr_pct": 6.73
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF917K01TK4",
         "name": "HSBC Medium Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.87,
+        "trailing_return_3yr_pct": 7.66,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109K015A5",
         "name": "ICICI Prudential Medium Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.56,
-        "trailing_return_5yr_pct": 7.43
+        "trailing_return_3yr_pct": 8.39,
+        "trailing_return_5yr_pct": 7.35
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205KA1429",
         "name": "Invesco India Medium Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.33,
-        "trailing_return_5yr_pct": 6.08
+        "trailing_return_3yr_pct": 7.04,
+        "trailing_return_5yr_pct": 5.93
       }
     ],
     "Income/Debt Oriented Schemes - Medium to Long Term Fund": [
@@ -2667,50 +2660,50 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01WY1",
         "name": "Aditya Birla Sun Life Medium to Long Term Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 6.35,
-        "trailing_return_5yr_pct": 5.6
+        "trailing_return_3yr_pct": 6.13,
+        "trailing_return_5yr_pct": 5.42
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K01R51",
         "name": "Bandhan Medium to Long Term Fund - Direct Plan - Growth",
         "trailing_return_3yr_pct": 6.64,
-        "trailing_return_5yr_pct": 5.29
+        "trailing_return_5yr_pct": 5.3
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01FI1",
         "name": "Canara Robeco Medium To Long Term Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 6.4,
-        "trailing_return_5yr_pct": 5.42
+        "trailing_return_3yr_pct": 6.2,
+        "trailing_return_5yr_pct": 5.31
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179K01WL3",
         "name": "HDFC Medium to Long Term Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 6.89,
-        "trailing_return_5yr_pct": 5.87
+        "trailing_return_3yr_pct": 6.67,
+        "trailing_return_5yr_pct": 5.72
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF336L01DE2",
         "name": "HSBC Medium to Long Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.61,
-        "trailing_return_5yr_pct": 5.3
+        "trailing_return_3yr_pct": 6.43,
+        "trailing_return_5yr_pct": 5.2
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109K01V83",
         "name": "ICICI Prudential Medium to Long Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.36,
-        "trailing_return_5yr_pct": 6.41
+        "trailing_return_3yr_pct": 7.01,
+        "trailing_return_5yr_pct": 6.23
       },
       {
         "amc": "JM Financial Mutual Fund",
         "isin": "INF192K01CW5",
         "name": "JM Medium to Long Term Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 6.84,
-        "trailing_return_5yr_pct": 5.47
+        "trailing_return_3yr_pct": 6.49,
+        "trailing_return_5yr_pct": 5.28
       }
     ],
     "Income/Debt Oriented Schemes - Money Market Fund": [
@@ -2718,43 +2711,50 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01UU3",
         "name": "Aditya Birla Sun Life Money Market Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 7.47,
-        "trailing_return_5yr_pct": 6.76
+        "trailing_return_3yr_pct": 7.41,
+        "trailing_return_5yr_pct": 6.78
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01Q62",
         "name": "Axis Money Market Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.5,
-        "trailing_return_5yr_pct": 6.77
+        "trailing_return_3yr_pct": 7.45,
+        "trailing_return_5yr_pct": 6.78
       },
       {
         "amc": "Bajaj Finserv Mutual Fund",
         "isin": "INF0QA701334",
         "name": "Bajaj Finserv Money Market Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.43,
+        "trailing_return_3yr_pct": 7.37,
         "trailing_return_5yr_pct": null
+      },
+      {
+        "amc": "Baroda BNP Paribas Mutual Fund",
+        "isin": "INF955L01ID0",
+        "name": "Baroda BNP Paribas Money Market Fund - Direct Plan - Growth Option",
+        "trailing_return_3yr_pct": 7.25,
+        "trailing_return_5yr_pct": 6.48
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01NU2",
         "name": "DSP Money Market Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.29,
-        "trailing_return_5yr_pct": 6.47
+        "trailing_return_3yr_pct": 7.23,
+        "trailing_return_5yr_pct": 6.49
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF917K01FE6",
         "name": "HSBC Money Market Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.36,
+        "trailing_return_3yr_pct": 7.31,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205K01RY9",
         "name": "Invesco India Money Market Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.3,
-        "trailing_return_5yr_pct": 6.47
+        "trailing_return_3yr_pct": 7.24,
+        "trailing_return_5yr_pct": 6.49
       }
     ],
     "Income/Debt Oriented Schemes - Other Debt Scheme": [
@@ -2762,8 +2762,8 @@
         "amc": "UTI Mutual Fund",
         "isin": "INF789F01VW8",
         "name": "UTI Annual Interval Fund - I - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.17,
-        "trailing_return_5yr_pct": 6.46
+        "trailing_return_3yr_pct": 6.13,
+        "trailing_return_5yr_pct": 5.73
       }
     ],
     "Income/Debt Oriented Schemes - Overnight Fund": [
@@ -2771,36 +2771,36 @@
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01N65",
         "name": "Axis Overnight Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 6.12,
+        "trailing_return_3yr_pct": 6.09,
+        "trailing_return_5yr_pct": 5.76
+      },
+      {
+        "amc": "Baroda BNP Paribas Mutual Fund",
+        "isin": "INF955L01HV4",
+        "name": "Baroda BNP Paribas Overnight Fund - Direct Plan - Growth Option",
+        "trailing_return_3yr_pct": 6.06,
         "trailing_return_5yr_pct": 5.74
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01JM5",
         "name": "Canara Robeco Overnight Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 6.01,
-        "trailing_return_5yr_pct": 5.65
+        "trailing_return_3yr_pct": 5.98,
+        "trailing_return_5yr_pct": 5.67
       },
       {
         "amc": "Groww Mutual Fund",
         "isin": "INF666M01GL8",
         "name": "Groww Overnight Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.02,
-        "trailing_return_5yr_pct": 5.57
+        "trailing_return_3yr_pct": 5.98,
+        "trailing_return_5yr_pct": 5.59
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF336L01OF6",
         "name": "HSBC Overnight Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.09,
-        "trailing_return_5yr_pct": 5.72
-      },
-      {
-        "amc": "Invesco Mutual Fund",
-        "isin": "INF205KA1163",
-        "name": "Invesco India Overnight Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.09,
-        "trailing_return_5yr_pct": 5.7
+        "trailing_return_3yr_pct": 6.06,
+        "trailing_return_5yr_pct": 5.74
       }
     ],
     "Income/Debt Oriented Schemes - Short Term Fund": [
@@ -2808,43 +2808,43 @@
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01EI1",
         "name": "Axis Short Term Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.86,
-        "trailing_return_5yr_pct": 6.82
+        "trailing_return_3yr_pct": 7.71,
+        "trailing_return_5yr_pct": 6.77
       },
       {
         "amc": "Bank of India Mutual Fund",
         "isin": "INF761K01736",
         "name": "BANK OF INDIA SHORT TERM FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.76,
-        "trailing_return_5yr_pct": 10.86
+        "trailing_return_3yr_pct": 7.61,
+        "trailing_return_5yr_pct": 10.83
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K01U07",
         "name": "Bandhan Short Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.82,
+        "trailing_return_3yr_pct": 7.71,
         "trailing_return_5yr_pct": 6.51
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01DX5",
         "name": "Canara Robeco Short Term Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 7.15,
-        "trailing_return_5yr_pct": 6.07
+        "trailing_return_3yr_pct": 6.98,
+        "trailing_return_5yr_pct": 6.05
       },
       {
         "amc": "Groww Mutual Fund",
         "isin": "INF666M01AC0",
         "name": "Groww Short Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.63,
-        "trailing_return_5yr_pct": 6.19
+        "trailing_return_3yr_pct": 7.49,
+        "trailing_return_5yr_pct": 6.18
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179K01YM7",
         "name": "HDFC Short Term Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.6,
-        "trailing_return_5yr_pct": 6.63
+        "trailing_return_3yr_pct": 7.4,
+        "trailing_return_5yr_pct": 6.55
       }
     ],
     "Income/Debt Oriented Schemes - Ultra Short Term Fund": [
@@ -2852,50 +2852,50 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01UR9",
         "name": "Aditya Birla Sun Life Ultra Short Term Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 7.54,
-        "trailing_return_5yr_pct": 6.76
+        "trailing_return_3yr_pct": 7.47,
+        "trailing_return_5yr_pct": 6.78
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01F40",
         "name": "Axis Ultra Short Term Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.48,
-        "trailing_return_5yr_pct": 6.78
+        "trailing_return_3yr_pct": 7.44,
+        "trailing_return_5yr_pct": 6.79
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194KA16R3",
         "name": "BANDHAN ULTRA SHORT TERM FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.2,
-        "trailing_return_5yr_pct": 6.45
+        "trailing_return_3yr_pct": 7.15,
+        "trailing_return_5yr_pct": 6.48
       },
       {
         "amc": "Bank of India Mutual Fund",
         "isin": "INF761K01892",
         "name": "BANK OF INDIA ULTRA SHORT TERM FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 6.96,
-        "trailing_return_5yr_pct": 6.23
+        "trailing_return_3yr_pct": 6.9,
+        "trailing_return_5yr_pct": 6.25
       },
       {
         "amc": "Baroda BNP Paribas Mutual Fund",
         "isin": "INF955L01HA8",
         "name": "Baroda BNP Paribas Ultra Short Term Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.28,
-        "trailing_return_5yr_pct": 6.65
+        "trailing_return_3yr_pct": 7.22,
+        "trailing_return_5yr_pct": 6.68
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01GM1",
         "name": "Canara Robeco Ultra Short Term Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 7.11,
-        "trailing_return_5yr_pct": 6.31
+        "trailing_return_3yr_pct": 7.05,
+        "trailing_return_5yr_pct": 6.33
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01ON5",
         "name": "DSP Ultra Short Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.47,
-        "trailing_return_5yr_pct": 6.66
+        "trailing_return_3yr_pct": 7.4,
+        "trailing_return_5yr_pct": 6.68
       }
     ],
     "Income/Debt Oriented Schemes - Ultra Short to Short Term Fund": [
@@ -2903,42 +2903,42 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209K01XU7",
         "name": "Aditya Birla Sun Life Ultra short to short term Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 7.45,
-        "trailing_return_5yr_pct": 6.78
+        "trailing_return_3yr_pct": 7.33,
+        "trailing_return_5yr_pct": 6.76
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01EN1",
         "name": "Axis Ultra Short to Short Term Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.5,
+        "trailing_return_3yr_pct": 7.42,
         "trailing_return_5yr_pct": 6.7
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K01J77",
         "name": "BANDHAN ULTRA SHORT TO SHORT TERM FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.2,
-        "trailing_return_5yr_pct": 6.38
+        "trailing_return_3yr_pct": 7.12,
+        "trailing_return_5yr_pct": 6.39
       },
       {
         "amc": "Baroda BNP Paribas Mutual Fund",
         "isin": "INF251K01GJ7",
         "name": "BARODA BNP PARIBAS ULTRA SHORT TO SHORT TERM FUND - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.44,
+        "trailing_return_3yr_pct": 7.34,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Canara Robeco Mutual Fund",
         "isin": "INF760K01ET1",
         "name": "Canara Robeco Ultra Short to Short Term Fund - Direct Plan - GROWTH OPTION",
-        "trailing_return_3yr_pct": 7.29,
-        "trailing_return_5yr_pct": 6.45
+        "trailing_return_3yr_pct": 7.2,
+        "trailing_return_5yr_pct": 6.46
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K013Q1",
         "name": "DSP Ultra Short to Short Term Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.22,
+        "trailing_return_3yr_pct": 7.11,
         "trailing_return_5yr_pct": 6.44
       }
     ],
@@ -2947,35 +2947,35 @@
         "amc": "Axis Mutual Fund",
         "isin": "INF846K017G6",
         "name": "Axis CRISIL IBX SDL May 2027 Index Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.59,
+        "trailing_return_3yr_pct": 7.56,
+        "trailing_return_5yr_pct": null
+      },
+      {
+        "amc": "Baroda BNP Paribas Mutual Fund",
+        "isin": "INF251K01RR7",
+        "name": "Baroda BNP Paribas NIFTY SDL December 2028 Index Fund - Direct Plan - Growth Option",
+        "trailing_return_3yr_pct": 7.38,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF336L01QH7",
         "name": "HSBC CRISIL IBX 50:50 Gilt Plus SDL Apr 2028 Index Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.54,
+        "trailing_return_3yr_pct": 7.42,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205KA1775",
         "name": "Invesco India Nifty G-sec Jul 2027 Index Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.41,
+        "trailing_return_3yr_pct": 7.34,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Mirae Asset Mutual Fund",
         "isin": "INF769K01IX5",
         "name": "Mirae Asset CRISIL IBX Gilt Index - April 2033 Index Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.68,
-        "trailing_return_5yr_pct": null
-      },
-      {
-        "amc": "UTI Mutual Fund",
-        "isin": "INF789F1AWX3",
-        "name": "UTI CRISIL SDL Maturity April 2033 Index Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.38,
+        "trailing_return_3yr_pct": 7.16,
         "trailing_return_5yr_pct": null
       }
     ],
@@ -2984,14 +2984,14 @@
         "amc": "360 ONE Mutual Fund",
         "isin": "INF579M01AN2",
         "name": "360 ONE ELSS Tax Saver Nifty 50 Index Fund - Direct Plan - GROWTH Option",
-        "trailing_return_3yr_pct": 7.0,
+        "trailing_return_3yr_pct": 5.78,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF917K01D12",
         "name": "HSBC NIFTY 50 Index Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.04,
+        "trailing_return_3yr_pct": 5.8,
         "trailing_return_5yr_pct": null
       }
     ],
@@ -3000,29 +3000,29 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF084M01ET2",
         "name": "Aditya Birla Sun Life Aggressive Hybrid Omni FOF - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 10.82,
-        "trailing_return_5yr_pct": 10.17
+        "trailing_return_3yr_pct": 10.1,
+        "trailing_return_5yr_pct": 9.55
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF754K01NY5",
         "name": "BHARAT Bond ETF FOF - April 2032 - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.43,
+        "trailing_return_3yr_pct": 6.88,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194K012B6",
         "name": "Bandhan Aggressive Hybrid Passive FOF - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 13.08,
-        "trailing_return_5yr_pct": 10.63
+        "trailing_return_3yr_pct": 11.7,
+        "trailing_return_5yr_pct": 9.69
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01HV6",
         "name": "Franklin India Dynamic Asset Allocation Active Fund of Funds - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.8,
-        "trailing_return_5yr_pct": 10.82
+        "trailing_return_3yr_pct": 7.85,
+        "trailing_return_5yr_pct": 9.66
       }
     ],
     "Other Scheme - FoF Overseas": [
@@ -3030,57 +3030,57 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF084M01EB0",
         "name": "Aditya Birla Sun Life Global Emerging Opportunities Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 19.36,
-        "trailing_return_5yr_pct": 10.01
+        "trailing_return_3yr_pct": 21.42,
+        "trailing_return_5yr_pct": 11.01
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194KB1FV2",
         "name": "Bandhan US Treasury Bond 0-1 year specific Debt Passive FOF - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 8.98,
+        "trailing_return_3yr_pct": 9.46,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Baroda BNP Paribas Mutual Fund",
         "isin": "INF251K01QT5",
         "name": "Baroda BNP Paribas Aqua Fund of Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 14.85,
+        "trailing_return_3yr_pct": 15.25,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "DSP Mutual Fund",
         "isin": "INF740K01PC5",
         "name": "DSP Global Clean Energy Overseas Equity Omni FoF - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 18.91,
-        "trailing_return_5yr_pct": 12.45
+        "trailing_return_3yr_pct": 20.09,
+        "trailing_return_5yr_pct": 11.0
       },
       {
         "amc": "Edelweiss Mutual Fund",
         "isin": "INF843K01AW7",
         "name": "Edelweiss ASEAN Equity Off-shore Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 17.81,
-        "trailing_return_5yr_pct": 11.56
+        "trailing_return_3yr_pct": 17.16,
+        "trailing_return_5yr_pct": 10.79
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01JR0",
         "name": "Franklin U. S. Opportunities Equity Active Fund of Funds - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 21.45,
-        "trailing_return_5yr_pct": 9.74
+        "trailing_return_3yr_pct": 24.89,
+        "trailing_return_5yr_pct": 11.36
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109KA1CE0",
         "name": "ICICI Prudential Global Stable Equity Fund (FOF) - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 14.34,
-        "trailing_return_5yr_pct": 10.7
+        "trailing_return_3yr_pct": 13.88,
+        "trailing_return_5yr_pct": 10.85
       },
       {
         "amc": "Kotak Mahindra Mutual Fund",
         "isin": "INF174KA1FQ7",
         "name": "Kotak US Specific Equity Passive FOF - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 29.93,
-        "trailing_return_5yr_pct": 19.61
+        "trailing_return_3yr_pct": 34.13,
+        "trailing_return_5yr_pct": 21.98
       }
     ],
     "Other Scheme - Index Funds": [
@@ -3088,28 +3088,21 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209KB14S0",
         "name": "Aditya Birla Sun Life CRISIL IBX SDL Jun 2032 Index Fund - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 7.53,
+        "trailing_return_3yr_pct": 7.02,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K010N7",
         "name": "Axis CRISIL IBX 50:50 Gilt Plus SDL June 2028 Index Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.57,
+        "trailing_return_3yr_pct": 7.42,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Bandhan Mutual Fund",
         "isin": "INF194KB1EN2",
         "name": "BANDHAN CRISIL IBX 90:10 SDL PLUS GILT - APRIL 2032 INDEX FUND - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.6,
-        "trailing_return_5yr_pct": null
-      },
-      {
-        "amc": "Baroda BNP Paribas Mutual Fund",
-        "isin": "INF251K01RR7",
-        "name": "Baroda BNP Paribas NIFTY SDL December 2028 Index Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 7.58,
+        "trailing_return_3yr_pct": 7.12,
         "trailing_return_5yr_pct": null
       }
     ],
@@ -3118,42 +3111,42 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209KB18C5",
         "name": "Aditya Birla Sun Life US Equity Passive FOF - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 29.93,
+        "trailing_return_3yr_pct": 33.44,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01X06",
         "name": "Axis Global Equity Alpha Fund of Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 23.55,
-        "trailing_return_5yr_pct": 15.39
+        "trailing_return_3yr_pct": 24.78,
+        "trailing_return_5yr_pct": 15.9
       },
       {
         "amc": "HSBC Mutual Fund",
         "isin": "INF336L01HF0",
         "name": "HSBC Asia Pacific (Ex Japan) Dividend Yield Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 28.09,
-        "trailing_return_5yr_pct": 15.3
+        "trailing_return_3yr_pct": 27.86,
+        "trailing_return_5yr_pct": 15.12
       },
       {
         "amc": "Invesco Mutual Fund",
         "isin": "INF205KA1585",
         "name": "Invesco India - Invesco EQQQ Nasdaq-100 ETF Fund of Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 30.01,
+        "trailing_return_3yr_pct": 33.54,
         "trailing_return_5yr_pct": null
       },
       {
         "amc": "Kotak Mahindra Mutual Fund",
         "isin": "INF174K01LW4",
         "name": "Kotak Global Emerging Market Overseas Equity Active FOF - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 27.14,
-        "trailing_return_5yr_pct": 12.55
+        "trailing_return_3yr_pct": 27.44,
+        "trailing_return_5yr_pct": 12.97
       },
       {
         "amc": "Mirae Asset Mutual Fund",
         "isin": "INF769K01IQ9",
         "name": "Mirae Asset Global Electric & Autonomous Vehicles Equity Passive FOF - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 17.55,
+        "trailing_return_3yr_pct": 16.76,
         "trailing_return_5yr_pct": null
       }
     ],
@@ -3162,50 +3155,50 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209KB1E84",
         "name": "ADITYA BIRLA SUN LIFE BAL BHAVISHYA YOJNA - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 11.29,
-        "trailing_return_5yr_pct": 10.04
+        "trailing_return_3yr_pct": 9.89,
+        "trailing_return_5yr_pct": 9.14
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179KC1IX0",
         "name": "HDFC Children's Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 8.64,
-        "trailing_return_5yr_pct": 10.55
+        "trailing_return_3yr_pct": 8.13,
+        "trailing_return_5yr_pct": 9.94
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109K01Y49",
         "name": "ICICI Prudential Children's Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 12.46,
-        "trailing_return_5yr_pct": 12.12
+        "trailing_return_3yr_pct": 11.78,
+        "trailing_return_5yr_pct": 11.28
       },
       {
         "amc": "LIC Mutual Fund",
         "isin": "INF767K01FB1",
         "name": "LIC MF Children's Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.55,
-        "trailing_return_5yr_pct": 8.5
+        "trailing_return_3yr_pct": 8.72,
+        "trailing_return_5yr_pct": 7.72
       },
       {
         "amc": "SBI Mutual Fund",
         "isin": "INF200K01QR6",
         "name": "SBI CHILDREN'S FUND - SAVINGS PLAN - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 11.77,
-        "trailing_return_5yr_pct": 10.88
+        "trailing_return_3yr_pct": 11.55,
+        "trailing_return_5yr_pct": 10.63
       },
       {
         "amc": "Tata Mutual Fund",
         "isin": "INF277K01QW4",
         "name": "Tata Childrens Fund - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 4.35,
-        "trailing_return_5yr_pct": 6.69
+        "trailing_return_3yr_pct": 3.45,
+        "trailing_return_5yr_pct": 5.73
       },
       {
         "amc": "UTI Mutual Fund",
         "isin": "INF789F1AZV0",
         "name": "UTI Children's Equity Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.29,
-        "trailing_return_5yr_pct": 7.0
+        "trailing_return_3yr_pct": 6.25,
+        "trailing_return_5yr_pct": 6.05
       }
     ],
     "Solution Oriented Scheme - Retirement Fund": [
@@ -3213,36 +3206,43 @@
         "amc": "Aditya Birla Sun Life Mutual Fund",
         "isin": "INF209KB1I23",
         "name": "Aditya Birla Sun Life Retirement Fund-The 30s Plan - Direct Plan - GROWTH",
-        "trailing_return_3yr_pct": 16.32,
-        "trailing_return_5yr_pct": 12.57
+        "trailing_return_3yr_pct": 15.49,
+        "trailing_return_5yr_pct": 11.87
       },
       {
         "amc": "Franklin Templeton Mutual Fund",
         "isin": "INF090I01JZ3",
         "name": "Franklin India Retirement Fund - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 7.74,
-        "trailing_return_5yr_pct": 7.37
+        "trailing_return_3yr_pct": 7.17,
+        "trailing_return_5yr_pct": 6.9
       },
       {
         "amc": "ICICI Prudential Mutual Fund",
         "isin": "INF109KC1TW4",
         "name": "ICICI Prudential Retirement Fund Hybrid Aggressive Plan - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 17.66,
-        "trailing_return_5yr_pct": 15.58
+        "trailing_return_3yr_pct": 16.78,
+        "trailing_return_5yr_pct": 14.59
       },
       {
         "amc": "Nippon India Mutual Fund",
         "isin": "INF204KA1C30",
         "name": "Nippon India Retirement Fund- Income Generation Scheme - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 6.88,
-        "trailing_return_5yr_pct": 6.53
+        "trailing_return_3yr_pct": 6.2,
+        "trailing_return_5yr_pct": 5.89
       },
       {
         "amc": "SBI Mutual Fund",
         "isin": "INF200KA1S97",
         "name": "SBI Retirement Benefit Fund - Aggressive Hybrid Plan - Direct Plan - Growth",
-        "trailing_return_3yr_pct": 9.62,
-        "trailing_return_5yr_pct": 11.55
+        "trailing_return_3yr_pct": 8.78,
+        "trailing_return_5yr_pct": 10.48
+      },
+      {
+        "amc": "Tata Mutual Fund",
+        "isin": "INF277K01QM5",
+        "name": "Tata Retirement Savings Fund-Conservative Plan - Direct Plan - Growth Option",
+        "trailing_return_3yr_pct": 7.39,
+        "trailing_return_5yr_pct": 6.48
       }
     ],
     "Solution Oriented Schemes ** - Retirement Fund": [
@@ -3250,15 +3250,15 @@
         "amc": "Axis Mutual Fund",
         "isin": "INF846K01S86",
         "name": "Axis Retirement Fund - Aggressive Plan - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 11.6,
-        "trailing_return_5yr_pct": 7.48
+        "trailing_return_3yr_pct": 10.11,
+        "trailing_return_5yr_pct": 6.49
       },
       {
         "amc": "HDFC Mutual Fund",
         "isin": "INF179KB1MF0",
         "name": "HDFC Retirement Fund - Equity Plan - Direct Plan - Growth Option",
-        "trailing_return_3yr_pct": 9.16,
-        "trailing_return_5yr_pct": 12.46
+        "trailing_return_3yr_pct": 8.34,
+        "trailing_return_5yr_pct": 11.36
       }
     ]
   },

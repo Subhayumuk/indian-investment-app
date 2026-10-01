@@ -463,7 +463,7 @@
   },
   "118650": {
     "amc": "Nippon India Mutual Fund",
-    "category": "Equity Scheme - Multi Cap Fund",
+    "category": "Equity Schemes - Multi Cap Fund",
     "isin": "INF204K01XF9",
     "name": "Nippon India Multi Cap Fund - Direct Plan - Growth Option"
   },
@@ -1135,7 +1135,7 @@
   },
   "119341": {
     "amc": "Baroda BNP Paribas Mutual Fund",
-    "category": "Debt Scheme - Gilt Fund",
+    "category": "Income/Debt Oriented Schemes - Gilt Fund",
     "isin": "INF955L01AD7",
     "name": "BARODA BNP PARIBAS GILT FUND - Direct Plan - Growth Option"
   },
@@ -1183,7 +1183,7 @@
   },
   "119393": {
     "amc": "Bank of India Mutual Fund",
-    "category": "Debt Scheme - Medium to Long Duration Fund",
+    "category": "Hybrid Schemes - Conservative Hybrid Fund",
     "isin": "INF761K01819",
     "name": "BANK OF INDIA CONSERVATIVE HYBRID FUND - Direct Plan - Growth"
   },
@@ -1195,7 +1195,7 @@
   },
   "119415": {
     "amc": "Baroda BNP Paribas Mutual Fund",
-    "category": "Debt Scheme - Liquid Fund",
+    "category": "Income/Debt Oriented Schemes - Liquid Fund",
     "isin": "INF955L01AL0",
     "name": "BARODA BNP PARIBAS LIQUID FUND - Direct Plan - Growth Option"
   },
@@ -1297,7 +1297,7 @@
   },
   "119550": {
     "amc": "Aditya Birla Sun Life Mutual Fund",
-    "category": "Debt Scheme - Banking and PSU Fund",
+    "category": "Income/Debt Oriented Schemes - Banking and PSU Debt Fund",
     "isin": "INF209K01YN0",
     "name": "Aditya Birla Sun Life Banking & PSU Debt Fund - Direct Plan - GROWTH"
   },
@@ -1321,7 +1321,7 @@
   },
   "119568": {
     "amc": "Aditya Birla Sun Life Mutual Fund",
-    "category": "Debt Scheme - Liquid Fund",
+    "category": "Income/Debt Oriented Schemes - Liquid Fund",
     "isin": "INF209K01VA3",
     "name": "Aditya Birla Sun Life Liquid Fund - Direct Plan - GROWTH"
   },
@@ -2739,7 +2739,7 @@
     "amc": "Aditya Birla Sun Life Mutual Fund",
     "category": "Income/Debt Oriented Schemes - Floating Interest Rates Fund",
     "isin": "INF209K01UX7",
-    "name": "Aditya Birla Sun Life Floating Interest Rate Fund - Direct Plan - GROWTH"
+    "name": "Aditya Birla Sun Life Floating Interest Rates Fund - Direct Plan - GROWTH"
   },
   "122653": {
     "amc": "Nippon India Mutual Fund",
@@ -3675,7 +3675,7 @@
     "amc": "UTI Mutual Fund",
     "category": "Exchange Traded Funds (ETFs) - Equity ETF",
     "isin": "INF789F1AUW9",
-    "name": "UTI - Nifty Next 50 Exchange Traded Fund. - Direct Plan - Growth"
+    "name": "UTI - Nifty Next 50 Exchange Traded Fund - Direct Plan - Growth"
   },
   "141690": {
     "amc": "Nippon India Mutual Fund",
@@ -4279,7 +4279,7 @@
   },
   "147196": {
     "amc": "Baroda BNP Paribas Mutual Fund",
-    "category": "Debt Scheme - Overnight Fund",
+    "category": "Income/Debt Oriented Schemes - Overnight Fund",
     "isin": "INF955L01HV4",
     "name": "Baroda BNP Paribas Overnight Fund - Direct Plan - Growth Option"
   },
@@ -4351,13 +4351,13 @@
   },
   "147377": {
     "amc": "Baroda BNP Paribas Mutual Fund",
-    "category": "Debt Scheme - Money Market Fund",
+    "category": "Income/Debt Oriented Schemes - Money Market Fund",
     "isin": "INF955L01ID0",
     "name": "Baroda BNP Paribas Money Market Fund - Direct Plan - Growth Option"
   },
   "147406": {
     "amc": "Shriram Mutual Fund",
-    "category": "Hybrid Scheme - Dynamic Asset Allocation or Balanced Advantage",
+    "category": "Hybrid Schemes - Balanced Advantage Fund/ Dynamic Asset Allocation",
     "isin": "INF680P01208",
     "name": "Shriram Balanced Advantage Fund - Direct Plan - Growth"
   },
@@ -4405,7 +4405,7 @@
   },
   "147496": {
     "amc": "Baroda BNP Paribas Mutual Fund",
-    "category": "Hybrid Scheme - Equity Savings",
+    "category": "Hybrid Schemes - Equity Savings Fund",
     "isin": "INF955L01IL3",
     "name": "Baroda BNP Paribas Equity Savings Fund - Direct Plan - Growth Option"
   },
@@ -5659,7 +5659,7 @@
   },
   "149450": {
     "amc": "Samco Mutual Fund",
-    "category": "Equity Scheme - Flexi Cap Fund",
+    "category": "Equity Schemes - Thematic Fund",
     "isin": "INF0K1H01024",
     "name": "Samco Flexi Cap Fund - Direct Plan - Growth"
   },
@@ -6037,7 +6037,7 @@
   },
   "150206": {
     "amc": "Baroda BNP Paribas Mutual Fund",
-    "category": "Hybrid Scheme - Conservative Hybrid Fund",
+    "category": "Hybrid Schemes - Conservative Hybrid Fund",
     "isin": "INF251K01HR8",
     "name": "BARODA BNP PARIBAS CONSERVATIVE HYBRID FUND - Direct Plan - Growth Option"
   },
@@ -6049,7 +6049,7 @@
   },
   "150237": {
     "amc": "Baroda BNP Paribas Mutual Fund",
-    "category": "Debt Scheme - Corporate Bond Fund",
+    "category": "Income/Debt Oriented Schemes - Corporate Bond Fund",
     "isin": "INF251K01GP4",
     "name": "BARODA BNP PARIBAS CORPORATE BOND FUND - Direct Plan - Growth Option"
   },
@@ -6061,7 +6061,7 @@
   },
   "150260": {
     "amc": "Baroda BNP Paribas Mutual Fund",
-    "category": "Hybrid Scheme - Aggressive Hybrid Fund",
+    "category": "Hybrid Schemes - Aggressive Hybrid Fund",
     "isin": "INF251K01OZ7",
     "name": "BARODA BNP PARIBAS AGGRESSIVE HYBRID FUND - Direct Plan - Growth Option"
   },
@@ -6331,7 +6331,7 @@
   },
   "150631": {
     "amc": "Samco Mutual Fund",
-    "category": "Debt Scheme - Overnight Fund",
+    "category": "Income/Debt Oriented Schemes - Overnight Fund",
     "isin": "INF0K1H01040",
     "name": "Samco Overnight Fund - Direct Plan - Growth"
   },
@@ -6406,12 +6406,6 @@
     "category": "Other Scheme - Index Funds",
     "isin": "INF277KA1554",
     "name": "TATA CRISIL-IBX GILT INDEX - APRIL 2026 INDEX FUND - Direct Plan - Growth Option"
-  },
-  "150698": {
-    "amc": "Aditya Birla Sun Life Mutual Fund",
-    "category": "Other Scheme - Index Funds",
-    "isin": "INF209KB10N9",
-    "name": "Aditya Birla Sun Life Crisil IBX Gilt-April 2026 Index Fund - Direct Plan - GROWTH"
   },
   "150702": {
     "amc": "Aditya Birla Sun Life Mutual Fund",
@@ -6553,7 +6547,7 @@
   },
   "150838": {
     "amc": "Samco Mutual Fund",
-    "category": "Equity Scheme - ELSS",
+    "category": "Equity Schemes - ELSS- Tax Saver Fund",
     "isin": "INF0K1H01065",
     "name": "Samco ELSS Tax Saver Fund - Direct Plan - Growth"
   },
@@ -6712,6 +6706,12 @@
     "category": "Income/Debt Oriented Schemes - Banking and PSU Debt Fund",
     "isin": "INF917K01HH5",
     "name": "HSBC Banking and PSU Debt Fund - Direct Plan - Growth"
+  },
+  "151113": {
+    "amc": "HSBC Mutual Fund",
+    "category": "Equity Schemes - Value Fund",
+    "isin": "INF917K01HD4",
+    "name": "HSBC Value Fund - Direct Plan - Growth"
   },
   "151117": {
     "amc": "HSBC Mutual Fund",
@@ -7063,7 +7063,7 @@
   },
   "151574": {
     "amc": "Baroda BNP Paribas Mutual Fund",
-    "category": "Other Scheme - Index Funds",
+    "category": "Index Funds - Debt Funds",
     "isin": "INF251K01RR7",
     "name": "Baroda BNP Paribas NIFTY SDL December 2028 Index Fund - Direct Plan - Growth Option"
   },
@@ -7183,7 +7183,7 @@
   },
   "151753": {
     "amc": "Samco Mutual Fund",
-    "category": "Equity Scheme - Sectoral/ Thematic",
+    "category": "Equity Schemes - Thematic Fund",
     "isin": "INF0K1H01081",
     "name": "Samco Active Momentum Fund - Direct Plan - Growth"
   },
@@ -7453,7 +7453,7 @@
   },
   "152056": {
     "amc": "DSP Mutual Fund",
-    "category": "Hybrid Scheme - Multi Asset Allocation",
+    "category": "Hybrid Schemes - Multi Asset Allocation Fund",
     "isin": "INF740KA1TE9",
     "name": "DSP Multi Asset Allocation Fund - Direct Plan - Growth"
   },
@@ -7633,7 +7633,7 @@
   },
   "152188": {
     "amc": "Samco Mutual Fund",
-    "category": "Hybrid Scheme - Dynamic Asset Allocation or Balanced Advantage",
+    "category": "Hybrid Schemes - Balanced Advantage Fund/ Dynamic Asset Allocation",
     "isin": "INF0K1H01131",
     "name": "Samco Dynamic Asset Allocation Fund - Direct Plan - Growth"
   },
@@ -8023,7 +8023,7 @@
   },
   "152586": {
     "amc": "Samco Mutual Fund",
-    "category": "Equity Scheme - Sectoral/ Thematic",
+    "category": "Equity Schemes - Thematic Fund",
     "isin": "INF0K1H01180",
     "name": "Samco Special Opportunities Fund - Direct Plan - Growth"
   },
@@ -8065,7 +8065,7 @@
   },
   "152628": {
     "amc": "Baroda BNP Paribas Mutual Fund",
-    "category": "Solution Oriented Scheme - Retirement Fund",
+    "category": "Solution Oriented Schemes ** - Retirement Fund",
     "isin": "INF251K01TJ0",
     "name": "Baroda BNP Paribas Retirement Fund - Direct Plan - Growth Option"
   },
@@ -8227,7 +8227,7 @@
   },
   "152741": {
     "amc": "Shriram Mutual Fund",
-    "category": "Other Scheme - Other  ETFs",
+    "category": "Exchange Traded Funds (ETFs) - Debt ETF",
     "isin": "INF680P01422",
     "name": "Shriram Nifty 1D Rate Liquid ETF - Direct Plan - Growth"
   },
@@ -8371,7 +8371,7 @@
   },
   "152847": {
     "amc": "Samco Mutual Fund",
-    "category": "Equity Scheme - Multi Cap Fund",
+    "category": "Equity Schemes - Multi Cap Fund",
     "isin": "INF0K1H01198",
     "name": "Samco Multi Cap Fund - Direct Plan - Growth"
   },
@@ -8659,7 +8659,7 @@
   },
   "153035": {
     "amc": "Shriram Mutual Fund",
-    "category": "Debt Scheme - Liquid Fund",
+    "category": "Income/Debt Oriented Schemes - Liquid Fund",
     "isin": "INF680P01430",
     "name": "Shriram Liquid Fund - Direct Plan - Growth"
   },
@@ -8749,13 +8749,13 @@
   },
   "153090": {
     "amc": "Samco Mutual Fund",
-    "category": "Hybrid Scheme - Arbitrage Fund",
+    "category": "Hybrid Schemes - Arbitrage Fund",
     "isin": "INF0K1H01214",
     "name": "Samco Arbitrage Fund - Direct Plan - Growth"
   },
   "153092": {
     "amc": "Samco Mutual Fund",
-    "category": "Hybrid Scheme - Multi Asset Allocation",
+    "category": "Hybrid Schemes - Multi Asset Allocation Fund",
     "isin": "INF0K1H01230",
     "name": "Samco Multi Asset Allocation Fund - Direct Plan - Growth"
   },
@@ -8971,7 +8971,7 @@
   },
   "153239": {
     "amc": "Samco Mutual Fund",
-    "category": "Equity Scheme - Large Cap Fund",
+    "category": "Equity Schemes - Large Cap Fund",
     "isin": "INF0K1H01255",
     "name": "Samco Large Cap Fund - Direct Plan - Growth"
   },
@@ -9397,7 +9397,7 @@
   },
   "153534": {
     "amc": "Samco Mutual Fund",
-    "category": "Equity Scheme - Large & Mid Cap Fund",
+    "category": "Equity Schemes - Large & Mid Cap Fund",
     "isin": "INF0K1H01271",
     "name": "Samco Large & Mid Cap Fund - Direct Plan - Growth"
   },
@@ -9421,7 +9421,7 @@
   },
   "153552": {
     "amc": "Baroda BNP Paribas Mutual Fund",
-    "category": "Other Scheme - FoF Domestic",
+    "category": "Fund of Funds Scheme (Domestic) - Fund of Funds Scheme (Domestic)",
     "isin": "INF251K01UO8",
     "name": "Baroda BNP Paribas Multi Asset Active Fund of Funds - Direct Plan - Growth Option"
   },
@@ -9787,7 +9787,7 @@
   },
   "153795": {
     "amc": "Baroda BNP Paribas Mutual Fund",
-    "category": "Other Scheme - FoF Domestic",
+    "category": "Fund of Funds Scheme (Domestic) - Fund of Funds Scheme (Domestic)",
     "isin": "INF251K01VF4",
     "name": "Baroda BNP Paribas Gold ETF Fund of Fund - Direct Plan - Growth Option"
   },
@@ -9889,7 +9889,7 @@
   },
   "153868": {
     "amc": "Samco Mutual Fund",
-    "category": "Equity Scheme - Small Cap Fund",
+    "category": "Equity Schemes - Small Cap Fund",
     "isin": "INF0K1H01297",
     "name": "Samco Small Cap Fund - Direct Plan - Growth"
   },
@@ -10207,7 +10207,7 @@
   },
   "154114": {
     "amc": "Samco Mutual Fund",
-    "category": "Equity Scheme - Mid Cap Fund",
+    "category": "Equity Schemes - Mid Cap Fund",
     "isin": "INF0K1H01313",
     "name": "Samco Mid Cap Fund - Direct Plan - Growth"
   },
@@ -10249,13 +10249,13 @@
   },
   "154144": {
     "amc": "Shriram Mutual Fund",
-    "category": "Debt Scheme - Money Market Fund",
+    "category": "Income/Debt Oriented Schemes - Money Market Fund",
     "isin": "INF680P01471",
     "name": "Shriram Money Market Fund - Direct Plan - Growth"
   },
   "154145": {
     "amc": "Kotak Mahindra Mutual Fund",
-    "category": "Other Scheme - Index Funds",
+    "category": "Index Funds - Equity Funds",
     "isin": "INF174KA1YP0",
     "name": "Kotak Nifty200 Value 30 Index Fund - Direct Plan - Growth"
   },
@@ -10639,7 +10639,7 @@
   },
   "154394": {
     "amc": "Shriram Mutual Fund",
-    "category": "Debt Scheme - Overnight Fund",
+    "category": "Income/Debt Oriented Schemes - Overnight Fund",
     "isin": "INF680P01497",
     "name": "Shriram Overnight Fund - Direct Plan - Growth"
   },
@@ -10763,11 +10763,23 @@
     "isin": "INF769K01RG1",
     "name": "Mirae Asset Nifty200 Momentum 30 Plus 8-13yr G-Sec 75:25 Index Fund - Direct Plan - Growth"
   },
+  "154498": {
+    "amc": "ITI Mutual Fund",
+    "category": "Hybrid Schemes - Multi Asset Allocation Fund",
+    "isin": "INF00XX01DS6",
+    "name": "ITI Multi Asset Allocation Fund - Direct Plan - Growth Option"
+  },
   "154505": {
     "amc": "HDFC Mutual Fund",
     "category": "Fund of Funds Scheme (Domestic) - Fund of Funds Scheme (Domestic)",
     "isin": "INF179KC1KS6",
     "name": "HDFC Nifty Metal ETF FOF - Direct Plan - Growth Option"
+  },
+  "154515": {
+    "amc": "Quantum Mutual Fund",
+    "category": "Equity Schemes - Flexi Cap Fund",
+    "isin": "INF082J01507",
+    "name": "Quantum Flexi Cap Fund - Direct Plan - Growth Option"
   },
   "154518": {
     "amc": "AlphaGrep Mutual Fund",
@@ -10786,6 +10798,12 @@
     "category": "Income/Debt Oriented Schemes - Short Term Fund",
     "isin": "INF090I01YW9",
     "name": "Franklin India Short Term Fund - Direct Plan - Growth"
+  },
+  "154547": {
+    "amc": "Invesco Mutual Fund",
+    "category": "Equity Schemes - Sectoral Fund",
+    "isin": "INF205KA1BX5",
+    "name": "Invesco India Pharma and Healthcare Fund - Direct Plan - Growth"
   },
   "154548": {
     "amc": "Edelweiss Mutual Fund",
@@ -10835,6 +10853,12 @@
     "isin": "INF194KB1KX8",
     "name": "Bandhan Contra Fund - Direct Plan - Growth"
   },
+  "154618": {
+    "amc": "SBI Mutual Fund",
+    "category": "Hybrid Schemes - Balanced Hybrid Fund",
+    "isin": "INF200KB1CA5",
+    "name": "SBI Balanced Hybrid Fund - Direct Plan - Growth"
+  },
   "154619": {
     "amc": "Zerodha Mutual Fund",
     "category": "Hybrid Schemes - Arbitrage Fund",
@@ -10865,6 +10889,18 @@
     "isin": "INF966L01EJ3",
     "name": "quant Income Plus Arbitrage Active FOF - Direct Plan - Growth Option"
   },
+  "154663": {
+    "amc": "The Wealth Company Mutual Fund",
+    "category": "Equity Schemes - Multi Cap Fund",
+    "isin": "INF2F0001719",
+    "name": "The Wealth Company Multi Cap Fund - Direct Plan - Growth"
+  },
+  "154668": {
+    "amc": "Motilal Oswal Mutual Fund",
+    "category": "Equity Schemes - Thematic Fund",
+    "isin": "INF247L01HI3",
+    "name": "Motilal Oswal Quality Fund - Direct Plan - GROWTH"
+  },
   "154673": {
     "amc": "Baroda BNP Paribas Mutual Fund",
     "category": "Income/Debt Oriented Schemes - Short Term Fund",
@@ -10877,10 +10913,64 @@
     "isin": "INF955L01JF3",
     "name": "Baroda BNP Paribas Short Term Fund (the scheme has 2 segregated portfolios) - Direct Growth"
   },
+  "154693": {
+    "amc": "Bank of India Mutual Fund",
+    "category": "Equity Schemes - Value Fund",
+    "isin": "INF761K01HK1",
+    "name": "BANK OF INDIA VALUE FUND - Direct Plan - Growth"
+  },
+  "154697": {
+    "amc": "Zerodha Mutual Fund",
+    "category": "Life Cycle Funds - Life Cycle Fund with Maturity of 5 Years",
+    "isin": "INF0R8F01240",
+    "name": "Zerodha Life Cycle Fund 2031 - Direct Plan - Growth"
+  },
+  "154699": {
+    "amc": "UTI Mutual Fund",
+    "category": "Index Funds - Equity Funds",
+    "isin": "INF789F1AH67",
+    "name": "UTI BSE India Sector Leaders Index Fund - Direct Plan - Growth"
+  },
+  "154704": {
+    "amc": "Navi Mutual Fund",
+    "category": "Index Funds - Equity Funds",
+    "isin": "INF959L01HT0",
+    "name": "Navi Nifty Reits & Realty Index fund - Direct Plan - Growth"
+  },
   "154706": {
     "amc": "Monarch Mutual Fund",
     "category": "Income/Debt Oriented Schemes - Overnight Fund",
     "isin": "INF2ZSC01028",
     "name": "Monarch Overnight Fund - Direct Plan - Growth"
+  },
+  "154720": {
+    "amc": "Mirae Asset Mutual Fund",
+    "category": "Index Funds - Equity Funds",
+    "isin": "INF769K01RO5",
+    "name": "Mirae Asset BSE Information Technology Index Fund - Direct Plan - Growth"
+  },
+  "154727": {
+    "amc": "Shriram Mutual Fund",
+    "category": "Fund of Funds Scheme (Domestic) - Fund of Funds Scheme (Domestic)",
+    "isin": "INF680P01653",
+    "name": "Shriram Gold ETF Passive FOF - Direct Plan - Growth"
+  },
+  "154736": {
+    "amc": "Lakshya Mutual Fund",
+    "category": "Income/Debt Oriented Schemes - Overnight Fund",
+    "isin": "INF2ZPR01014",
+    "name": "LAKSHYA OVERNIGHT FUND - Direct Plan - GROWTH"
+  },
+  "154747": {
+    "amc": "Tata Mutual Fund",
+    "category": "Index Funds - Debt Funds",
+    "isin": "INF277KA1FB5",
+    "name": "Tata CRISIL-IBX Financial Services 3-6 Months Debt Index Fund - Direct Plan - Growth Option"
+  },
+  "154753": {
+    "amc": "HDFC Mutual Fund",
+    "category": "Index Funds - Equity Funds",
+    "isin": "INF179KC1KX6",
+    "name": "HDFC BSE REITS and Commercial Real Estate Index Fund - Direct Plan - Growth Option"
   }
 }
